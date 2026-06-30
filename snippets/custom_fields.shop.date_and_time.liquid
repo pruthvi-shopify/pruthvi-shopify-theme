@@ -1,0 +1,8 @@
+{% if shop.metafields["custom_fields"]["date_and_time"] != blank %}
+  <div class="custom-field custom-field__date-and-time custom-field__type--date-time">
+    <h3 class="custom-field--title">Date and Time</h3>
+    <div class="custom-field--value">
+      {{ shop.metafields["custom_fields"]["date_and_time"] | date: "%m/%d/%Y %I:%M:%S %p" }}
+    </div>
+  </div>
+{% endif %}

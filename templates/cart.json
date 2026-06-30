@@ -1,0 +1,60 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero_banner_TLWGG9": {
+      "type": "hero-banner",
+      "blocks": {
+        "slide_M7Aiyz": {
+          "type": "slide",
+          "settings": {
+            "slide_image": "shopify://shop_images/Hero_img.jpg",
+            "alt_text": "Hero Image"
+          }
+        }
+      },
+      "block_order": [
+        "slide_M7Aiyz"
+      ],
+      "name": "Hero banner",
+      "settings": {}
+    },
+    "main": {
+      "type": "main-cart",
+      "settings": {}
+    },
+    "1774329826ee488292": {
+      "type": "apps",
+      "blocks": {
+        "aiod_all_in_1_discount_app_bundle_offer_GeL7p7": {
+          "type": "shopify://apps/aiod-all-in-1-discount/blocks/app-bundle-offer/9537caf0-36d5-4981-a648-8961a8e85652",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "aiod_all_in_1_discount_app_bundle_offer_GeL7p7"
+      ],
+      "settings": {}
+    },
+    "join_us_aLehXL": {
+      "type": "join-us",
+      "name": "Join Us Section",
+      "settings": {
+        "heading": "Join Our Pack!"
+      }
+    }
+  },
+  "order": [
+    "hero_banner_TLWGG9",
+    "main",
+    "1774329826ee488292",
+    "join_us_aLehXL"
+  ]
+}

@@ -1,0 +1,6 @@
+
+<ul>
+{% for item in customer.metafields["custom_fields"]["name"].value %}
+<li><a href="{{ item.url }}" class="metafield-product_reference">{{ item.title }}</a></li>
+{% endfor %}
+</ul>

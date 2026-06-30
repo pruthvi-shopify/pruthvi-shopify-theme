@@ -1,0 +1,342 @@
+<section class="product-details" data-section="main-product" id="product">
+  <div class="product-details-inner">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-7 col-m-12">
+          <div class="product-detail-img">
+            {% if product.images.size > 0 %}
+              <div class="top-slider slick-slider pswp-gallery">
+                {% for image in product.images %}
+                  <div class="top-slider-inner" data-id="{{ image.id }}">
+                    <div class="slide-img zoom-container" data-action="open-lightbox-trigger">
+                    </div>
+
+                    <div class="slide-img" id="product-gallery">
+                      <a
+                        data-fancybox="gallery"
+                        href="{{ image |image_url: width:800 }}"
+                      >
+                        <img
+                          id="MainZoomImage"
+                          src="{{ image | image_url: width:800 }}"
+                          alt="{{ product.title }}"
+                        >
+                      </a>
+                    </div>
+                  </div>
+                {% endfor %}
+              </div>
+              <div class="bottom-slider slick-slider">
+                {% for image in product.images %}
+                  <div class="bottom-slider-inner" data-id="{{ image.id }}">
+                    <div class="slide-img">
+                      <img width="" height="" src="{{ image | image_url: width: 150 }}" alt="{{ image.alt | escape }}">
+                    </div>
+                  </div>
+                {% endfor %}
+              </div>
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="col-5 col-m-12">
+          <div class="product-info-content">
+            {% for block in section.blocks %}
+              {% case block.type %}
+                {%- when '@app' -%}
+                  {% render block %}
+
+                {% when 'product_title' %}
+                  {% if product.title != blank %}
+                    <h1 class="h3">{{ product.title }}</h1>
+                  {% endif %}
+
+                {% when 'product_price' %}
+                  <p class="product-price">
+                    <span id="Price" class="h4">
+                      {{ product.selected_or_first_available_variant.price | money }}
+                    </span>
+
+                    <span
+                      id="CompareAtPrice"
+                      style="text-decoration: line-through; color: gray; {% unless product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price %}display:none;{% endunless %}"
+                    >
+                      {{ product.selected_or_first_available_variant.compare_at_price | money }}
+                    </span>
+                  </p>
+                  {{ product.metafields.number.value }}
+                {% when 'color_swatch' %}
+                  {% comment %} {% unless product.has_only_default_variant %} {% endcomment %}
+                  {% for option in product.options_with_values %}
+                    <div class="select-option">
+                      <h5>STEP {{ forloop.index }}, SELECT A {{ option.name }}</h5>
+                      <div class="shop-by-color {% unless option.name == 'Color' %}size-option{% endunless %}">
+                        <ul>
+                          {% for value in option.values %}
+                            <li>
+                              <input
+                                type="radio"
+                                value="{{ value }}"
+                                name="{{ option.name | handle }}"
+                                id="{{ option.name | handle }}-{{ forloop.index }}"
+                                {% if option.selected_value == value %}
+                                  checked
+                                {% endif %}
+                              >
+                              <label
+                                class="card-color-swatch"
+                                for="{{ option.name | handle }}-{{ forloop.index }}"
+                                {% if option.name == 'Color' %}
+                                  style="background-color: {{ value | downcase }};"
+                                {% endif %}
+                              >
+                                {% unless option.name == 'Color' %}
+                                  <span>{{ value }}</span>
+                                {% endunless %}
+                              </label>
+                            </li>
+                          {% endfor %}
+                        </ul>
+                      </div>
+                    </div>
+                  {% endfor %}
+                  {% comment %} {% endunless %} {% endcomment %}
+                  {% for option in item.product.options_with_values %}
+                    <div class="cart-prod-option">
+                      <p>
+                        <strong>{{ option.name }}:</strong>
+                        <span>{{ item.variant.options[forloop.index0] }}</span>
+                      </p>
+                    </div>
+                  {% endfor %}
+
+                  <form method="post" action="/cart/add" id="main-product-form" data-product-id="{{ product.id }}">
+                    <!-- upsell/checked products -->
+                    <div class="product" style="display:flex; position:relative">
+                      {% for upsell in collections['you-may-also-like'].products %}
+                        <div class="add-product" style="border: 1px solid black; margin: 5px; padding: 15px 25px">
+                          {{ upsell.featured_media | image_url: width: 120 | image_tag }}
+                          <h5>{{ upsell.title }}</h5>
+
+                          <input
+                            type="checkbox"
+                            class="add-checkbox"
+                            value="{{ upsell.selected_or_first_available_variant.id }}"
+                            id="add-{{ forloop.index }}"
+                            style="position:absolute; bottom:35px;"
+                          >
+                          <!-- default qty = 1 -->
+                          <input type="hidden" name="items[1][quantity]" value="1">
+                          <label for="add-{{ forloop.index }}" style="position:absolute; bottom:30px;"></label>
+                        </div>
+                      {% endfor %}
+                    </div>
+                    <div class="select-addtocart">
+                      <!-- main product -->
+                      <input
+                        type="hidden"
+                        name="items[0][id]"
+                        id="selected-variant-id"
+                        value="{{ product.selected_or_first_available_variant.id }}"
+                      >
+                      <input
+                        type="hidden"
+                        name="items[0][id]"
+                        id="selected-variant-id"
+                        value="{{ product.selected_or_first_available_variant.id }}"
+                      >
+
+                      <input type="hidden" name="[quantity]" class="main-product">
+
+                      <div class="quantity-box">
+                        <div class="quantity-wrap">
+                          <span id="sub" class="adjust minus">
+                            <img
+                              width=""
+                              height=""
+                              src="https://cdn.shopify.com/s/files/1/0640/4839/8454/files/minus.png?v=1752137483"
+                              alt="Minus sign"
+                            >
+                          </span>
+                          <input
+                            name="items[0][quantity]"
+                            class="count"
+                            type="number"
+                            value="1"
+                          >
+                          <span id="add" class="adjust plus">
+                            <img
+                              width=""
+                              height=""
+                              src="https://cdn.shopify.com/s/files/1/0640/4839/8454/files/plus.png?v=1752137500"
+                              alt="Plus sign"
+                            >
+                          </span>
+                        </div>
+                      </div>
+                      <!-- submit buttons -->
+                      <div class="addtocart-btn">
+                        {% assign current_variant = product.selected_or_first_available_variant %}
+                        <button
+                          type="submit"
+                          class="btn btn-pink"
+                          id="AddToCartButton"
+                        >
+                          {% if current_variant.inventory_quantity <= 0
+                            and current_variant.inventory_policy == 'continue'
+                          %}
+                            Pre-Order Product
+                          {% else %}
+                            Add to cart
+                          {% endif %}
+                        </button>
+                        <button type="submit" name="return_to" value="/checkout" class="btn btn-black">
+                          BUY IT NOW
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+
+                {% when 'description' %}
+                  <div class="prod-desc rte">
+                    {{ product.description }}
+                  </div>
+
+                {% when 'extra_details' %}
+                  <div class="specification">
+                    <div class="spec-detail">
+                      <h6>Dimensions</h6>
+                      <div class="spec-info">
+                        <img
+                          src="https://cdn.shopify.com/s/files/1/0640/4839/8454/files/dimension.png?v=1752141079"
+                          alt="Dimension"
+                        >
+                      </div>
+                    </div>
+                    <div class="spec-detail">
+                      <h6>Shipping and Return Policy</h6>
+                      <div class="spec-info">
+                        <p>Lorem ipsum dolor sit</p>
+                      </div>
+                    </div>
+                    <div class="review">
+                      <h6>
+                        <img
+                          src="https://cdn.shopify.com/s/files/1/0640/4839/8454/files/star.png?v=1752141092"
+                          alt="review"
+                        >
+                        2 Reviews
+                      </h6>
+                      <div class="spec-info">
+                        <p>Lorem ipsum dolor sit</p>
+                      </div>
+                    </div>
+                  </div>
+              {% endcase %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+{% schema %}
+{
+  "name": "Product Info",
+  "settings": [
+    {
+      "type": "text",
+      "id": "step_1_heading",
+      "label": "Step 1 Heading",
+      "default": "STEP 1, SELECT A POT COLOR:"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_lightbox",
+      "default": true,
+      "label": "Enable image lightbox on click"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_hover_zoom",
+      "default": true,
+      "label": "click and hover"
+    },
+    {
+      "type": "text",
+      "id": "step_2_heading",
+      "label": "Step 2 Heading",
+      "default": "STEP 2, Select A Hardwood Plinth:"
+    },
+    {
+      "type": "image_picker",
+      "id": "stand_image_1",
+      "label": "Stand Image 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "stand_image_2",
+      "label": "Stand Image 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "stand_image_3",
+      "label": "Stand Image 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "stand_image_4",
+      "label": "Stand Image 4"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@app"
+    },
+    {
+      "type": "product_title",
+      "name": "Product Title"
+    },
+    {
+      "type": "product_price",
+      "name": "Product Price"
+    },
+    {
+      "type": "color_swatch",
+      "name": "Color Swatch"
+    },
+    {
+      "type": "stand_images",
+      "name": "Stand Images"
+    },
+    {
+      "type": "add_to_cart",
+      "name": "Add to Cart"
+    },
+    {
+      "type": "description",
+      "name": "Description"
+    },
+    {
+      "type": "extra_details",
+      "name": "Extra Info"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "blocks": [
+        { "type": "product_title" },
+        { "type": "product_price" },
+        { "type": "color_swatch" },
+        { "type": "stand_images" },
+        { "type": "add_to_cart" },
+        { "type": "description" },
+        { "type": "extra_details" }
+      ]
+    }
+  ]
+}
+{% endschema %}

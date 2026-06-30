@@ -1,0 +1,216 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "cart": {
+    "general": {
+      "header_cart_label": "Cart",
+      "header_search_label" : "search",
+      "title": "Your cart",
+      "header_title": "Basket",
+      "note": "Add a note to your order",
+      "remove": "Remove",
+      "subtotal": "Subtotal",
+      "savings": "You're saving",
+      "taxes_and_shipping_at_checkout": "Taxes and shipping calculated at checkout",
+      "taxes_and_shipping_policy_at_checkout_html": "Taxes and <a href=\"{{ link }}\">shipping calculated</a> at checkout",
+      "taxes_included_but_shipping_at_checkout": "Tax included and shipping calculated at checkout",
+      "taxes_included_and_shipping_policy_html": "Tax included. <a href=\"{{ link }}\">Shipping calculated</a> at checkout.",
+      "update": "Update",
+      "checkout": "Check out",
+      "empty": "Your cart is currently empty.",
+      "cookies_required": "Enable cookies to use the shopping cart",
+      "edit": "Edit",
+      "cancel": "Cancel",
+      "continue_shopping": "Continue shopping",
+      "shipping_at_checkout": "Taxes and shipping calculated at checkout",
+      "continue_browsing_html": "Continue shopping",
+    },
+    "label": {
+      "product": "Product",
+      "price": "Price",
+      "quantity": "Quantity",
+      "total": "Total",
+      "original_price": "Original Price"
+    }
+  },
+  "products": {
+    "product": {
+      "regular_price": "Regular price",
+      "sold_out": "Sold out",
+      "unavailable": "Unavailable",
+      "on_sale": "Sale",
+      "sale_price": "Sale price",
+      "quantity": "Quantity",
+      "add_to_cart": "Add to cart",
+      "back_to_collection": "Back to {{ title }}",
+      "vendor": "Vendor",
+      "quantity_minimum_message": "Quantity must be 1 or more",
+      "include_taxes": "Tax included.",
+      "shipping_policy_html": "<a href=\"{{ link }}\">Shipping calculated</a> at checkout."
+    }
+  },
+  "general" : {
+"pagination": {
+      "next": "Next Page",
+      "previous": "Previous Page"
+    }
+  },
+  
+  "contact": {
+    "form": {
+      "email": "Váš e-mail",
+      "message": "",
+      "send": "Zapsat se na waitlist"
+    }
+  },
+  "customer": {
+    "account": {
+      "title": "My Account",
+      "details": "Account Details",
+      "view_addresses": "View Addresses",
+      "return": "Return to Account Details"
+    },
+    "activate_account": {
+      "title": "Activate Account",
+      "subtext": "Create your password to activate your account.",
+      "password": "Password",
+      "password_confirm": "Confirm Password",
+      "submit": "Activate Account",
+      "cancel": "Decline Invitation"
+    },
+    "addresses": {
+      "title": "Your Addresses",
+      "default": "Default",
+      "add_new": "Add a New Address",
+      "edit_address": "Edit address",
+      "first_name": "First Name",
+      "last_name": "Last Name",
+      "company": "Company",
+      "address1": "Address1",
+      "address2": "Address2",
+      "city": "City",
+      "country": "Country",
+      "province": "Province",
+      "zip": "Postal/Zip Code",
+      "phone": "Phone",
+      "set_default": "Set as default address",
+      "add": "Add New Address",
+      "update": "Update Address",
+      "cancel": "Cancel",
+      "edit": "Edit",
+      "delete": "Delete",
+      "delete_confirm": "Are you sure you wish to delete this address?",
+      "default_address": "Default Address"
+    },
+    "login": {
+      "title": "Login",
+      "email": "Email",
+      "password": "Password",
+      "forgot_password": "Forgot your password?",
+      "sign_in": "Log in",
+      "cancel": "Return to Store",
+      "guest_title": "Continue as a guest",
+      "guest_continue": "Continue"
+    },
+    "orders": {
+      "title": "Order History",
+      "order_number": "Id",
+      "date": "Date",
+      "payment_status": "Payment Status",
+      "fulfillment_status": "Fulfillment Status",
+      "total": "Total",
+      "product_name": "Product Detail",
+      "none": "You haven't placed any orders yet."
+    },
+    "order": {
+      "title": "Order {{ name }}",
+      "date": "Placed on {{ date }}",
+      "cancelled": "Order Cancelled on {{ date }}",
+      "cancelled_reason": "Reason: {{ reason }}",
+      "billing_address": "Billing Address",
+      "payment_status": "Payment Status",
+      "shipping_address": "Shipping Address",
+      "fulfillment_status": "Fulfillment Status",
+      "discount": "Discount",
+      "shipping": "Shipping",
+      "tax": "TAX", 
+      "product": "Product Detail",
+      "sku": "SKU",
+      "price": "Price",
+      "quantity": "Quantity",
+      "total": "Order Total:",
+      "fulfilled_at": "Fulfilled {{ date }}",
+      "subtotal": "TOTAL BEFORE TAX",
+      "recent_order": "Recent Orders"
+    },
+    "recover_password": {
+      "title": "Forgot Password",
+      "email": "Email",
+      "submit": " Forgot Password",
+      "cancel": "Cancel",
+      "subtext": "Enter the email address for your account and we'll send you an email with instructions for resetting your password.",
+      "success": "We've sent you an email with a link to update your password.",
+      "sign-up": "Sign up instead?",
+      "login": "Login"
+    },
+    "reset_password": {
+      "title": "Reset account password",
+      "subtext": "Enter a new password for {{ email }}",
+      "password": "Password",
+      "password_confirm": "Confirm Password",
+      "submit": "Reset Password"
+    },
+    "register": {
+      "title": "Register",
+      "full_name": "Full Name",
+      "first_name": "First Name",
+      "last_name": "Last Name",
+      "email": "Email",
+      "password": "Password",
+      "submit": "Log in",
+      "cancel": "Return to Store",
+      "already_account": "Already have an account? Click Here"
+    },
+    "newsletter": {
+      "title": "Newsletter",
+      "content": "Be the first to find out about our newest offerings and hottest deals, and what’s new.",
+      "form_success": "Thank you! Your submission has been received!"
+    },
+    "providers": {
+      "payment_title": "Payment providers",
+      "shipping_title": "Shipping providers"
+    }
+  },
+  "layout": {
+    "navigation": {
+      "menu": "Menu"
+    },
+    "cart": {
+      "title": "Cart"
+    },
+    "customer": {
+      "account": "My Account",
+      "log_out": "Logout",
+      "log_in": "Sign In",
+      "create_account": "No account? Sign up.",
+      "or": "or"
+    },
+    "footer": {
+      "blog_title": "Latest News",
+      "linklist_title": "Quick Links",
+      "social_title": "Follow Us",
+      "social_platform": "{{ name }} on {{ platform }}",
+      "contact_title": "Contact Us",
+      "newsletter_title": "Newsletter",
+      "newsletter_caption": "Sign up for the latest news, offers and styles",
+      "copyright": "Copyright"
+    }
+  }
+}

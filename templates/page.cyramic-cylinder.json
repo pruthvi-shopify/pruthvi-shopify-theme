@@ -1,0 +1,63 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {}
+    },
+    "hero_banner_yRJMAj": {
+      "type": "hero-banner",
+      "blocks": {
+        "slide_HGfcFN": {
+          "type": "slide",
+          "settings": {
+            "slide_image": "shopify://shop_images/Hero_img.jpg",
+            "alt_text": "Hero Image"
+          }
+        }
+      },
+      "block_order": [
+        "slide_HGfcFN"
+      ],
+      "name": "Hero banner",
+      "settings": {}
+    },
+    "cyramic_cylinder_aCnrAx": {
+      "type": "Cyramic-cylinder",
+      "name": "Cyramic-cylinder",
+      "settings": {
+        "main-title": "Ceramic Cylinder Collection",
+        "main-content": "<p>The Cylinder planter features a hand-finished, high-fire ceramic stoneware of superb quality and craftsmanship. We produce these waterproof matte-glazed pots using traditional methods of applying pressure and centrifugal force to form their shapes from solid clay. This process creates seamless vessels of a refined aesthetic with superior strength and durability.</p><p>Our cylinders are sized to fit grow pots and have extra space for drainage, making moving and caring for your plants easier.</p>",
+        "featured_collection": "all-display-products"
+      }
+    },
+    "main_collection_XiUa7E": {
+      "type": "main-collection",
+      "disabled": true,
+      "name": "main-collection",
+      "settings": {}
+    },
+    "join_us_TnN4MF": {
+      "type": "join-us",
+      "name": "Join Us Section",
+      "settings": {
+        "heading": "Join Our Pack!"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "hero_banner_yRJMAj",
+    "cyramic_cylinder_aCnrAx",
+    "main_collection_XiUa7E",
+    "join_us_TnN4MF"
+  ]
+}

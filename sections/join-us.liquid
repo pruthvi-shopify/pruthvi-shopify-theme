@@ -1,0 +1,30 @@
+<section class="join-us-section" data-section="join-us">
+  <div class="join-us-inner">
+    <div class="container">
+      {% if section.settings.heading != blank %}
+  <h3 class="text-center">
+    {{ section.settings.heading | escape }}
+  </h3>
+{% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Join Us Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Text",
+      "default": "Join Our Pack!"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Join Us Section"
+    }
+  ]
+}
+{% endschema %}

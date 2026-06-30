@@ -1,0 +1,132 @@
+<section class="search-section">
+  <div class="container">
+    <div class="search-container text-center">
+      <h1>Search</h1>
+
+      <p-search>
+        <form action="{{ routes.search_url }}" method="get">
+          <input
+            style="
+              padding: 7px 10px;
+              border: 1px solid #000000;
+              color: #a4a4a4;
+              letter-spacing: .02em;
+              font-size: 14px;
+              width: calc(100% - 40px);
+              height: 40px;box-sizing: border-box;
+            "
+            type="search"
+            name="q"
+            value="{{ search.terms | escape }}"
+            {% comment %} role="combobox" {% endcomment %}
+            {% comment %}
+              aria-expanded="false"
+              aria-owns="predictive-search-results"
+              aria-controls="predictive-search-results"
+              aria-haspopup="listbox"
+              aria-autocomplete="list"
+            {% endcomment %}
+          >
+          <input name="options" type="hidden" value="last">
+          <div id="predictive-search" style="width:50%; background-color : #f7f8fa"></div>
+        </form>
+      </p-search>
+    </div>
+  </div>
+</section>
+
+<section class="prod-filter">
+  <div class="container-fluid">
+    <div class="row">
+      {% render 'collection-filter', collection: search %}
+
+      <div class="col-9 col-m-12">
+        <div class="collection-prod">
+          <div class="collection-prod-inner" id="productGrid">
+            <!-- PRODUCT LISTING SAME J RAKHYO -->
+            {% render 'top-filter' %}
+            {% paginate search.results by 10 %}
+              <div class="row">
+                {% for product in search.results %}
+                  {% render 'product-grid', product: product %}
+                {% endfor %}
+              </div>
+
+              <!-- Pagination -->
+              {% if paginate.pages > 1 %}
+                <div class="pagination text-center mt-4">
+                  {% if paginate.previous %}
+                    <a href="{{ paginate.previous.url }}" class="pagination-prev">← Previous</a>
+                  {% endif %}
+                  {% for part in paginate.parts %}
+                    {% if part.is_link %}
+                      <a href="{{ part.url }}">{{ part.title }}</a>
+                    {% else %}
+                      <span class="current">{{ part.title }}</span>
+                    {% endif %}
+                  {% endfor %}
+                  {% if paginate.next %}
+                    <a href="{{ paginate.next.url }}" class="pagination-next">Next →</a>
+                  {% endif %}
+                </div>
+              {% endif %}
+            {% endpaginate %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+    margin: 0;
+  }
+
+  .search-container {
+    text-align: center;
+    width: 100%;
+    max-width: 500px;
+    margin: auto;
+  }
+
+  h1 {
+    font-size: 2em;
+    color: #333;
+    margin-bottom: 20px;
+    margin-top: 60px;
+  }
+
+  .search-box {
+    display: flex;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    overflow: hidden;
+  }
+
+  .search-box input[type="text"] {
+    flex-grow: 1;
+    border: none;
+    padding: 10px 15px;
+    font-size: 1em;
+    outline: none;
+  }
+
+  .search-btn {
+    background-color: #fff;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    color: #888;
+  }
+
+  .search-btn:hover {
+    color: #555;
+  }
+</style>
+
+

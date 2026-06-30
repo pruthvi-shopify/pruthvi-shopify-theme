@@ -1,0 +1,57 @@
+{% comment %} <div id="wrap">
+  <ul id="slider">
+    <li class="slide-item"><img data-lazy="https://takblog.site/wp-content/themes/takblog/assets/img/blanks/post19_1.jpg" alt="画像"></li>
+    <li class="slide-item"><img data-lazy="https://takblog.site/wp-content/themes/takblog/assets/img/blanks/post19_2.jpg" alt="画像"></li>
+    <li class="slide-item"><img data-lazy="https://takblog.site/wp-content/themes/takblog/assets/img/blanks/post19_3.jpg" alt="画像"></li>
+    <li class="slide-item"><img data-lazy="https://takblog.site/wp-content/themes/takblog/assets/img/blanks/post19_4.jpg" alt="画像"></li>
+    <li class="slide-item"><img data-lazy="https://takblog.site/wp-content/themes/takblog/assets/img/blanks/post19_5.jpg" alt="画像"></li>
+    <li class="slide-item"><img data-lazy="https://takblog.site/wp-content/themes/takblog/assets/img/blanks/post19_6.jpg" alt="画像"></li>
+  </ul>
+  <ul id="thumbnail_slider">
+    <li class="thumbnail-item"><img data-lazy="https://takblog.site/wp-content/themes/takblog/assets/img/blanks/post19_1.jpg" alt="画像"></li>
+    <li class="thumbnail-item"><img data-lazy="https://takblog.site/wp-content/themes/takblog/assets/img/blanks/post19_2.jpg" alt="画像"></li>
+    <li class="thumbnail-item"><img data-lazy="https://takblog.site/wp-content/themes/takblog/assets/img/blanks/post19_3.jpg" alt="画像"></li>
+    <li class="thumbnail-item"><img data-lazy="https://takblog.site/wp-content/themes/takblog/assets/img/blanks/post19_4.jpg" alt="画像"></li>
+    <li class="thumbnail-item"><img data-lazy="https://takblog.site/wp-content/themes/takblog/assets/img/blanks/post19_5.jpg" alt="画像"></li>
+    <li class="thumbnail-item"><img data-lazy="https://takblog.site/wp-content/themes/takblog/assets/img/blanks/post19_6.jpg" alt="画像"></li>
+  </ul>
+</div>
+
+<style>
+  #wrap{
+  background-color: #ddd;
+  padding: 50px 0;
+}
+#slider,#thumbnail_slider{
+  width: 300px;
+  margin: 0 auto 10px;
+}
+.slide-item{
+  img{
+    width: 100%;
+  }  
+}
+.thumbnail-item{
+  img{
+    width: 98%;
+    margin: 0 auto;
+  } 
+}
+  </style>
+
+  <script>
+$(function(){
+  $("#slider").slick({
+    autoplay: true,
+    speed: 1000,
+    arrows: false,
+    asNavFor: "#thumbnail_slider"
+  });
+  $("#thumbnail_slider").slick({
+    slidesToShow: 3,
+    speed: 1000,    
+    asNavFor: "#slider"
+  });
+});
+    
+  </script> {% endcomment %}

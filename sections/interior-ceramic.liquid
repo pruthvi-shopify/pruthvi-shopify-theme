@@ -1,0 +1,32 @@
+<section class="interior-ceramic">
+  <div class="container-fluid">
+    <div class="interior-img">
+      {% if section.settings.interior_image != blank %}
+         {{
+        section.settings.interior_image
+        | image_url: width: 1530
+        | image_tag:
+        widths: widths
+       }}
+     {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Interior Ceramic Image",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "interior_image",
+      "label": "Interior Ceramic Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Interior Ceramic Section"
+    }
+  ]
+}
+{% endschema %}

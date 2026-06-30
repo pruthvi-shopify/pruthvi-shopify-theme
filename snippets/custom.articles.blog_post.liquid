@@ -1,0 +1,9 @@
+{% if article.metafields["custom"]["blog_post"] != blank %}
+  <div class="custom-field custom-field__blog-post custom-field__type--rating">
+    <h3 class="custom-field--title">blog post</h3>
+    <div class="custom-field--value">
+{{ article.metafields["custom"]["blog_post"] | metafield_tag }}
+
+    </div>
+  </div>
+{% endif %}

@@ -1,0 +1,31 @@
+<section class="collection-prod" data-section="main-list-collection">
+  <div class="collection-prod-inner">
+      <div class="container-fluid">
+          <div class="section-title">
+              <h1>Shop</h1>
+          </div>
+          <div class="collection-prod-content-inner">
+              <div class="row">
+                {% for collection in collections %}
+                  <div class="col-4 col-m-4 text-center">
+                      <a href="{{ collection.url }}" class="collection-prod-content">
+                          <div class="collection-prod-img">
+                              <img src="{{ collection.image | img_url: 'master' }}" alt="{{ collection.image.alt }}">
+                          </div>
+                          <div class="collection-prod-title">
+                              <p>{{ collection.title }}</p>
+                          </div>
+                      </a>
+                  </div>
+                {% endfor %}
+              </div> 
+          </div>
+      </div>
+  </div>
+</section>
+{% schema %}
+  {
+    "name": "Collection list",
+    "settings": []
+  }
+{% endschema %}

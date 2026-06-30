@@ -1,0 +1,45 @@
+<section class="video-section" data-section="video">
+  <div class="container-fluid">
+    <div class="video-wrap">
+      {% if section.settings.thumbnail_image != blank %}
+        <img src="{{ section.settings.thumbnail_image | image_url: master }}" alt="{{ section.settings.thumbnail_image.alt }}">
+      {% endif %}
+      <div class="play-btn">
+        <a href="{{ section.settings.video_url }}" data-autoslide="true" data-fullscreenmode="true" class="html5lightbox">
+          {% if section.settings.play_button_image != blank %}
+            <img src="{{ section.settings.play_button_image | image_url: master }}" alt="{{ section.settings.play_button_image.alt }}">
+          {% else %}
+            {% endif %}
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Video Section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "thumbnail_image",
+      "label": "Video Thumbnail Image"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Video",
+    },
+    {
+      "type": "image_picker",
+      "id": "play_button_image",
+      "label": "Play Button Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Video Section",
+    }
+  ]
+}
+{% endschema %}

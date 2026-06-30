@@ -1,0 +1,6 @@
+
+<ul>
+{% for item in article.metafields["custom"]["blog_post3_metafield"].value %}
+<li><time datetime="{{ item }}" class="metafield-date">{{ item | time_tag: '%B %d, %Y' }}</time></li>
+{% endfor %}
+</ul>

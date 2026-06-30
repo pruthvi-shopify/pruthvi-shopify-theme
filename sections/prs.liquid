@@ -1,0 +1,589 @@
+<div id="drawer-{{ block.id }}" class="nt_fk_canvas shop-look-drawer dn">
+  <div class="shop_look_drawer flex column h__100">
+    <div class="shop_look_header flex fl_between al_center">
+      <h3 class="widget-title tu fs__16 mg__0">Shop the look</h3>
+      <i class="close_pp pegk pe-7s-close ts__03 cd"></i>
+    </div>
+    <div class="shop_look_wrap">
+      <div class="shop_look_product_grid">
+        {% for product in block.settings.shop_the_look_products %}
+            <div class="product-item">
+            {%assign drawer_id = 'pro-details-' |append:product.id | append: '-' | append: block.id %}
+            {% render 'pr_loop_grid_1',
+              product: product,
+              collection: null,
+              use_cdt: false,
+              txt_cd: '',
+              col: '12',
+              col_tb: '12',
+              col_mb: '12',
+              sett_equal: false,
+              show_vendor: false,
+              inc_price: settings.price_format,
+              use_rating: settings.use_pr_rating,
+              inc_rating: settings.app_review,
+              show_color: settings.show_pr_color,
+              show_cl_type: settings.show_color_type,
+              show_size: settings.show_pr_size,
+              drawer_id: drawer_id
+            %}
+            
+            <div id="{{ drawer_id }}" class="nt_fk_canvas shop-look-drawer dn">
+              <span class="close">Close</span>
+            </div>
+          </div>  
+          {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+aa maro drawer code nu snippet code che 
+{%- liquid
+  assign no_sold_out = product.available
+  if no_sold_out 
+   assign remove_soldout = settings.remove_sold_out 
+  else 
+   assign remove_soldout = false  
+  endif
+assign pr_variants = product.variants 
+assign variants_size = pr_variants.size 
+assign selected_variant = product.selected_variant
+assign pr_curent = settings.pr_curent
+if pr_curent == '2' 
+  assign current_variant = selected_variant |default: pr_variants.first 
+  if remove_soldout and current_variant.available == false and no_sold_out 
+    assign current_variant = product.first_available_variant 
+  endif
+else 
+  assign current_variant = product.selected_or_first_available_variant 
+endif
+assign default = product.has_only_default_variant
+assign on_sale = false
+if current_variant.compare_at_price > current_variant.price 
+  assign on_sale = true 
+endif
+assign ck_external = false
+assign pr_metafields = product.metafields
+assign pr_metafields_meta = pr_metafields.meta
+assign external = pr_metafields.external 
+if external.title_is != blank or external.link_is != blank 
+  assign ck_external = true 
+  assign title = external.title_is 
+  assign link = external.link_is
+endif
+assign ck_inventory = settings.ck_inventory
+if section.id == "main-qv" 
+  assign call_cl = '_qv'
+  assign Isquickview = true 
+else 
+  assign call_cl = '_ppr' 
+  assign Isquickview = false
+endif
+assign des_pr_layout = '1'
+assign pr_incoming_mess = settings.pr_incoming_mess
+assign pid = product.id
+assign hd_up = 'group-' |append:pid
+assign nav_up = linklists[hd_up].links | where:'type','product_link'
+assign nav_up_size = nav_up.size
+assign links_vendor = linklists['image-vendor-the4'].links
+assign pr_vendor = product.vendor
+assign price_varies = product.price_varies | default:product.compare_at_price_varies
+assign pr_tags = product.tags
+assign style_tag_arr = pr_tags | where:'stylet4_'
+assign style_tag = style_tag_arr | first | remove:'stylet4_'
+assign nav_style = linklists[style_tag].links | where:'type','product_link' 
+assign nav_style_size = nav_style.size
+
+assign inventory_quantity = current_variant.inventory_quantity
+assign inventory_management = current_variant.inventory_management
+if inventory_quantity <= 0  and inventory_management == 'shopify'
+  assign classdn1 = 'dn' 
+  assign classdn2 = ''
+  assign ck_preoder = true
+else 
+  assign classdn1 = '' 
+  assign classdn2 = 'dn'
+  assign ck_preoder = false
+endif
+assign PR_no_pick = false
+if pr_curent == '1' and variants_size > 1 and selected_variant == blank
+  assign PR_no_pick = true
+endif
+assign locale_url = product.url | split:'/products/' | first
+assign Block_sizeg = section.blocks | where:'type','size'  | first
+assign bk_stts = Block_sizeg.settings
+assign pos_sizeg = bk_stts.pos_sizeg | default:'1'
+assign ck_sizeg  = false
+assign pr_tags_str = pr_tags |join:'ntt4'
+if pos_sizeg == '2'
+  assign size_ck = bk_stts.size_ck | append:',size,sizes,Größe'
+  assign get_size = size_ck | downcase | replace: ' ,', ',' | replace: ', ', ',' | split: ',' | uniq
+  for option in product.options_with_values
+   assign name = option.name | downcase
+   if get_size contains name
+     assign ck_sizeg = true
+     assign name_sizeg = name
+     break
+   endif
+  endfor  
+endif
+assign ck_tab = section.settings.auto -%}
+
+{%- capture html_sizeg -%}
+  {%- if ck_sizeg -%}
+    {%- liquid
+      assign sc_type = bk_stts.sc_type
+      if pr_tags_str contains 'sizechart_t4s_'
+         assign sizechart_tag = pr_tags | where:'sizechart_t4s_' | first | remove:'sizechart_t4s_'
+         assign handle_size = pr_metafields_meta.page_size_chart | default:sizechart_tag
+         assign img_meta = pr_metafields_meta.img_size_chart | default:sizechart_tag
+      else
+         assign handle_size = pr_metafields_meta.page_size_chart
+         assign img_meta = pr_metafields_meta.img_size_chart
+      endif
+      assign page_size = pages[handle_size] | default:pages[bk_stts.page]
+      assign image = images[img_meta] | default:bk_stts.image -%}
+   
+    {%- if sc_type == '1' and page_size != blank -%}
+      <a class="cd chp ajax_pp_js mr__20" href="#" data-no-instant rel="nofollow" data-id='ps_ajax_pp_js' data-url="{{page_size.url}}/?view=AjaxPopup">{{ 'products.product.product_size_guide' | t }}</a>
+    {%- elsif sc_type == '2' and image != blank -%}
+      <a class="cd chp btn_size_guide ml__10 mr__20" href="#" data-no-instant rel="nofollow" data-src="{{ image | img_url: 'master' }}" data-width="{{ image.width }}" data-height="{{ image.height }}">{{ 'products.product.product_size_guide' | t }}</a>
+    {%- endif -%}
+
+  {%- endif -%}
+{%- endcapture -%}
+
+<div id="shopify-section-pr_summary" class="shopify-section summary entry-summary mt__30 sp-tabs">
+{%- for block in section.blocks %}{% assign bk_stts = block.settings -%}
+   {%- case block.type -%}
+
+      {%- when 'vendor_img' -%}
+        {%- if pr_vendor == blank or links_vendor.size == 0 %}{% continue %}{% endif -%}
+          {%- assign img_vendor = links_vendor | where:'title',pr_vendor | first -%}
+          {%- assign name_img_vendor = img_vendor.url |split:'?' | first | split :'/' | last -%}
+          {%- assign image = images[name_img_vendor] -%}
+          {%- if image != blank -%}
+          <div class="t4s-pr-vendor"><a href="{{ pr_vendor | url_for_vendor }}">
+            <img width="{{image.width}}" height="{{image.height}}" src="data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%20{{image.width}}%20{{image.height}}%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3C%2Fsvg%3E" data-src="{{ image | img_url: '1x1' }}" data-widths="[60, 90, 180, 320, 640]" data-sizes="auto" class="w__100 lazyloadt4s lz_op_ef" alt="{{ pr_vendor | escape }}"><span class="visually-hidden">{{ pr_vendor | escape }}</span>
+          </a></div> 
+          {%- endif -%}
+
+      {%- when '@app' -%}
+            {% render block %}
+      {%- when 'custom_liquid' -%}
+            <div class="pr_custom_liquid" {{ block.shopify_attributes }}>{{ bk_stts.custom_liquid }}</div>
+
+      {%- when 'title' -%} 
+        
+        {%- unless Isquickview -%}
+        <h1 class="product_title entry-title" style="font-size: {{bk_stts.size}}px" {{ block.shopify_attributes }}>{{product.title}}</h1>
+        {%- else -%}
+        <h1 class="product_title entry-title" style="font-size: {{bk_stts.size}}px" {{ block.shopify_attributes }}><a href="{{product.url | within: collection}}">{{product.title}}</a></h1>
+        {%- endunless -%}
+
+      {%- when 'subtitle' -%}
+        {% assign subtitle = product.metafields.custom.product_subtitle | default: block.settings.text %}
+        {% if subtitle != blank %}
+          <p class="product_subtitle" {{block.shopify_attributes }} style="font-size: {{ block.settings.size }}px; color: {{ block.settings.text_color}}">{{ subtitle }}</p>
+        {% endif %} 
+
+      {%- when 'pricereview' -%}  
+  <div class="price-review_wrp">   
+    {%- liquid 
+            if pr_tags contains 't4_hide_price'
+              continue
+            endif
+            if price_varies
+             assign price_varies_html = '<span class="price_varies dib">|</span>' | split:'|'
+            else 
+             assign price_varies_html = '' | split:'|'
+            endif
+            assign bl_saletxt = false
+            assign txt_sale = bk_stts.txt_sale
+            if txt_sale != '0' and on_sale 
+              assign bl_saletxt = true
+              if txt_sale == '1'
+                assign save = current_variant.compare_at_price | minus: current_variant.price | times: 100.0 | divided_by: current_variant.compare_at_price | round
+                assign save_js = 'products.product.save_js_html' | t: saved_amount:save
+              else
+                assign save = current_variant.compare_at_price | minus: current_variant.price
+                assign save = save | money
+              assign save_js = 'products.product.save2_js_html' | t: saved_amount:save
+              endif
+              assign txt_save_html = '<span class="txt_sale">' | append:save_js | append:'</span>'
+            endif -%}
+
+    <div class="flex wrap fl_between al_center price-review" {{ block.shopify_attributes }}>
+      <p class="price_range" id="price{{call_cl}}" data-txtsale="{{txt_sale}}" data-product-price>
+        {%- assign ck_price_varies = false -%}
+        {%- if product.price_varies == false or bk_stts.price == '0' %}{% assign ck_price_varies = true %}{% endif -%}
+
+        {%- if nav_up_size == 0 and current_variant.unit_price_measurement and ck_price_varies -%}
+        {{-price_varies_html[0]-}}
+        {%- if on_sale -%}<del>{{ current_variant.compare_at_price  | money }}</del><ins>{{ current_variant.price | money }}</ins>{%- else -%}{{ current_variant.price | money }}{%- endif -%}
+        {{-price_varies_html[1]-}}
+        {{-txt_save_html-}}
+        {%- capture unit_price_base_unit -%}
+        <span class="unit_base">
+          {%- if current_variant.unit_price_measurement -%}
+          {%- if current_variant.unit_price_measurement.reference_value != 1 -%}
+          {{- current_variant.unit_price_measurement.reference_value -}}
+          {%- endif -%}
+          {{ current_variant.unit_price_measurement.reference_unit }}
+          {%- endif -%}
+        </span>
+        {%- endcapture -%}
+
+        <span class="price__unit db"><span class="unit_price">{{ current_variant.unit_price | money }}</span><span>/</span>{{- unit_price_base_unit -}}</span>
+
+        {%- elsif nav_up_size == 0 -%}
+
+        {%- if price_varies -%}
+        {%- if bk_stts.price == '1' -%}{{ product.price_min | money }} – {{ product.price_max | money }}
+        {%- elsif bk_stts.price == '2' -%}<span class="cb fwn">{{ 'products.product.from' | t }}</span> {{ product.price_min | money }}
+        {%- else -%}
+        {%- if on_sale -%}<span class="price_varies current_price dib"><del>{{ current_variant.compare_at_price | money }}</del> <ins>{{ current_variant.price | money }}</ins></span>{{-txt_save_html-}}<style>.nt_cart_form .price {display: none}</style>
+        {%- else -%}<span class="price_varies current_price" dib>{{ current_variant.price | money }}</span><style type="text/css">.nt_cart_form .price {display: none}</style>{%- endif -%}
+        {%- endif -%}
+        {%- elsif on_sale -%}<del>{{ current_variant.compare_at_price | money }}</del> <ins>{{ current_variant.price | money }}</ins>{{-txt_save_html-}}
+        {%- else -%}{{ current_variant.price | money }}{%- endif -%}
+        {%- else -%}
+
+        {%- if on_sale -%}
+        {{ product.price | money }}–{{ product.compare_at_price | money }}
+        {%- else -%}
+        {{ product.price | money }}
+        {%- endif -%}
+
+        {%- endif -%}
+      </p>
+      {%- if bk_stts.rating -%}
+      <a href="#data-id-review" data-sl='[data-id-reviewt4s]' class="rating_sp_kl dib{% if Isquickview %} pe_none{% endif %}">
+        {%- case settings.app_review -%}              
+        {%- when '1' -%}
+        <span class="shopify-product-reviews-badge" data-id="{{ pid }}"></span>
+        {%- when '2' -%}
+        {%- if Isquickview -%}
+        <div class="ryviu-collection star-rating"><ryviu-widget-total collection=1 reviews_data="{{pr_metafields.ryviu.product_reviews_info  | escape  }}" product_id="{{product.id}}" handle="{{product.handle}}"></ryviu-widget-total></div>
+        {%- else -%}
+        <div class="review-widget"><ryviu-widget-total reviews_data="{{pr_metafields.ryviu.product_reviews_info  | escape  }}" product_id="{{pid}}" handle="{{product.handle}}"></ryviu-widget-total></div>
+        {%- endif -%}
+        {%- when '3' -%}
+        {%- if Isquickview -%}<div product-id="{{ pid }}" class="arv-collection arv-collection--{{ pid }}"></div>{%- else -%}<div product-id="{{ pid }}" class="alr-display-review-badge"></div>{%- endif -%}
+        {%- when '4' -%}
+        <div class="loox-rating" data-id="{{ pid }}" data-rating="{{ pr_metafields.loox.avg_rating }}" data-raters="{{ pr_metafields.loox.num_reviews }}"></div>
+        {%- when '5' -%}
+        {%- capture the_snippet_review_avg %}{% render 'ssw-widget-avg-rate-profile' %}{% endcapture -%}
+        {%- unless the_snippet_review_avg contains 'Liquid error' %}{{ the_snippet_review_avg }}{% endunless -%}
+        {%- when '7' -%}{{ product.metafields.judgeme.badge }}
+        {%- else -%}
+        <div class="pr_rating review_pr_other">{{bk_stts.review_liquid}}</div>
+        {%- endcase -%}
+      </a>
+      {%- endif -%}
+    </div>
+
+    <!-- Stamped - Begin Star Rating Badge -->
+    {% if block.settings.star_enable %}
+    <span class="stamped-product-reviews-badge stamped-main-badge" data-id="{{ product.id }}" data-product-sku="{{ product.handle }}" data-product-title="{{product.title}}" 
+          data-product-type="{{product.type}}" style="display: block;">{{product.metafields.stamped.badge}}</span>
+    {% endif %}
+  </div>
+      {%- when 'des' -%}
+      {%- if pr_tags contains 'hidet4_des' %}{% continue %}{% endif -%}
+      {%- comment %}{%- if bk_stts.des == '1' and call_cl != '_qv' %}{% continue %}{% endif -%}{% endcomment -%}
+      <div class="pr_short_des rtet4" {{ block.shopify_attributes }}>
+        {%- assign length = bk_stts.length | default: 31 -%}
+        {%- assign pr_des = product.description -%}
+        {%- capture readm -%}
+        {%- if bk_stts.readm and call_cl != "_qv" %}<a class="readm_sp_kl" data-sl='[data-id-dest4s]' href="#tab_pr_deskl"> {{bk_stts.readm_txt}}</a>{% endif -%}
+        {%- endcapture -%}
+
+        {%- if bk_stts.des == '1' -%}{{- pr_des -}}
+        {%- elsif bk_stts.text != blank -%}{{- bk_stts.text -}}{{readm}}
+        {%-else-%}<p class="mg__0">{{- pr_des | strip_html | truncatewords: length -}}{{readm}}</p>
+        {%-endif-%}
+      </div>    
+     {%- when 'frm' -%}
+        <div class="btn-atc atc-slide btn_full_{{bk_stts.btn_atc_full}} PR_no_pick_{{PR_no_pick}} btn_des_{{bk_stts.btn_des}} btn_txt_{{bk_stts.btn_txt}}" {{ block.shopify_attributes }}>
+           {%- if nav_up_size == 0 -%}
+              <div id="callBackVariant{{call_cl}}" data-js-callback class="nt_{{current_variant.option1 | handle}} nt1_{{current_variant.option2 | handle}} nt2_{{current_variant.option3 | handle}}">
+                 {%- if nav_style_size > 0 %}{% render 'choose_style',call_cl:call_cl,default:default,style_tag_arr:style_tag_arr,style_tag:style_tag,nav_style:nav_style,pid:pid %}{% endif -%}
+
+                 {%- assign id_frm = 'cart-form' | append:call_cl -%}{%- assign cl_frm = 'nt_cart_form variations_form variations_form' | append:call_cl -%}
+                 {%- form 'product', product, id: id_frm, data-productid: pid, class: cl_frm -%}                    
+                    {%- if no_sold_out and settings.enable_sub_reCharge %}{% render 'subscription-product',product:product %}{% endif -%} 
+                    {%- if settings.enable_infiniteoptions %}<div id="infiniteoptions-container"></div>{% endif -%} 
+                    {%- if default -%}
+                       <input name="id" data-productid="{{pid}}" value="{{ pr_variants.first.id }}" type="hidden">
+                       <div class="nt_pr_js lazypreloadt4s op__0" data-id="{{call_cl}}" data-set4url="/?section_id=js{{call_cl}}" data-rendert4s="{{locale_url}}/products/{{product.handle}}"></div>
+                       {%- if pr_incoming_mess and inventory_management and inventory_quantity <= 0 and current_variant.incoming -%}
+                           {%- assign idate = current_variant.next_incoming_date | date: format: settings.date_in -%}
+                           <div id="pr_incoming_mess{{call_cl}}" class="nt_varianqtyss mb__15 cb tu fwsb">{% if current_variant.available %}{{ 'products.product.will_not_ship_until_html' | t: date:idate }}{% else %}{{ 'products.product.will_be_in_stock_after_html' | t: date:idate }}{% endif %}</div>
+                       {%- endif -%}
+                       {{-product.metafields.meta.customProperty -}}
+                    {%- else -%}
+                       <select name="id" data-productid="{{pid}}" id="product-select{{call_cl}}" class="product-select_pr product-form__variants hide hidden">
+                          {%- for variant in pr_variants -%}
+                              {%- if variant.available -%}
+                                <option {% if variant.id == current_variant.id %} selected="selected" {% endif %} value="{{ variant.id }}">{{ variant.title | escape }}</option>
+                              {%- else -%}
+                                <option value="{{ variant.id }}"{%- if remove_soldout %} disabled="disabled"{%- endif %} class="nt_sold_out">{{ variant.title | escape }}</option>
+                              {%- endif -%}
+                            {%- endfor -%}
+                       </select>
+
+                       {%- case bk_stts.swatch_design -%}
+                          {%- when '1' -%}{%- render 'swatch',product:product,block:block,remove_soldout:remove_soldout,call_cl:call_cl,locale_url:locale_url,html_sizeg:html_sizeg,ck_sizeg:ck_sizeg,name_sizeg:name_sizeg -%}
+                          {%- when '2' -%}{%- render 'swatch_2',product:product,block:block,remove_soldout:remove_soldout,call_cl:call_cl,locale_url:locale_url,html_sizeg:html_sizeg,ck_sizeg:ck_sizeg,name_sizeg:name_sizeg -%}
+                          {%- when '3' -%}{%- render 'swatch_radio',product:product,block:block,remove_soldout:remove_soldout,call_cl:call_cl,locale_url:locale_url,html_sizeg:html_sizeg,ck_sizeg:ck_sizeg,name_sizeg:name_sizeg -%}
+                          {%- when '4' -%}{%- render 'swatch_radio_2',product:product,block:block,remove_soldout:remove_soldout,call_cl:call_cl,locale_url:locale_url,html_sizeg:html_sizeg,ck_sizeg:ck_sizeg,name_sizeg:name_sizeg -%}
+                          {%- when '5' -%}{%- render 'swatch_radio_3',product:product,block:block,remove_soldout:remove_soldout,call_cl:call_cl,locale_url:locale_url,html_sizeg:html_sizeg,ck_sizeg:ck_sizeg,name_sizeg:name_sizeg -%}
+                          {%- when '6' -%}{%- render 'swatch_radio_4',product:product,block:block,remove_soldout:remove_soldout,call_cl:call_cl,locale_url:locale_url,html_sizeg:html_sizeg,ck_sizeg:ck_sizeg,name_sizeg:name_sizeg -%}
+                          {%- when '7' -%}{%- render 'swatch_rectangle',product:product,block:block,remove_soldout:remove_soldout,call_cl:call_cl,locale_url:locale_url,html_sizeg:html_sizeg,ck_sizeg:ck_sizeg,name_sizeg:name_sizeg -%}
+                          {%- when '8' -%}{%- render 'swatch_rectangle_2',product:product,block:block,remove_soldout:remove_soldout,call_cl:call_cl,locale_url:locale_url,html_sizeg:html_sizeg,ck_sizeg:ck_sizeg,name_sizeg:name_sizeg -%}
+                          {%- when '9' -%}{%- render 'swatch_simple',product:product,block:block,remove_soldout:remove_soldout,call_cl:call_cl,locale_url:locale_url,html_sizeg:html_sizeg,ck_sizeg:ck_sizeg,name_sizeg:name_sizeg -%}
+                          {%- when '10' -%}{%- render 'swatch_simple_2',product:product,block:block,remove_soldout:remove_soldout,call_cl:call_cl,locale_url:locale_url,html_sizeg:html_sizeg,ck_sizeg:ck_sizeg,name_sizeg:name_sizeg -%}
+                       {%- endcase -%}
+                       {{-product.metafields.meta.customProperty -}}
+                        <div class="nt_pr_js lazypreloadt4s op__0" data-id="{{call_cl}}" data-set4url="/?section_id=js{{call_cl}}" data-rendert4s="{{locale_url}}/products/{{product.handle}}"></div>
+                       {%- if pr_incoming_mess -%}
+                          {%- if inventory_quantity <= 0 and current_variant.incoming and variants_size < 2 and inventory_management  -%}
+                              {%- assign idate = current_variant.next_incoming_date | date: format: settings.date_in -%}
+                              <div id="pr_incoming_mess{{call_cl}}" class="nt_varianqtyss mb__15 cb tu fwsb">{% if current_variant.available %}{{ 'products.product.will_not_ship_until_html' | t: date:idate }}{% else %}{{ 'products.product.will_be_in_stock_after_html' | t: date:idate }}{% endif %}</div>
+                          {%- else -%}
+                              <div id="pr_incoming_mess{{call_cl}}" class="nt_varianqty mb__15 cb tu fwsb dn">{{ 'products.product.will_not_ship_until_html' | t: date:'[19041994]' }}</div>
+                          {%- endif -%}
+                       {%- endif -%} 
+                    {%- endif -%}
+
+                   {%- if price_varies and current_variant.unit_price_measurement -%}
+                        <span class="price">
+                           <span class="price_varies">
+                            {%- if on_sale -%}<del>{{ current_variant.compare_at_price  | money }}</del><ins>{{ current_variant.price | money }}</ins>{%- else -%}{{ current_variant.price | money }}{%- endif -%}
+                           </span>
+                           {%- capture unit_price_base_unit -%}
+                            <span class="unit_base">
+                              {%- if current_variant.unit_price_measurement -%}
+                                {%- if current_variant.unit_price_measurement.reference_value != 1 -%}
+                                  {{- current_variant.unit_price_measurement.reference_value -}}
+                                {%- endif -%}
+                                {{ current_variant.unit_price_measurement.reference_unit }}
+                              {%- endif -%}
+                            </span>
+                           {%- endcapture -%}
+                           <span class="price__unit db"><span class="unit_price">{{ current_variant.unit_price | money }}</span><span>/</span>{{- unit_price_base_unit -}}</span>
+                        </span>
+                   {%- elsif price_varies and on_sale -%}<span class="price price_varies"><del>{{ current_variant.compare_at_price | money }}</del> <ins>{{ current_variant.price | money }}</ins></span>
+                   {%- elsif price_varies -%}<span class="price price_varies">{{ current_variant.price | money }}</span>{%- endif -%}
+                    
+                   <div class="specification-tabs-wrapper">
+                      {% for i in (1..3) %}
+                        {% assign icon = 'icon_' | append: i %}
+                        {% assign text = 'text_' | append: i %}
+                        {% assign subtext = 'subtext_' | append: i %}
+                        {% if block.settings[text] != blank or subtext != blank %}
+                          <div class="specification-tab">
+                            {% if block.settings[icon] != blank %}
+                              <div class="specification-tab__icon">
+                                {{
+                                  block.settings[icon]
+                                  | image_url: width: 50
+                                  | image_tag: loading: 'lazy', alt: block.settings[text]
+                                }}
+                              </div>
+                            {% endif %}
+                            <div class="specification-tab__text">
+                              {% if block.settings[text] != blank %}
+                              <p>{{ block.settings[text] }}</p>
+                              {% endif %}
+                              {% if block.settings[subtext] != blank %}
+                                <span>{{ block.settings[subtext] }}</span>
+                              {% endif %}
+                            </div>
+                          </div>
+                        {% endif %}
+                      {% endfor %}
+                    </div>
+
+                    {%- assign PR_buy_pr = false -%}
+                    {%- if bk_stts.enable_payment_btn and ck_external == false and no_sold_out -%}
+                    {%- assign PR_buy_pr = true -%}
+                    {%- endif -%}
+                    <div class="variations_button in_flex column w__100 buy_qv_{{PR_buy_pr}}">
+                       <div class="flex wrap">
+                          {%- if ck_external -%}<a href="{{link}}" rel="nofollow" target="_blank" class="truncate external_btn button">{{title}}</a>{%- render 'nt_add_w',class:"order-3",tooltip:"ttip_nt tooltip_top_left" -%}
+                          {%- elsif no_sold_out == false -%}
+                                <a rel="nofollow" data-no-instant href="#" class="truncate out_stock button pe_none" id="out_stock{{call_cl}}">{{'products.product.outofstock' | t}}</a>
+                                <a class="btn klaviyo-bis-trigger" href="#" style="display:none;">Notify Me When Available</a>
+                                {%- render 'nt_add_w',tooltip:"ttip_nt tooltip_top_left" -%}
+                          {%- else -%}
+                             <div class="quantity pr mr__10 order-1 qty__{{bk_stts.show_qty}}" id="sp_qty{{call_cl}}"> 
+                                <input type="number" class="input-text qty text tc qty_pr_js" step="1" min="1" max="{% if ck_preoder %}999{% elsif inventory_management != null %}{{inventory_quantity}}{% else %}9999{% endif %}" name="quantity" value="1" size="4" pattern="[0-9]*" inputmode="numeric">
+                                <div class="qty tc fs__14"><button type="button" class="plus db cb pa pd__0 pr__15 tr r__0"><i class="facl facl-plus"></i></button><button type="button" class="minus db cb pa pd__0 pl__15 tl l__0"><i class="facl facl-minus"></i></button></div>
+                             </div> 
+                             <a rel="nofollow" data-no-instant href="#" class="single_stt out_stock button pe_none order-2" id="out_stock{{call_cl}}">{{'products.product.outofstock' | t}}</a>
+                             <a class="btn klaviyo-bis-trigger" href="#" style="display:none;">Notify Me When Available</a>
+                             {%- render 'nt_add_w',class:"order-3",tooltip:"ttip_nt tooltip_top_left" -%}
+                             <button type="submit" data-time='{{bk_stts.time}}000' data-ani='{{bk_stts.ani}}' class="single_add_to_cart_button button truncate js_frm_cart w__100 order-4{% if PR_no_pick %} disabled{% endif %}"><span class="txt_add {{classdn1}}">{{'products.product.add_to_cart' | t}}</span><span class="txt_pre {{classdn2}}">{{'products.product.add_to_cart' | t}}</span></button>                             
+                          {%- endif -%}
+                       </div>
+                       {%- if PR_buy_pr -%}{{- form | payment_button -}}{%- endif -%} 
+                    </div>
+                 {%- endform -%}
+
+                {%- assign uavailable_v = pr_variants | where: "available", false -%}
+                {%- if settings.use_notify_me and uavailable_v.size > 0 -%}
+                 <div class="form-notify single_variation_wrap w_100 frm_notify_pr mt__25 {%- if no_sold_out %} dn{%- endif -%}" id="frm_notify{{call_cl}}">
+                    {%- form 'contact',class:'frm_notify w_100' -%}
+                           {%- assign formId = 'ContactForm'| append:call_cl | append:current_variant.id -%}
+                           {%- assign post_message = 'products.product.success_notify_me' -%}
+                           {%- render 'form-status', form: form, form_id: formId, success_message: post_message -%}
+                           <p class="cd fwsb mt__15 mb__10 fs__16">{{ 'products.product.title_notify_me' | t }}</p>
+                           <div class="row">
+                             {%- if customer and customer.name != blank -%}
+                             <div class="col-12 mb__20 hide hidden">
+                               <input type="text" id="{{ formId }}-name" name="contact[name]" value="{{ customer.name }}">
+                             </div>
+                             {%- endif -%}
+                             <div class="col-12 mb__20">
+                               <label for="{{ formId }}-email">{{ 'products.product.email_address' | t }} <span aria-hidden="true">*</span></label>
+                               <input required="required" type="email" id="{{ formId }}-email" name="contact[email]" autocorrect="off" autocapitalize="off" aria-required="true"{%- if form.errors contains 'email' %} class="input--error"{%- endif -%} value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}">
+                             </div>
+                             <div class="col-12 mb__20 hide hidden">
+                               <label for="{{ formId }}-message">{{ 'contact.form.message' | t }}</label>
+                               <textarea rows="10" id="{{ formId }}-message" name="contact[body]" data-wg-notranslate>
+                                {%- assign shop_url = shop.url | append:product.url -%}
+                                  {%- if variants_size < 2 -%}{{- 'products.product.please_notify_me' | t: title:product.title,variant:'',shop_url:shop_url,url:'' -}}
+                                  {%- else -%}{{- 'products.product.please_notify_me' | t: title:product.title,variant:' ( [variant] )',shop_url:shop_url,url:'[url]' -}}
+                                  {%- endif -%}
+                               </textarea>
+                             </div>
+                           </div>
+                           <input type="hidden" name="challenge" value="false">
+                           <input type="submit" class="add_to_cart_button button" value="{{ 'products.product.send_notify_me' | t }}">
+                    {%- endform -%}
+                 </div>
+                 {%- endif -%}
+              </div>
+           {%- else -%}
+              {%- comment %}product group{% endcomment -%}
+              {%- render 'grouped_product',block:block,nav_up:nav_up,call_cl:call_cl,pid:pid -%}
+           {%- endif -%}
+        </div>
+        <div class="payment_tem_main">
+          {%- form 'product', product, class: cl_frm -%}
+            <div class="payment_tem">
+              {{ form | payment_terms }}
+            </div>
+          {% endform %}
+        </div>
+
+
+      {%- when 'img' -%}
+        <div id="trust_seal{{call_cl}}" class="pr_trust_seal {{bk_stts.al}}_md tc" {{ block.shopify_attributes }}>
+          {%- if bk_stts.mess -%}<p class="mess_cd cb mb__10 fwm tu" style="font-size: {{bk_stts.size}}px">{{bk_stts.mess}}</p>{%- endif -%}
+          {%- assign image = bk_stts.image -%}
+          {%- if bk_stts.source == '1' and image != blank  -%}{%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+              <img style="--max-w-img:{{image.width}}px;width: {% if call_cl == '_ppr' %}{{bk_stts.wimg}}{% else %}100{% endif %}%" class="lazyloadt4s lz_op_ef img_tr_s1" src="data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%20{{image.width}}%20{{image.height}}%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3C%2Fsvg%3E" data-src="{{ img_url }}" data-widths="[90, 120, 150, 180, 360, 480, 600, 750, 940, 1080, 1296]" data-sizes="auto" alt="{{image.alt}}">
+          {%- else bk_stts.svg -%}
+              {%- assign arr = bk_stts.svg | remove: ' ' | split:"," -%}
+            <style>.pr_trust_seal img {padding: 2.5px;height: {{bk_stts.height}}px;}</style>
+            {%- for img in arr -%}<img class="lazyloadt4s img_tr_svg" src="https://cdn.shopify.com/s/assets/payment_icons/generic-dfdcaf09b6731ca14dd7441354c0ad8bc934184eb15ae1fda6a6b9e307675485.svg" data-src="{{ img | payment_type_img_url }}" alt="{{img | replace:'_',' '}}" />{%- endfor -%}
+          {%- endif -%}
+        </div>
+
+
+         {%- if meta != blank -%}{%- assign _meta = meta | remove: "/" | remove: ":" | remove: " " -%}
+
+           <div id="nt_countdow{{call_cl}}_txt" class="pdp_countdown_timer_{{ block.id }} {{bk_stts.al}} cd_style_{{bk_stts.cd_style}}" {{ block.shopify_attributes }}>
+             {%- if bk_stts.mess != blank -%}
+                <p class="mess_cd cb mb__10 lh__1 dn fwm tu" style="font-size: {{bk_stts.size}}px;">
+                {%- if bk_stts.icon != '1' -%}
+                  {%- if bk_stts.icon == '3' and bk_stts.img != blank -%}<img class="lazyloadt4s img_w25 w__100 mr__5 fading_{{bk_stts.fade}}" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{ bk_stts.img | img_url: '50x' }}" alt="{{settings.img.alt | default:'stock kalles' }}">{%- else -%}<i class="cd mr__5 fading_{{bk_stts.fade}} fs__20 las la-{{bk_stts.icon_name}}"></i>{%- endif -%}
+                {%- endif -%}
+                {{bk_stts.mess}}</p>
+             {%- endif -%}
+             <div class="nt_countdow_page in_flex fl_between lh__1" data-timezone='{{bk_stts.timezone}}' data-loop='{{bk_stts.loop}}' id="nt_countdow{{call_cl}}" data-time='{{meta}}' data-timej='{{_meta}}'></div>
+             <span class="day dn">{{bk_stts.day}}</span><span class="hr dn">{{bk_stts.hr}}</span><span class="min dn">{{bk_stts.min}}</span><span class="sec dn">{{bk_stts.sec}}</span>
+           </div>
+
+         {%- elsif bk_stts.stock_time != blank or pr_metafields_meta.countdown_day != blank -%}
+
+           {%- if bk_stts.source == '2' -%}{%- unless pr_tags contains 'has_stock_countdown' -%}{%- continue -%}{%- endunless -%}{%- endif -%}
+           <div id="nt_countdow{{call_cl}}_txt" class="pdp_countdown_timer_{{ block.id }} {{bk_stts.al}} cd_style_{{bk_stts.cd_style}}">
+             {%- if bk_stts.mess != blank -%}
+                <p class="mess_cd cb mb__10 lh__1 dn fwm tu" style="font-size: {{bk_stts.size}}px;">
+                {%- if bk_stts.icon != '1' -%}
+                  {%- if bk_stts.icon == '3' and bk_stts.img != blank -%}<img class="lazyloadt4s img_w25 w__100 mr__5 fading_{{bk_stts.fade}}" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{ bk_stts.img | img_url: '50x' }}" alt="{{settings.img.alt | default:'stock kalles' }}">{%- else -%}<i class="cd mr__5 fading_{{bk_stts.fade}} fs__20 las la-{{bk_stts.icon_name}}"></i>{%- endif -%}
+                {%- endif -%}
+                {{bk_stts.mess}}</p>
+             {%- endif -%}
+             <div class="nt_countdow_page nt_loop in_flex fl_between lh__1" data-timezone='{{bk_stts.timezone}}' data-loop='{{bk_stts.loop}}' id="nt_countdow{{call_cl}}" data-time={{ pr_metafields_meta.countdown_day | default:bk_stts.stock_time | json }}></div>
+             <span class="day dn">{{bk_stts.day}}</span><span class="hr dn">{{bk_stts.hr}}</span><span class="min dn">{{bk_stts.min}}</span><span class="sec dn">{{bk_stts.sec}}</span>
+           </div>
+
+         {%- endif -%}
+
+      {%- when 'stock' -%}
+          {%- if bk_stts.mess == blank or no_sold_out == false -%}{%- continue -%}{%- endif -%}
+          {%- assign arr = bk_stts.mess | split:'[stock_number]' -%}
+          <div id="nt_stock{{call_cl}}" {{ block.shopify_attributes }} class="nt_stock_page {{bk_stts.al}}" data-type="ATC{% if bk_stts.reduce %}_NONE{% endif %}" data-cur="{{inventory_quantity |default:0}}" data-prid="{{pid}}" data-st='{{bk_stts.st}}' data-qty='{{bk_stts.qty}}' data-total='{{bk_stts.total_items}}' data-min='{{bk_stts.stock_from}}' data-max='{{bk_stts.stock_to}}' data-bgprocess='{{bk_stts.stock_bg_process}}' data-bgten='{{bk_stts.bgten}}'>
+           <p class="message dn cb mb__10 lh__1 fwm" style="font-size:{{bk_stts.size}}px">
+            {%- if bk_stts.icon != '1' -%}
+              {%- if bk_stts.icon == '3' and bk_stts.img != blank -%}<img class="lazyloadt4s img_w25 w__100 mr__5 fading_{{bk_stts.fade}}" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{ bk_stts.img | img_url: '50x' }}" alt="{{settings.img.alt | default:'stock kalles' }}">{%- else -%}<i class="cd mr__5 fading_{{bk_stts.fade}} fs__20 las la-{{bk_stts.icon_name}}"></i>{%- endif -%}
+            {%- endif -%}
+            {{arr[0]}} <span class='count'></span> {{arr[1]}}</p>
+           {%- if bk_stts.progress -%}
+           <div class="progressbar progress_bar pr oh dn" style="display:none;background-color:{{bk_stts.stock_bg}};width:{{bk_stts.wbar}}%"><div style="background-color:{{bk_stts.stock_bg_process}};width: 100%;"></div></div>
+           {%- endif -%}
+          </div>
+
+      {%- when 'sold' -%}
+        {%- if bk_stts.text == blank or no_sold_out == false -%}{%- continue -%}{%- endif -%}
+        <div id="sold{{call_cl}}" {{ block.shopify_attributes }} data-time="120000" data-id="{{product.id}}" class="pr_flash_sold cb dn" data-mins="{{bk_stts.mins}}" data-maxs="{{bk_stts.maxs}}" data-mint="{{bk_stts.mint}}" data-maxt="{{bk_stts.maxt}}">
+          {%- if bk_stts.icon != '1' -%}
+            {%- if bk_stts.icon == '3' and bk_stts.img != blank -%}<img class="lazyloadt4s img_w25 w__100 mr__5 fading_{{bk_stts.fade}}" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{ bk_stts.img | img_url: '50x' }}" alt="{{settings.img.alt | default:'sold kalles' }}">{%- else -%}<i class="cd mr__5 fading_{{bk_stts.fade}} fs__20 las la-{{bk_stts.icon_name}}"></i>{%- endif -%}
+          {%- endif -%}
+          {{ bk_stts.text | replace:'[sold]','<span class="nt_pr_sold clc fwm"></span>' | replace:'[hour]','<span class="nt_pr_hrs clc fwm"></span>' }}
+        </div>
+ 
+
+      {%- when 'order' -%}{% unless no_sold_out %}{% continue %}{% endunless -%}{% if ck_preoder and variants_size == 1 and bk_stts.hide_pre %}{% continue %}{% endif -%}
+        <div id="delivery{{call_cl}}" {{ block.shopify_attributes }} class="prt_delivery dn cd" data-timezone="false" data-frm="{{bk_stts.frm}}" data-mode="{{bk_stts.mode}}" data-cut="{{bk_stts.cut}}" data-ds="{{pr_metafields_meta.estimateStartDate | default:bk_stts.ds}}" data-de="{{pr_metafields_meta.estimateEndDate | default:bk_stts.de}}" data-time="{{bk_stts.time}}" data-hidepre="{{bk_stts.hide_pre}}">
+          {%- if bk_stts.icon == '2' or bk_stts.icon == '3' -%}
+            {%- if bk_stts.icon == '3' and bk_stts.img != blank -%}<img class="lazyloadt4s img_w25 w__100 fading_{{bk_stts.fade}} mr__5" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{ bk_stts.img | img_url: '50x' }}" alt="{{bk_stts.img.alt | default:'kalles sale' }}">{%- else -%}<i class="las la-{{bk_stts.icon_name}} fading_{{bk_stts.fade}} fs__20 mr__5"></i>{%- endif -%}
+          {%- endif -%}
+            {{ bk_stts.txt | replace:'[hour]','<span class="h_delivery clc"></span>' | replace:'[date_start]','<span class="start_delivery fwm txt_under"></span>' | replace:'[date_end]','<span class="end_delivery fwm txt_under"></span>'}}
+            <span class="dn hr">{{bk_stts.hr}}</span><span class="dn min">{{bk_stts.min}}</span>
+        </div>
+
+      {%- when 'image' %}
+        <div class="image_{{block.id}} pdp_image_block" {{ block.shopify_attributes }}>
+          <img src="{{ bk_stts.image_block | img_url: 'master'}}" alt="{{ bk_stts.image_block.alt }}" />
+        </div>
+        <style>
+          .image_{{block.id}}.pdp_image_block {
+              margin: {{bk_stts.margin_top_desktop}}px {{bk_stts.margin_right_desktop}}px {{bk_stts.margin_bottom_desktop}}px {{bk_stts.margin_left_desktop}}px;
+              padding: {{bk_stts.padding_top_desktop}}px {{bk_stts.padding_right_desktop}}px {{bk_stts.padding_bottom_desktop}}px {{bk_stts.padding_left_desktop}}px;
+          }
+          @media (max-width: 767px) {
+            .image_{{block.id}}.pdp_image_block {
+              margin: {{bk_stts.margin_top_mobile}}px {{bk_stts.margin_right_mobile}}px {{bk_stts.margin_bottom_mobile}}px {{bk_stts.margin_left_mobile}}px;
+              padding: {{bk_stts.padding_top_mobile}}px {{bk_stts.padding_right_mobile}}px {{bk_stts.padding_bottom_mobile}}px {{bk_stts.padding_left_mobile}}px;
+            }
+          }
+        </style>
+          
+      {%- when 'html' %}{% if bk_stts.page == blank %}{% continue %}{% endif -%}
+        <div class="custom_{{block.id}}" {{ block.shopify_attributes }}>{{pages[bk_stts.page].content}}</div>
+
+      {%- when 'text' -%}{% if bk_stts.text == blank %}{% continue %}{% endif -%}
+        <div class="richtext_{{block.id}}" {{ block.shopify_attributes }}>{{bk_stts.text}}</div>
+
+   {%- endcase -%}
+{%- endfor -%}
+{%- if call_cl == "_qv" -%}<a href="{{product.url | within: collection}}" class="btn fwsb detail_link">{{ 'products.product.product_view_details' | t }} <i class="facl facl-right"></i></a> {%- endif -%}
+</div>
+
+

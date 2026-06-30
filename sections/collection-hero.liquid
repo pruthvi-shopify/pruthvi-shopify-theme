@@ -1,0 +1,38 @@
+<section class="hero-section" data-section="collection-hero">
+  <div class="hero-section-inner">
+    {% if section.settings.hero_image != blank %}
+      {{
+        section.settings.hero_image 
+        | image_url: width: 1920 
+        | image_tag: 
+          width: section.settings.hero_image.width, 
+          alt: "Hero Image"
+      }}
+    {% else %}
+      <img width="" height=""
+        src="https://cdn.shopify.com/s/files/1/0640/4839/8454/files/home-hero-img.jpg?v=1751266759" 
+        width="1920" 
+        alt="Default Hero Banner">
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero-Collection",
+  "tag": "section",
+  "class": "section-hero-about",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero Image"
+    },
+  ],
+  "presets": [
+    {
+      "name": "Hero and Collection Description"
+    }
+  ]
+}
+{% endschema %}

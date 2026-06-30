@@ -1,0 +1,9 @@
+{% if customer.metafields["custom_fields"]["boolean"] != blank %}
+  <div class="custom-field custom-field__boolean custom-field__type--boolean">
+    <h3 class="custom-field--title">boolean</h3>
+    <div class="custom-field--value">
+{{ customer.metafields["custom_fields"]["boolean"] | metafield_tag }}
+
+    </div>
+  </div>
+{% endif %}

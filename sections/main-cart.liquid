@@ -1,0 +1,374 @@
+<section class="shopping-cart" data-section="main-cart">
+  <div class="container-fluid">
+    <div class="section-title">
+      <h1>{{ 'cart.general.title' | t }}</h1>
+    </div>
+
+    {% if cart.item_count > 0 %}
+      <form action="/cart" method="post">
+        <div class="row ai-s jc-c">
+          <div class="col-8 col-m-12">
+            <div class="cart-inner">
+              <div class="cart-title">
+                <div class="row jc-c">
+                  <div class="col-2">
+                    <h5>{{ 'cart.label.product' | t }}</h5>
+                  </div>
+                  <div class="col-3">
+                    <h5>{{ 'products.product.vendor' | t }}</h5>
+                  </div>
+                  <div class="col-2">
+                    <h5>{{ 'cart.label.original_price' | t }}</h5>
+                  </div>
+                  <div class="col-2">
+                    <h5>{{ 'cart.label.price' | t }}</h5>
+                  </div>
+                  <div class="col-2">
+                    <h5>{{ 'cart.label.quantity' | t }}</h5>
+                  </div>
+                  <div class="col-1"></div>
+                </div>
+              </div>
+
+              {% for item in cart.items %}
+                <div
+                  class="cart-prod-detail"
+                  data-max="{{ item.variant.inventory_quantity }}"
+                  {% comment %} data-bundle-key="{{ item.properties.bundle_key }}" {% endcomment %}
+                >
+                  <div class="row jc-c">
+                    <!-- Product Image -->
+                    <div class="col-2 col-s-4 mob-border-bottom cart-prod-img-inner">
+                      <div class="cart-prod-img">
+                        <a href="{{ item.product.url }}">
+                          <img src="{{ item.image | img_url: '300x300' }}" alt="{{ item.product.title }}">
+                        </a>
+                      </div>
+                    </div>
+
+                    <!-- Product Info -->
+                    <div class="col-3 col-s-8 mob-border-bottom">
+                      <div class="cart-prod-desc">
+                        <div class="cart-prod-desc-inner">
+                          <div class="cart-prod-title">
+                            <h5>{{ item.product.title }}</h5>
+                          </div>
+                          {% for option in item.product.options_with_values %}
+                            <div class="cart-prod-option">
+                              <p>
+                                <strong>{{ option.name }}:</strong>
+                                <span>{{ item.variant.options[forloop.index0] }}</span>
+                              </p>
+                            </div>
+                          {% endfor %}
+
+                          <!-- Custom Properties like Finish -->
+                          {% if item.properties != blank %}
+                            <div class="cart-prod-option">
+                              {% for property in item.properties %}
+                                <p>
+                                  <strong>{{ property.first }}:</strong><span>{{ property.last }}</span>
+                                </p>
+                              {% endfor %}
+                            </div>
+                          {% endif %}
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Original Price -->
+                    <div class="col-2 col-s-4">
+                      <div class="cart-prod-price">
+                        <h4 style="color: #999;">
+                          {{ item.variant.compare_at_price | default: item.price | money_without_trailing_zeros }}
+                        </h4>
+                      </div>
+                    </div>
+
+                    <!-- Final Price (Price x Quantity) -->
+                    <div class="col-2 col-s-4">
+                      <div class="cart-prod-price">
+                        <h4>
+                          {{ item.line_price | money_without_trailing_zeros }}
+                        </h4>
+                      </div>
+                    </div>
+
+                    <!-- Quantity -->
+                    <div class="col-2 col-s-4">
+                      <div class="cart-prod-qty">
+                        <div class="quantity-box">
+                          <div class="quantity-wrap">
+                            <span class="adjust minus">
+                              <img
+                                src="https://cdn.shopify.com/s/files/1/0640/4839/8454/files/minus.png?v=1752137483"
+                                alt="Minus sign"
+                              >
+                            </span>
+                            <input
+                              name="updates[{{ item.key }}]"
+                              class="count"
+                              type="number"
+                              min="0"
+                              value="{{ item.quantity }}"
+                            >
+                            <span class="adjust plus">
+                              <img
+                                src="https://cdn.shopify.com/s/files/1/0640/4839/8454/files/plus.png?v=1752137500"
+                                alt="Plus sign"
+                              >
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Remove -->
+                    <div class="col-1 col-s-4">
+                      <div class="remove">
+                        <a href="/cart/change?line={{ forloop.index }}&quantity=0" class="delete-btn">
+                          <img
+                            src="https://cdn.shopify.com/s/files/1/0640/4839/8454/files/delete-img.png?v=1752471467"
+                            alt="{{ 'cart.general.remove' | t }}"
+                          >
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+
+              <!-- Bottom Buttons -->
+              <div class="continue-shopping">
+                <a href="/collections/all" class="btn-pink">{{ 'cart.general.continue_shopping' | t }}</a>
+                <button type="submit" class="btn-black">{{ 'cart.general.update' | t }}</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cart Summary -->
+          <div class="col-4 col-m-6">
+            <div class="cart-total">
+              <div class="cart-title">
+                <h5>{{ 'cart.general.subtotal' | t }}</h5>
+              </div>
+              <div class="cart-total-content">
+                <!-- Subtotal -->
+                <div class="subtotal row jc-sb">
+                  <div class="cart-total-price">
+                    <h5>{{ 'cart.general.subtotal' | t }}</h5>
+                  </div>
+                  <div class="cart-prod-price">
+                    <h5>{{ cart.items_subtotal_price | money }}</h5>
+                  </div>
+                </div>
+
+                <!-- Discount Check -->
+                {% if cart.cart_level_discount_applications.size > 0 %}
+                  {% for discount in cart.cart_level_discount_applications %}
+                    <div class="discount row jc-sb">
+                      <div class="cart-total-price">
+                        <h5>{{ discount.title }}</h5>
+                      </div>
+                      <div class="cart-prod-price">
+                        <h5>-{{ discount.total_allocated_amount | money }}</h5>
+                      </div>
+                    </div>
+                  {% endfor %}
+                {% endif %}
+
+                <!-- Shipping -->
+                <div class="shipping row jc-sb">
+                  <div class="cart-total-price">
+                    <h5>{{ 'cart.general.shipping_at_checkout' | t }}</h5>
+                  </div>
+                  <div class="cart-prod-price">
+                    <h5>{{ cart.total_price | money }}</h5>
+                  </div>
+                </div>
+
+                <!-- Total -->
+                <div class="total row jc-sb">
+                  <div class="cart-total-price">
+                    <h5>{{ 'cart.label.total' | t }}</h5>
+                  </div>
+                  <div class="cart-prod-price total-price">
+                    <h5>{{ cart.total_price | money }}</h5>
+                  </div>
+                </div>
+                <div class="checkout-btn text-center">
+                  <a href="/checkout" class="btn-pink">
+                    {{ 'cart.general.checkout' | t }}
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+
+    {% else %}
+      <div class="empty-cart text-center">
+        <h2>{{ 'cart.general.empty' | t }}</h2>
+        <a href="/collections/all" class="btn-pink">{{ 'cart.general.continue_browsing_html' | t }}</a>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+ {% comment %} <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const fmt = (v) =>
+      new Intl.NumberFormat('en-IN', {
+        style: 'currency',
+        currency: Shopify.currency.active,
+      }).format(v / 100);
+
+    const updateTotals = (cart) => {
+      document.querySelector('.subtotal .cart-prod-price h5').textContent = fmt(cart.items_subtotal_price);
+      document.querySelector('.total-price h5').textContent = fmt(cart.total_price);
+    };
+    console.log(updateTotals);
+
+    const updateRow = (row, item) => {
+      row.querySelector('input.count').value = item.quantity;
+      row.querySelector('.col-2.col-s-4 .cart-prod-price h4').textContent = fmt(item.line_price);
+    };
+
+    const Bundle = (bundleKey, qty) =>
+      fetch('/cart.js')
+        .then((r) => r.json())
+        .then((cart) => {
+          const updates = {};
+          cart.items.forEach((i) => {
+            if (i.properties?.bundle_key === bundleKey) updates[i.key] = qty;
+          });
+          return Object.keys(updates).length
+            ? fetch('/cart/update.js', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ updates }),
+              }).then((r) => r.json())
+            : null;
+        });
+
+    const changeQty = (row, qty) => {
+      const bundleKey = row.dataset.bundleKey;
+      console.log(bundleKey);
+      if (bundleKey) {
+        document
+          .querySelectorAll(`.cart-prod-detail[data-bundle-key="${bundleKey}"] input.count`)
+          .forEach((inp) => (inp.value = qty));
+        Bundle(bundleKey, qty).then((cart) => {
+          if (!cart) return;
+          updateTotals(cart);
+          cart.items.forEach((i, idx) => {
+            if (i.properties?.bundle_key === bundleKey) {
+              const row = document.querySelectorAll('.cart-prod-detail')[idx];
+              if (row) updateRow(row, i);
+            }
+          });
+        });
+      } else {
+        const idx = [...document.querySelectorAll('.cart-prod-detail')].indexOf(row) + 1;
+        fetch('/cart/change.js', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ line: idx, quantity: qty }),
+        })
+          .then((r) => r.json())
+          .then((cart) => {
+            updateTotals(cart);
+            const item = cart.items[idx - 1];
+            if (item) updateRow(row, item);
+          });
+      }
+    };
+
+    // qty input change
+    document.body.addEventListener('change', (e) => {
+      if (e.target.matches('.cart-prod-qty input.count')) {
+        const row = e.target.closest('.cart-prod-detail');
+        const qty = Math.max(0, +e.target.value || 0);
+        changeQty(row, qty);
+      }
+    });
+
+    // plus / minus click
+    document.body.addEventListener('click', (e) => {
+      const btn = e.target.closest('.adjust');
+      if (!btn) return;
+      const row = btn.closest('.cart-prod-detail');
+      const input = row.querySelector('input.count');
+      let qty = +input.value + (btn.classList.contains('plus') ? 1 : -1);
+      qty = Math.min(Math.max(0, qty), +row.dataset.max);
+      changeQty(row, qty);
+    });
+
+
+
+
+
+  });
+</script> 
+
+
+
+
+{% comment %} remove api  {% endcomment %}
+
+ <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest('.delete-btn');
+      if (!btn) return;
+      e.preventDefault();
+      const urlParams = new URL(btn.href).searchParams;
+      console.log(urlParams);
+      const line = parseInt(urlParams.get('line'));
+      console.log(line);
+
+      fetch('/cart/change.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ line: line, quantity: 0 }),
+      })
+        .then((r) => r.json())
+        .then((cart) => {
+          if (cart.item_count === 0) {
+            const cartSection = document.querySelector('.shopping-cart');
+            cartSection.outerHTML = `
+              <section class="empty-cart text-center">
+                <div class="container">
+                  <h2>Your cart is currently empty</h2>
+                  <a href="/collections/all" class="btn-pink">Continue Shopping</a>
+                </div>
+              </section>
+            `;
+            return;
+          }
+
+          // otherwise update UI for that row
+          const item = cart.items[idx - 1];
+          if (qty === 0) {
+            row.remove();
+          } else {
+            row.querySelector('.col-2.col-s-4:nth-of-type(3) h4').textContent = fmt(item.line_price);
+            input.value = qty;
+          }
+          
+          btn.closest('.cart-prod-detail').remove();
+          document.querySelector('.subtotal .cart-prod-price h5').textContent = new Intl.NumberFormat('en-IN', {
+            style: 'currency',
+            currency: Shopify.currency.active,
+          }).format(cart.items_subtotal_price / 100);
+
+          document.querySelector('.total-price h5').textContent = new Intl.NumberFormat('en-IN', {
+            style: 'currency',
+            currency: Shopify.currency.active,
+          }).format(cart.total_price / 100);
+        })
+        .catch(console.error);
+    });
+  });
+</script>   {% endcomment %}

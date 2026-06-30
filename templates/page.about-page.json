@@ -1,0 +1,109 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {}
+    },
+    "hero_banner_yRJMAj": {
+      "type": "hero-banner",
+      "blocks": {
+        "slide_HGfcFN": {
+          "type": "slide",
+          "settings": {
+            "slide_image": "shopify://shop_images/Hero_img.jpg",
+            "alt_text": "Hero Image"
+          }
+        }
+      },
+      "block_order": [
+        "slide_HGfcFN"
+      ],
+      "name": "Hero banner",
+      "settings": {}
+    },
+    "about_us_tJAebC": {
+      "type": "about-us",
+      "name": "about-us",
+      "settings": {
+        "heading": "About us",
+        "image1": "shopify://shop_images/content-image-1_e2f143f3-c988-4d9f-bf11-3ae4b40a5625.png",
+        "subtitle": "Our story",
+        "sub-content": "<p>We are Veronica and Jon, co-founders of <strong>LBE design.</strong> <strong>In 2018</strong> we challenged ourselves to buck the status quo, leaving our corporate careers and setting out to create a company built on principles we believe in. We’re travel fanatics who love the enduring nature of quality and are suckers for good design. Through connecting with many people and cultures, we’ve come away with two revelations that shape our company: The world is filled with talented individuals who are driven to create works of enduring beauty. People everywhere are fundamentally more similar than dissimilar and share a desire to lead happy, productive and healthy lives. Drawing on these two guiding principles, we hatched <strong>LBE Design.</strong></p><p>Through the design and production of beautiful products, our company strives to celebrate global connectedness and provide opportunities for individuals to achieve their aspirations regardless of where they reside. We believe you deserve the option of purchasing products created with a focus on sustainability, designed with consciousness, and crafted with enduring quality.</p>"
+      }
+    },
+    "driving_principle_H9HzFr": {
+      "type": "driving-principle",
+      "blocks": {
+        "principle_block_iJVb7U": {
+          "type": "principle_block",
+          "name": "Principle block",
+          "settings": {
+            "images": "shopify://shop_images/content-img-1_fbdda99c-c02a-4cc0-b10a-e7b22b0b08fb.png",
+            "sub-title": "Uncompromising Quality",
+            "sub-content": "<p>We offer you excellence in every product we create. Each planter and stand we build starts with a community of remarkable craftspeople and carefully selected manufacturing partners who exhibit an attention to detail that matches our own. We insist on the time-consuming and expensive process of forming our planters in one-piece molds using centrifugal force and pressure to shape the solid clay. Our meticulous standards are your gain: Revival Ceramics are made to last a lifetime.<br/><br/></p>",
+            "image_position": "left"
+          }
+        },
+        "principle_block_PBPDK9": {
+          "type": "principle_block",
+          "settings": {
+            "images": "shopify://shop_images/content-img-2_80dbca86-58cd-444c-a189-4e7b687de60d.png",
+            "sub-title": "Sustainable Focus",
+            "sub-content": "<p>People and the environment are at the core of everything we do, so we focus on a conscientious approach to our business. While creating high-quality products is one leg of that approach, supporting people, and employing sustainable practices are the equally important other two. We build strong, caring relationships with our small, family-owned partners, who strive to empower their local communities. And because we believe the pursuit of profit should not come at the expense of sustainability, we look at every aspect of our business to ensure we produce our goods in the most sustainable manner possible. We are dedicated to doing our part to pave the road to a better, greener, and more sustainable future.<br/><br/></p>",
+            "image_position": "right"
+          }
+        },
+        "principle_block_i9UtU8": {
+          "type": "principle_block",
+          "settings": {
+            "images": "shopify://shop_images/content-img-3_3d3a52d3-c36e-4984-bbe6-dded1da8c376.png",
+            "sub-title": "Timeless Design",
+            "sub-content": "<p>We love to bring you great design. From recreations of past classics to our original designs, Revival Ceramics are timeless, functional and versatile. We start with clean designs that fit any style, any decor. We then incorporate superb craftsmanship like the seamless, beautifully thin walls of our vessels or the delicate wood grains highlighted in our plant stands. The result is a product that continually delights our customers. Your design preferences may change, but your planter will never have to.<br/><br/></p>",
+            "image_position": "left"
+          }
+        }
+      },
+      "block_order": [
+        "principle_block_iJVb7U",
+        "principle_block_PBPDK9",
+        "principle_block_i9UtU8"
+      ],
+      "name": "driving-principle",
+      "settings": {
+        "main-heading": "Driving Principles"
+      }
+    },
+    "video_3LPYi4": {
+      "type": "video",
+      "name": "Video Section",
+      "settings": {
+        "thumbnail_image": "shopify://shop_images/sustainability.jpg",
+        "play_button_image": "shopify://shop_images/lightbox-play_fc4a4a10-2e4e-432c-84b9-de32c6ac483c.png"
+      }
+    },
+    "join_us_qEfLzM": {
+      "type": "join-us",
+      "name": "Join Us Section",
+      "settings": {
+        "heading": "Join Our Pack!"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "hero_banner_yRJMAj",
+    "about_us_tJAebC",
+    "driving_principle_H9HzFr",
+    "video_3LPYi4",
+    "join_us_qEfLzM"
+  ]
+}

@@ -1,0 +1,212 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero_banner_e9Jiep": {
+      "type": "hero-banner",
+      "blocks": {
+        "slide_JJTziD": {
+          "type": "slide",
+          "settings": {
+            "slide_image": "shopify://shop_images/home-hero-img.jpg",
+            "alt_text": "Hero Image"
+          }
+        },
+        "slide_FG8y6J": {
+          "type": "slide",
+          "settings": {
+            "slide_image": "shopify://shop_images/home-hero-img.jpg",
+            "alt_text": "Hero Image"
+          }
+        }
+      },
+      "block_order": [
+        "slide_JJTziD",
+        "slide_FG8y6J"
+      ],
+      "name": "Hero banner",
+      "settings": {}
+    },
+    "image_content_Mxz3YH": {
+      "type": "image-content",
+      "blocks": {
+        "feature_na6Yth": {
+          "type": "feature",
+          "settings": {
+            "feature_title": "Uncompromising Quality",
+            "feature_text": "We are dedicated to providing exceptional quality and design through our meticulous standards and processes."
+          }
+        },
+        "feature_chWNzy": {
+          "type": "feature",
+          "settings": {
+            "feature_title": "Timeless Design",
+            "feature_text": "Revival Ceramics are engineered to endure the test of trends and time."
+          }
+        },
+        "feature_pqJ4JT": {
+          "type": "feature",
+          "settings": {
+            "feature_title": "Sustainable Focus",
+            "feature_text": "Supporting people and employing sustainable practices are at the core of everything we do."
+          }
+        },
+        "feature_D89Lfy": {
+          "type": "feature",
+          "settings": {
+            "feature_title": "Functional and Beautiful",
+            "feature_text": "Our planters are designed to fit plastic grow pots, making plant design and plant care simple."
+          }
+        }
+      },
+      "block_order": [
+        "feature_na6Yth",
+        "feature_chWNzy",
+        "feature_pqJ4JT",
+        "feature_D89Lfy"
+      ],
+      "name": "image-content",
+      "settings": {
+        "main_image": "shopify://shop_images/revival-ceramic.png",
+        "main_title": "Why Choose Revival Ceramics?"
+      }
+    },
+    "block_image_3y8R6d": {
+      "type": "block-image",
+      "blocks": {
+        "content_block_ktkz9N": {
+          "type": "content_block",
+          "source": "{{ metaobjects.home_page[\"the-lbe-design-promise\"] }}",
+          "settings": {
+            "block_image": "{{ metaobjects.home_page[\"the-lbe-design-promise\"].image.value }}",
+            "heading": "{{ metaobjects.home_page[\"the-lbe-design-promise\"].title.value }}",
+            "description": "Some pet supplements contain ingredients that shouldn’t be in there - fillers, chemical additives, and GMOs. You can have a clean conscience knowing your dog is active and healthy while taking what nature intended.",
+            "button_link": "",
+            "button_text": "Shop Now",
+            "reverse_layout": false
+          }
+        },
+        "content_block_YmpM4w": {
+          "type": "content_block",
+          "settings": {
+            "block_image": "shopify://shop_images/LBE-2.jpg",
+            "heading": "No Bad Stuff",
+            "description": "Some pet supplements contain ingredients that shouldn’t be in there - fillers, chemical additives, and GMOs. You can have a clean conscience knowing your dog is active and healthy while taking what nature intended.",
+            "button_link": "shopify://collections/frontpage",
+            "button_text": "Shop Now",
+            "reverse_layout": true
+          }
+        }
+      },
+      "block_order": [
+        "content_block_ktkz9N",
+        "content_block_YmpM4w"
+      ],
+      "name": "block-image",
+      "settings": {}
+    },
+    "customer_iA3mGH": {
+      "type": "customer",
+      "blocks": {
+        "testimonial_4YyeP7": {
+          "type": "testimonial",
+          "settings": {
+            "customer_image": "shopify://shop_images/customer-img.png",
+            "name": "Moby, Labrador",
+            "customer_text": "Love that this is all natural and organic to feed to Moby. It's so important for his health as he is getting older."
+          }
+        },
+        "testimonial_THjkXW": {
+          "type": "testimonial",
+          "settings": {
+            "customer_image": "shopify://shop_images/customer-img.png",
+            "name": "Moby, Labrador",
+            "customer_text": "Love that this is all natural and organic to feed to Moby. It's so important for his health as he is getting older."
+          }
+        },
+        "testimonial_3RHApy": {
+          "type": "testimonial",
+          "settings": {
+            "customer_image": "shopify://shop_images/customer-img.png",
+            "name": "Moby, Labrador",
+            "customer_text": "Love that this is all natural and organic to feed to Moby. It's so important for his health as he is getting older."
+          }
+        },
+        "testimonial_Upmxay": {
+          "type": "testimonial",
+          "settings": {
+            "customer_image": "shopify://shop_images/customer-img.png",
+            "name": "Moby, Labrador",
+            "customer_text": "Love that this is all natural and organic to feed to Moby. It's so important for his health as he is getting older."
+          }
+        },
+        "testimonial_mX3gEj": {
+          "type": "testimonial",
+          "settings": {
+            "customer_image": "shopify://shop_images/customer-img.png",
+            "name": "Moby, Labrador",
+            "customer_text": "Love that this is all natural and organic to feed to Moby. It's so important for his health as he is getting older."
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_4YyeP7",
+        "testimonial_THjkXW",
+        "testimonial_3RHApy",
+        "testimonial_Upmxay",
+        "testimonial_mX3gEj"
+      ],
+      "name": "Customer Love",
+      "settings": {
+        "heading": "Customers Love Revival Ceramics"
+      }
+    },
+    "video_Eqdym6": {
+      "type": "video",
+      "name": "Video Section",
+      "settings": {
+        "thumbnail_image": "shopify://shop_images/video-img.png",
+        "play_button_image": "shopify://shop_images/lightbox-play_fc4a4a10-2e4e-432c-84b9-de32c6ac483c.png"
+      }
+    },
+    "lbe_designe_3Vj38c": {
+      "type": "lbe-designe",
+      "name": "LBE Gives Back",
+      "settings": {
+        "logo_image": "shopify://shop_images/Plant-a-Seed-Logo.png",
+        "heading": "LBE Design Gives Back",
+        "description": "We care about all canine-kind—and we’re committed to donating 1% of our revenue to our rescue organization partners, including the Sato Project. Every meal your dog eats will contribute to the cause.",
+        "footer_image": "shopify://shop_images/L_G-Round-Two-white.png"
+      }
+    },
+    "join_us_8y9k6B": {
+      "type": "join-us",
+      "name": "Join Us Section",
+      "settings": {
+        "heading": "Join Our Pack!"
+      }
+    },
+    "recently_viewed_QcUV9B": {
+      "type": "recently-viewed",
+      "name": "recently-viewed",
+      "settings": {}
+    }
+  },
+  "order": [
+    "hero_banner_e9Jiep",
+    "image_content_Mxz3YH",
+    "block_image_3y8R6d",
+    "customer_iA3mGH",
+    "video_Eqdym6",
+    "lbe_designe_3Vj38c",
+    "join_us_8y9k6B",
+    "recently_viewed_QcUV9B"
+  ]
+}

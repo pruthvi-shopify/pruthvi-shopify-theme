@@ -1,0 +1,81 @@
+<section class="customer-love-section" data-section="customer">
+  <div class="container-fluid">
+    {% if section.settings.heading != blank %}
+      <h3>{{ section.settings.heading }}</h3>
+    {% endif %}
+
+    {% for testimonial in product.metafields.custom.testimonial %}
+      {{ testimonial.image }}
+    {% endfor %}
+
+    <div class="customerLove-slider">
+      {% for block in section.blocks %}
+        <div class="customerLove-slides" {{ block.shopify_attributes }}>
+          <div class="customerLove-slide">
+            <div class="slide-content">
+              <div class="customer-detail">
+                {% if block.settings.customer_image != blank %}
+                  {{ block.settings.customer_image | image_url: width: 60 | image_tag: widths: widths }}
+                {% endif %}
+                {% if block.settings.name != blank %}
+                  <span class="customer-name">{{ block.settings.name }}</span>
+                {% endif %}
+              </div>
+              <div>
+                {% if block.settings.customer_text != blank %}
+                  <p>"{{ block.settings.customer_text }}"</p>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Customer Love",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading",
+      "default": "Customers Love Revival Ceramics"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "customer_image",
+          "label": "Customer Image"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Customer Name",
+          "default": "Moby, Labrador"
+        },
+        {
+          "type": "textarea",
+          "id": "customer_text",
+          "label": "Customer Quote",
+          "default": "Love that this is all natural and organic to feed to Moby. It's so important for his health as he is getting older."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Customer Love",
+      "blocks": [{ "type": "testimonial" }, { "type": "testimonial" }, { "type": "testimonial" }]
+    }
+  ]
+}
+{% endschema %}
+}

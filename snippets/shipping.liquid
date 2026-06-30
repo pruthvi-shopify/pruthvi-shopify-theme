@@ -1,0 +1,288 @@
+{% if cart.item_count > 0 %}
+  {%- assign free_shipping_amount = settings.free_shipping_threshold | times: 100 -%}
+  {%- assign cart_total = cart.total_price -%}
+
+  {% if cart_total < free_shipping_amount %}
+    {% assign remaining_for_free_shipping = free_shipping_amount | minus: cart_total %}
+    <div class="progress-bar-container">
+      <p class="progress-message">Spend {{ remaining_for_free_shipping | money }} more for free shipping.</p>
+      {% assign progress_percentage = cart_total | times: 100 | divided_by: free_shipping_amount %}
+      <div class="progress-bar">
+        <div class="progress-fill" style="width: {{ progress_percentage | at_most: 100 }}%;"></div>
+      </div>
+    </div>
+  {% else %}
+    <div class="progress-bar-container progress-bar-complete">
+      <p class="progress-message">{{ settings.post_goal_message }}</p>
+    </div>
+  {% endif %}
+
+  {% comment %} CSS for free shipping progress bar  {% endcomment %}
+  <style>
+    .progress-bar-container {
+      {% comment %} margin: 1.5rem 0;{% endcomment %}
+      padding: 1.25rem;
+      background-color: #fef6e4;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .progress-bar-container.progress-bar-complete {
+      height: 50px;
+    }
+    .progress-message {
+      font-weight: 600;
+      font-size: 1rem;
+      color: #333;
+    }
+    .progress-bar {
+      margin-top: 1rem;
+      height: 10px;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background-color: #008060;
+      transition: width 0.4s ease-in-out;
+    }
+
+    .progress-bar-complete .progress-fill {
+      background-color: #00c853;
+    }
+  </style>
+
+  {%- liquid
+    assign free_gift_threshold = settings.free_gift_threshold | times: 100
+    assign cart_total = cart.total_price
+    assign gift_progress_percentage = cart_total | times: 100 | divided_by: free_gift_threshold
+    assign away_from_free_gift = free_gift_threshold | minus: cart_total
+    assign free_gift_product = all_products[settings.free_gift_product]
+  -%}
+
+  {% if cart_total < free_gift_threshold %}
+    <div class="gift-progress-bar-container">
+      <p class="gift-progress-message">
+        Spend {{ away_from_free_gift | money_with_currency }} more to unlock your free gift!
+      </p>
+      <div class="gift-progress-bar">
+        <div class="gift-progress-fill" style="width: {{ gift_progress_percentage | at_most: 100 }}%;"></div>
+      </div>
+    </div>
+  {% else %}
+    <div class="gift-progress-bar-container gift-progress-bar-complete">
+      <p class="gift-progress-message">{{ settings.post_goal_message2 }}</p>
+    </div>
+  {% endif %}
+
+  {% if cart_total >= free_gift_threshold and settings.free_gift_product != blank %}
+    {% assign gift_added_to_cart = false %}
+    {% for item in cart.items %}
+      {% if item.product.id == free_gift_product.id %}
+        {% assign gift_added_to_cart = true %}
+      {% endif %}
+    {% endfor %}
+
+    {% unless gift_added_to_cart %}
+      <div class="free-gift-promo">
+        <img src="{{ free_gift_product.featured_image | img_url: '100x' }}" alt="{{ free_gift_product.title }}">
+        <div class="free-gift-details">
+          <p>{{ free_gift_product.title }}</p>
+          <strong>{{ free_gift_product.price | money_without_trailing_zeros }}</strong>
+          <button class="add-free-gift-button" data-variant-id="{{ free_gift_product.variants.first.id }}">
+            Add to Cart
+          </button>
+        </div>
+      </div>
+    {% endunless %}
+  {% endif %}
+{% endif %}
+
+{% comment %} <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    function fetchCart() {
+      return fetch('/cart.js')
+        .then(res => res.json());
+    }
+
+    function showGiftButton() {
+      const btn = document.querySelector('.add-free-gift-button');
+      if (btn) btn.style.display = 'block';
+    }
+
+    //step 1: one function , use all ajax call about same html
+    function refreshCartDrawer() {
+      fetch(window.location.pathname + '?section_id=header')
+        .then(res => res.text())
+        .then(html => {
+          const temp = document.createElement('div');
+          temp.innerHTML = html;
+
+          const newDrawerContent = temp.querySelector('.cart-drawer-content');
+          const newSubtotal = temp.querySelector('.subtotal-price');
+          const cartIsEmpty = !temp.querySelector('.products');
+
+          //step 4: if cart empty :
+          if (cartIsEmpty) {
+            document.querySelector('.cart-drawer-content').innerHTML =
+              '<p class="text-center">your cart is currently empty</p>';
+            if (document.querySelector('.cart-drawer-footer')) {
+              document.querySelector('.cart-drawer-footer').remove();
+            }
+            const giftPromo = document.querySelector('.free-gift-promo');
+            if (giftPromo) giftPromo.remove();
+          } else {
+            if (newDrawerContent) {
+              document.querySelector('.cart-drawer-content').innerHTML = newDrawerContent.innerHTML;
+            }
+            if (newSubtotal) {
+              document.querySelector('.subtotal-price').textContent = newSubtotal.textContent;
+            }
+            const giftBtn = document.querySelector('.add-free-gift-button');
+            if (giftBtn) {
+              const giftVariantId = giftBtn.dataset.variantId;
+              const giftInCart = [...temp.querySelectorAll('.cart-drawer-content [data-variant-id]')].some(
+                (item) => item.dataset.variantId === giftVariantId
+              );
+              if (giftInCart) giftBtn.style.display = 'none';
+            }
+          }
+
+
+          fetchCart().then(cart => {
+            const freeGiftVariantId = {{ free_gift_product.variants.first.id }}
+            let realItemCount = 0; // gift product shivay na product nu store
+            let giftLine = null; //gift product line store
+
+            cart.items.forEach((item, index) => {
+              if (item.variant_id === freeGiftVariantId) {
+                giftLine = index + 1;
+              } else {
+                realItemCount += item.quantity;
+              }
+            });
+
+            const threshold = {{ free_gift_threshold }};
+            const cartTotal = cart.total_price;
+
+            if (cartTotal < threshold && giftLine) {
+          fetch('/cart/change.js', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ line: giftLine, quantity: 0 })
+          }).then(() => {
+            refreshCartDrawer();
+          });
+          return;
+        }
+
+            // only gift remove
+            if (realItemCount === 0 && giftLine) { // check free gift shivay koy pan item nathi ne
+              fetch('/cart/change.js', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ line: giftLine, quantity: 0 })
+              }).then(() => {
+                refreshCartDrawer();
+              });
+            }
+
+          });
+        });
+    }
+
+
+    // step 2:Add free gift
+    document.addEventListener('click', (event) => {
+      if (event.target.classList.contains('add-free-gift-button')) {
+        const variantId = event.target.dataset.variantId;
+        fetch('/cart/add.js', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ items: [{ id: variantId, quantity: 1 }] }),
+        })
+          .then(() => refreshCartDrawer())
+          .catch(err => console.error('Error adding gift:', err));
+      }
+    });
+
+    //step 3: Remove normal cart item
+     document.addEventListener('click', (event) => {
+      if (event.target.classList.contains('remove-cart-item') || event.target.closest('.delete-btn')) {
+        event.preventDefault();
+        const line = event.target.dataset.line || event.target.closest('.delete-btn')?.dataset.line;
+        fetch('/cart/change.js', {
+          method: 'POST',
+          headers: { 'Content-type': 'application/json' },
+          body: JSON.stringify({ line: line, quantity: 0 }),
+        })
+          .then(() => refreshCartDrawer())
+          .then(() => {
+            setTimeout(() => showGiftButton(), 100);
+          })
+          .catch(err => console.error('Error removing item:', err));
+      }
+    }); 
+  });
+</script> {% endcomment %}
+
+<style>
+    .gift-progress-bar-container {
+      margin-top: 1rem;
+      padding: 1.25rem;
+      background-color: #fef6e4;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .gift-progress-bar-container.gift-progress-bar-complete {
+      background-color: #e8f5e9;
+      {% comment %} border: 1px solid #00c853; {% endcomment %}
+    }
+
+    .gift-progress-message {
+      font-weight: 600;
+      font-size: 1rem;
+      color: #333;
+      height: 7px;
+    }
+
+    .gift-progress-bar {
+      margin-top: 1rem;
+      height: 10px;
+      border-radius: 5px;
+      {% comment %} background-color: #eee; {% endcomment %}
+      overflow: hidden;
+    }
+    .gift-progress-fill {
+      height: 100%;
+      background-color: #ff9800;
+      transition: width 0.4s ease-in-out;
+    }
+    .gift-progress-bar-complete .gift-progress-fill {
+      background-color: #00c853;
+    }
+
+  .free-gift-promo {
+    display: inline-block;
+    align-items: center;
+  }
+  .free-gift-promo img {
+    left: 72px;
+    margin-right: 5px;
+    margin-bottom: 10px;
+  }
+  .free-gift-details {
+    flex-grow: 1;
+    {% comment %} display: flex; {% endcomment %}
+  }
+   .add-free-gift-button {
+    background-color: #008000;
+    color: #fff;
+    padding: 8px 12px;
+    cursor: pointer;
+    line-height: 1;
+    border-radius: 3px;
+  }
+</style>

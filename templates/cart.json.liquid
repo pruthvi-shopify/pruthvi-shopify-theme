@@ -1,0 +1,41 @@
+
+
+{% assign active_cart_tag = '' %}
+{% if cart.item_count > 0 %}
+  {% for item in cart.items %}
+    {% for tag in item.product.tags %}
+      {% if tag contains '@' %}
+        {% assign  active_cart_tag = tag %}
+      {% endif %}
+      {% break %}
+    {% endfor %}
+  {% endfor %}
+{% endif %}
+
+{% layout none %}
+{% comment %} {% assign active_cart_tag = '' %}
+{% for item in cart.items %}
+  {% for tag in item.product.tags %}
+    {% if tag contains '@' %}
+      {% assign active_cart_tag = tag %}
+      {% break %}
+    {% endif %}
+  {% endfor %}
+  {% if active_cart_tag != '' %}
+    {% break %}
+  {% endif %}
+{% endfor %} {% endcomment %}
+
+{
+    "active_cart_tag" : {{ active_cart_tag | json }},
+   "items": [
+      {%- for item in cart.items -%}
+        {
+          "id" : {{ item.id }},
+          "product_id" : {{ item.product_id }}
+        }
+      {%- unless forloop.last -%},{%- endunless -%}
+    {%- endfor -%}
+  ] 
+}
+

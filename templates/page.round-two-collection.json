@@ -1,0 +1,56 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {}
+    },
+    "hero_banner_yRJMAj": {
+      "type": "hero-banner",
+      "blocks": {
+        "slide_HGfcFN": {
+          "type": "slide",
+          "settings": {
+            "slide_image": "shopify://shop_images/Hero_img.jpg",
+            "alt_text": "Hero Image"
+          }
+        }
+      },
+      "block_order": [
+        "slide_HGfcFN"
+      ],
+      "name": "Hero banner",
+      "settings": {}
+    },
+    "round_two_Lwq3xV": {
+      "type": "round-two",
+      "name": "roundtwo-collection",
+      "settings": {
+        "main-title": "Round Two collection",
+        "main-content": "<p>Our beautifully functional two-piece Round Two planter inspired by Richard Lindh’s 1960s design features the original’s minimalist aesthetic with additional enhancements. Channels at the bottom of the inner ceramic allow for airflow and drainage, and the deep dish saucer facilitates bottom-up watering. The fully vitreous, waterproof ceramic is glazed inside and out and has been high fired to ensure beauty and durability. As with all Revival Ceramics, Round Two’s timeless design will endure through years of fads and fashions.<br/><br/></p>",
+        "featured_collection": "all-display-products"
+      }
+    },
+    "join_us_H4citU": {
+      "type": "join-us",
+      "name": "Join Us Section",
+      "settings": {
+        "heading": "Join Our Pack!"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "hero_banner_yRJMAj",
+    "round_two_Lwq3xV",
+    "join_us_H4citU"
+  ]
+}

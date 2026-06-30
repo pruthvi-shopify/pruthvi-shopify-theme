@@ -1,0 +1,448 @@
+{% render "blocks.custom_fields" with resource_type: "shop", blocks: section.blocks %}
+{% schema %}
+  {
+    "name": {
+        "en": "Custom Fields"
+    },
+    "settings": [
+        {
+            "type": "paragraph",
+            "content": "[View Documentation](https:\/\/custom-fields.docs.bonify.io\/)"
+        },
+        {
+            "type": "paragraph",
+            "content": "[Edit Custom Fields](https:\/\/customfields.bonify.io\/dashboard\/pruthvi-cirkle.myshopify.com\/home-page\/configure)"
+        }
+    ],
+    "templates": [
+        "index"
+    ],
+    "presets": [
+        {
+            "name": "Custom Fields",
+            "blocks": []
+        }
+    ],
+    "blocks": [
+        {
+            "type": "cf_f_dtf",
+            "name": {
+                "en": "Date and Time"
+            },
+            "settings": [
+                {
+                    "type": "select",
+                    "id": "key",
+                    "label": "Select a Field",
+                    "options": [
+                        {
+                            "value": "custom_fields.date_and_time",
+                            "label": "Date and Time"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "cf_f_if",
+            "name": {
+                "en": "Integer"
+            },
+            "settings": [
+                {
+                    "type": "select",
+                    "id": "key",
+                    "label": "Select a Field",
+                    "options": [
+                        {
+                            "value": "custom_fields.integer",
+                            "label": "INteger"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "cf_f_txtl",
+            "name": {
+                "en": "Text (List)"
+            },
+            "settings": [
+                {
+                    "type": "select",
+                    "id": "key",
+                    "label": "Select a Field",
+                    "options": [
+                        {
+                            "value": "custom_fields.single_line_text",
+                            "label": "single line text"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "cf_w_imgs2",
+            "name": {
+                "en": "Image Slider "
+            },
+            "settings": [
+                {
+                    "type": "select",
+                    "id": "key",
+                    "label": "Select a Widget",
+                    "options": [
+                        {
+                            "value": "custom_fields.image",
+                            "label": "Image"
+                        }
+                    ]
+                },
+                {
+                    "type": "header",
+                    "content": "Layout"
+                },
+                {
+                    "id": "cols",
+                    "type": "select",
+                    "label": "Width",
+                    "default": "12",
+                    "options": [
+                        {
+                            "value": "4",
+                            "label": "1\/3"
+                        },
+                        {
+                            "value": "6",
+                            "label": "1\/2"
+                        },
+                        {
+                            "value": "8",
+                            "label": "2\/3"
+                        },
+                        {
+                            "value": "12",
+                            "label": "Full width"
+                        }
+                    ]
+                },
+                {
+                    "id": "margin_top",
+                    "label": "Top Margin",
+                    "type": "range",
+                    "min": 0,
+                    "max": 20,
+                    "step": 1,
+                    "unit": "rem",
+                    "default": 5
+                },
+                {
+                    "id": "margin_bottom",
+                    "label": "Bottom Margin",
+                    "type": "range",
+                    "min": 0,
+                    "max": 20,
+                    "step": 1,
+                    "unit": "rem",
+                    "default": 5
+                },
+                {
+                    "type": "header",
+                    "content": "Background Overlay"
+                },
+                {
+                    "type": "paragraph",
+                    "content": "Adds a slight background color overlay to the image to help make text more readable. Set \"Opacity\" to 0 to remove the overlay."
+                },
+                {
+                    "id": "bg_color_dark",
+                    "type": "color",
+                    "label": "Dark Text Background",
+                    "default": "#ffffff"
+                },
+                {
+                    "id": "bg_color_light",
+                    "type": "color",
+                    "label": "Light Text Background",
+                    "default": "#000000"
+                },
+                {
+                    "id": "bg_opacity",
+                    "type": "range",
+                    "label": "Opacity",
+                    "min": 0,
+                    "max": 1,
+                    "step": 0.1,
+                    "default": 0.1
+                },
+                {
+                    "type": "header",
+                    "content": "Widget Settings"
+                },
+                {
+                    "id": "widget_hide_arrows",
+                    "label": "Hide Arrows",
+                    "type": "checkbox",
+                    "default": false
+                },
+                {
+                    "id": "widget_hide_pager",
+                    "label": "Hide Pager",
+                    "type": "checkbox",
+                    "default": false
+                },
+                {
+                    "id": "widget_randomize",
+                    "label": "Randomize",
+                    "type": "checkbox",
+                    "default": false
+                },
+                {
+                    "id": "widget_interval",
+                    "type": "range",
+                    "min": 0,
+                    "max": 20,
+                    "step": 1,
+                    "unit": "s",
+                    "label": "Slide Interval",
+                    "default": 0,
+                    "info": "The number of seconds to show a slide before auto-scrolling. Leave 0 to disable auto-scrolling."
+                },
+                {
+                    "id": "widget_effect",
+                    "type": "select",
+                    "label": "Animation Effect",
+                    "default": "slide",
+                    "options": [
+                        {
+                            "value": "slide",
+                            "label": "Slide"
+                        },
+                        {
+                            "value": "fade",
+                            "label": "Fade"
+                        }
+                    ]
+                },
+                {
+                    "id": "widget_animate_speed",
+                    "type": "range",
+                    "min": 0,
+                    "max": 2000,
+                    "step": 50,
+                    "unit": "ms",
+                    "label": "Animation Speed",
+                    "default": 500
+                },
+                {
+                    "id": "content_max_width",
+                    "type": "range",
+                    "min": 300,
+                    "max": 1200,
+                    "step": 50,
+                    "unit": "px",
+                    "label": "Content Max Width",
+                    "default": 700
+                },
+                {
+                    "type": "header",
+                    "content": "Title Settings"
+                },
+                {
+                    "id": "title_font_size",
+                    "type": "range",
+                    "min": 8,
+                    "max": 60,
+                    "step": 1,
+                    "unit": "px",
+                    "label": "Font size",
+                    "default": 32
+                },
+                {
+                    "id": "title_line_height",
+                    "type": "range",
+                    "min": 0.5,
+                    "max": 10,
+                    "step": 0.1,
+                    "unit": "em",
+                    "label": "Line Height",
+                    "default": 1.5
+                },
+                {
+                    "id": "title_font_custom",
+                    "label": "Customize the title font",
+                    "type": "checkbox",
+                    "default": false
+                },
+                {
+                    "id": "title_font",
+                    "type": "font_picker",
+                    "label": "Custom Title Font",
+                    "default": "helvetica_n4"
+                },
+                {
+                    "id": "title_font_color",
+                    "type": "color",
+                    "label": "Title Font Color (Dark)",
+                    "default": "#000000"
+                },
+                {
+                    "id": "title_font_color_light",
+                    "type": "color",
+                    "label": "Title Font Color (Light)",
+                    "default": "#ffffff"
+                },
+                {
+                    "id": "title_margin_bottom",
+                    "label": "Margin Bottom",
+                    "type": "range",
+                    "min": 0,
+                    "max": 10,
+                    "step": 0.5,
+                    "unit": "rem",
+                    "default": 2.5
+                },
+                {
+                    "type": "header",
+                    "content": "Body Settings"
+                },
+                {
+                    "id": "body_font_size",
+                    "type": "range",
+                    "min": 8,
+                    "max": 60,
+                    "step": 1,
+                    "unit": "px",
+                    "label": "Font size",
+                    "default": 16
+                },
+                {
+                    "id": "body_font_color",
+                    "type": "color",
+                    "label": "Body Font Color (Dark)",
+                    "default": "#000000"
+                },
+                {
+                    "id": "body_font_color_light",
+                    "type": "color",
+                    "label": "Body Font Color (Light)",
+                    "default": "#ffffff"
+                },
+                {
+                    "id": "body_line_height",
+                    "type": "range",
+                    "min": 0.5,
+                    "max": 10,
+                    "step": 0.1,
+                    "unit": "em",
+                    "label": "Line Height",
+                    "default": 2
+                },
+                {
+                    "id": "body_margin_bottom",
+                    "label": "Margin Bottom",
+                    "type": "range",
+                    "min": 1,
+                    "max": 10,
+                    "step": 0.5,
+                    "unit": "rem",
+                    "default": 2.5
+                },
+                {
+                    "type": "header",
+                    "content": "Link Settings"
+                },
+                {
+                    "id": "link_padding",
+                    "type": "text",
+                    "label": "Padding",
+                    "default": "10px 25px"
+                },
+                {
+                    "id": "link_border_radius",
+                    "type": "text",
+                    "label": "Border Radius",
+                    "default": "5px",
+                    "info": "[Generate](https:\/\/html-css-js.com\/css\/generator\/border-radius\/)"
+                },
+                {
+                    "id": "link_font_size",
+                    "type": "range",
+                    "min": 8,
+                    "max": 60,
+                    "step": 1,
+                    "unit": "px",
+                    "label": "Font size",
+                    "default": 18
+                },
+                {
+                    "type": "header",
+                    "content": "Link Colors (Light Text)"
+                },
+                {
+                    "id": "link_bg_color_light",
+                    "type": "color",
+                    "label": "Background Color"
+                },
+                {
+                    "id": "link_hover_bg_color_light",
+                    "type": "color",
+                    "label": "Hover Background Color"
+                },
+                {
+                    "id": "link_border_light",
+                    "type": "text",
+                    "label": "Border",
+                    "default": "2px solid #ffffff",
+                    "info": "[Generate](https:\/\/html-css-js.com\/css\/generator\/border-outline\/)"
+                },
+                {
+                    "id": "link_font_color_light",
+                    "type": "color",
+                    "label": "Font Color",
+                    "default": "#ffffff"
+                },
+                {
+                    "id": "link_hover_font_color_light",
+                    "type": "color",
+                    "label": "Hover Font Color",
+                    "default": "#ffffff"
+                },
+                {
+                    "type": "header",
+                    "content": "Link Colors (Dark Text)"
+                },
+                {
+                    "id": "link_bg_color",
+                    "type": "color",
+                    "label": "Background Color"
+                },
+                {
+                    "id": "link_hover_bg_color",
+                    "type": "color",
+                    "label": "Hover Background Color"
+                },
+                {
+                    "id": "link_border",
+                    "type": "text",
+                    "label": "Border",
+                    "default": "2px solid #555555",
+                    "info": "[Generate](https:\/\/html-css-js.com\/css\/generator\/border-outline\/)"
+                },
+                {
+                    "id": "link_font_color",
+                    "type": "color",
+                    "label": "Font Color",
+                    "default": "#555555"
+                },
+                {
+                    "id": "link_hover_font_color",
+                    "type": "color",
+                    "label": "Hover Font Color",
+                    "default": "#555555"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

@@ -1,0 +1,130 @@
+<div class="contact-section" data-section="Contactpage">
+  <h2>{{ section.settings.title }}</h2>
+  {% if section.settings.description != blank %}
+    {{ section.settings.description }}
+  {% endif %}
+  {% for block in section.blocks %}
+    {% if block.type == 'form' %}
+      {% form 'contact' %}
+        {% if block.settings.show_name %}
+          <input type= "text", name="contact[name]", id="ContactForm-name" placeholder="Your Name" required>
+        {% endif %}
+        <input type="email", name="contact[email]", id="ContactForm-email" placeholder="Your Email" required>
+        {% if block.settings.show_phone %}
+          <input type="tel", name="contact[phone]", id="ContactForm-phone" placeholder="Your Phone">
+        {% endif %}
+        <textarea name="contact[body]", id="ContactForm-body", placeholder="Your Message" , required></textarea>
+        <button type="submit">Send Message</button>
+      {% endform %}
+    {% endif %}
+  {% endfor %}
+</div>
+
+
+{% schema %}
+{
+  "name": "Custom Contact Form",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Get in Touch"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Section Description",
+    }
+  ],
+  "blocks": [
+    {
+      "type": "form",
+      "name": "Contact Form",
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "show_name",
+          "label": "Show Name Field",
+        },
+        {
+          "type": "checkbox",
+          "id": "show_phone",
+          "label": "Show Phone Field",
+        },
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Contact Form",
+      "category": "Forms"
+    }
+  ]
+}
+{% endschema %}
+<style>
+.contact-section {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.contact-section h2 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.contact-section p {
+    color: #666;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.contact-section input[type="text"],
+.contact-section input[type="email"],
+.contact-section input[type="tel"],
+.contact-section textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+.contact-section textarea {
+    resize: vertical; 
+    min-height: 120px;
+}
+
+/* Form inputs on focus (when clicked/typed in) */
+.contact-section input:focus,
+.contact-section textarea:focus {
+    border-color: #007bff; 
+    outline: none;
+}
+
+/* Submit button styling */
+.contact-section button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff; /* Primary button color */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+}
+
+/* Button hover effect */
+.contact-section button[type="submit"]:hover {
+    background-color: #0056b3; /* Darker color on hover */
+}
+</style>

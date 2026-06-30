@@ -1,0 +1,269 @@
+<!doctype html>
+<!--[if IE 9]> <html class="ie9 no-js" lang="{{ shop.locale }}"> <![endif]-->
+<!-- [if (gt IE 9)|!(IE)]><! -->
+<html class="no-js" lang="{{ shop.locale }}">
+  <!-- <![endif] -->
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.7.1/css/lightgallery-bundle.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@5/dist/photoswipe.css">
+    {%- if canonical_url != blank -%}
+      <link rel="canonical" href="{{ canonical_url }}">
+    {%- endif -%}
+    {%- if settings.favicon != blank -%}
+      <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png">
+    {%- endif -%}
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.js"
+      integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+      crossorigin="anonymous"
+    ></script>
+    {%- capture seo_title -%}
+  {%- if request.page_type == 'search' and search.performed == true -%}
+  {{ 'general.search.heading' | t: count: search.results_count }}: {{ 'general.search.results_with_count' | t: terms: search.terms, count: search.results_count }}
+  {%- else -%}
+  {{ page_title }}
+  {%- endif -%}
+  {%- if current_tags -%}
+  {%- assign meta_tags = current_tags | join: ', ' -%} &ndash; {{ 'general.meta.tags' | t: tags: meta_tags -}}
+  {%- endif -%}
+  {%- if current_page != 1 -%}
+  &ndash; {{ 'general.meta.page' | t: page: current_page }}
+  {%- endif -%}
+  {%- assign escaped_page_title = page_title | escape -%}
+  {%- unless escaped_page_title contains shop.name -%}
+  &ndash; {{ shop.name }}
+  {%- endunless -%}
+  {%- endcapture -%}
+
+    <title>{{ seo_title | strip }}</title>
+
+    {%- if page_description -%}
+      <meta name="description" content="{{ page_description | escape }}">
+    {%- endif -%}
+
+    {% include 'social-meta-tags' %}
+
+    {{ 'style.css' | asset_url | stylesheet_tag }}
+
+    {{ content_for_header }}
+
+    <script src="{{ 'jquery.min.js' | asset_url }}" defer></script>
+
+    <script src="{{ 'vendor.js' | asset_url }}" defer></script>
+    <script src="{{ 'script.js' | asset_url }}" defer></script>
+
+    {% section 'slider' %}
+    {% render 'quick-view' %}
+
+    {% if settings.facebook_icon != blank %}
+      <img src="{{ settings.facebook_icon | image_url: width: 32 }}" alt="Facebook Icon">
+    {% endif %}
+
+    <!-- Instagram Icon -->
+    {% if settings.instagram_icon != blank %}
+      <img src="{{ settings.instagram_icon | image_url: width: 32 }}" alt="Instagram Icon">
+    {% endif %}
+
+    <!-- Pinterest Icon -->
+    {% if settings.pinterest_icon != blank %}
+      <img src="{{ settings.pinterest_icon | image_url: width: 32 }}" alt="Pinterest Icon">
+    {% endif %}
+
+    <!-- Custom Icon -->
+    {% comment %}
+      {% if settings.custom_icon != blank %}
+        <img src="{{ settings.custom_icon | image_url: width: 32 }}" alt="Custom Icon">
+      {% endif %}
+    {% endcomment %}
+
+    {%- if template contains 'customers' -%}
+      {{ 'customer.scss.css' | asset_url | stylesheet_tag }}
+      <script src="{{ 'shopify_common.js' | shopify_asset_url }}"></script>
+    {%- endif -%}
+
+    <script src="{{ 'custom.js' |asset_url }}" defer></script>
+    {{ 'custom-fields.css' | asset_url | stylesheet_tag }}
+    <script src="{{ 'custom-fields-widgets.js' | asset_url }}" defer="defer"></script>
+    {% comment %}
+          {{ 'magiczoom.css' | asset_url | stylesheet_tag }}
+      {{ 'magiczoom.js' | asset_url | script_tag }}
+    {% endcomment %}
+    {% comment %} <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js" defer=”defer”></script> {% endcomment %}
+    {% if template contains 'product' %}
+      <script src="{{ 'jquery.zoom.min.js' | asset_url }}" defer="defer"></script>
+    {% endif %}
+  </head>
+  {% comment %} <script src="{{ 'custom.js' |asset_url }}" defer="defer"></script> {% endcomment %}
+  <body class="template-{{ template | split: '.' | first }} body">
+    {% comment %} {% section 'header' %} {% endcomment %}
+    pdpdpdpddpdpdpdpddp=============
+    <div id="quick-view-modal" class="quick-view-modal">
+      <div class="quick-view-content">
+        <span class="close-button">
+          <img
+            width=""
+            height=""
+            src="https://cdn.shopify.com/s/files/1/0640/4839/8454/files/close-btn.png?v=1751970192"
+            alt="close btn"
+          >
+        </span>
+        <div id="quick-view-product-data">
+          <!-- Product data will be loaded here -->
+        </div>
+      </div>
+    </div>
+
+    <style>
+       #quick-view-modal {
+        transition: opacity 0.3s ease;`
+      }
+        #quick-view-modal[style*="display: none"] {
+        opacity: 0;
+      }
+    </style>
+    <style>
+      .quick-view-modal{
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      width:100%;
+      height: 100%;
+      overflow: auto;
+      background-color:rgba(0,0,0,0.4);
+      }
+      .quick-view-content{
+      background-color: #fefefe;
+      margin: 15% auto;
+      padding: 20px;
+      border: 1px solid black;
+      width: 80%;
+      position:relative;
+      }
+      .close-button{
+      color: black;
+      float: right;
+      font-size : 28px;
+      font-weight : bold;
+      }
+    </style>
+    
+    {{ content_for_layout }}
+    {% section 'footer' %}
+
+     <script id="variantscript">
+      window.ProductVariants = {{ product.variants | json }};
+      window.shopCurrency = "{{ shop.currency }}";
+      window.ProductImages = {};
+
+      {% for variant in product.variants %}
+        {% assign color = variant.option1 | escape %}
+        {% if variant.image %}
+          if (!window.ProductImages["{{ color }}"]) {
+            window.ProductImages["{{ color }}"] = [];
+          }
+          window.ProductImages["{{ color }}"].push({
+            id: {{ variant.image.id }},
+            src: "{{ variant.image | image_url: width: 800 }}"
+          });
+        {% endif %}
+      {% endfor %}
+      initProductScripts(document);
+    </script> 
+
+
+
+    {% comment %} <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script> {% endcomment %}
+
+    {% comment %} <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.1/lightgallery.min.js"></script> {% endcomment %}
+    {% comment %} <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script> {% endcomment %}
+
+    {% comment %} <script src="https://cdn.jsdelivr.net/npm/photoswipe@5/dist/photoswipe.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/photoswipe@5/dist/photoswipe-lightbox.umd.min.js"></script> {% endcomment %}
+
+    <div id="compare-popup" style="display: none;">
+      <div class="popup-content">
+        <h3>Compare Products</h3>
+        <p id="compare-count-text"></p>
+        <button id="view-comparison-page">View Comparison Page</button>
+        <button id="close-popup">Close</button>
+        <button id="clear-all-button"> CLEAR ALL </button>
+      </div>
+    </div>
+
+    <style>
+      #compare-popup {
+          display: none;
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.6);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          z-index: 1000;
+      }
+      .popup-content {
+          background-color: #fff;
+          padding: 20px;
+          border-radius: 8px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+          max-width: 500px;
+          width: 90%;
+          text-align: center;
+          position: relative;
+      }
+      .popup-content h3 {
+          margin-top: 0;
+          color: #333;
+          border-bottom: 1px solid #eee;
+          padding-bottom: 10px;
+      }
+      #compare-product-list {
+          list-style-type: none;
+          padding: 0;
+          margin: 15px 0;
+          max-height: 200px;
+          overflow-y: auto;
+          text-align: left;
+      }
+      #compare-product-list li {
+          padding: 10px 0;
+          border-bottom: 1px solid #f0f0f0;
+      }
+      .popup-content button {
+          padding: 10px 15px;
+          margin: 10px 5px 0;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+          font-size: 14px;
+      }
+
+      #view-comparison-page {
+          background-color: #007bff; /* Primary action button color */
+          color: white;
+      }
+
+      #view-comparison-page:hover {
+          background-color: #0056b3;
+      }
+
+      #close-popup {
+          background-color: #6c757d; /* Secondary action button color */
+          color: white;
+      }
+
+      #close-popup:hover {
+          background-color: #5a6268;
+      }
+    </style>
+  </body>
+</html>

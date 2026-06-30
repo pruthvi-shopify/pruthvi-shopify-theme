@@ -1,0 +1,28 @@
+<div class="custom-fields-section v2">
+  
+    {% if resource_type == "shop" %}
+    <div class="custom-fields-section__shop">
+      {% for block in blocks %}
+      {% if block.type contains "cf_" %}
+      <div {{ block.shopify_attributes }} class="custom-fields-section__item
+                  custom-fields-section__item--{{ block.type }}
+                  custom-fields-section__item--{{ block.type }}--{{ block.settings.key }}
+                  {% if block.settings.cols != blank %}{{ "cf-width-" | append: block.settings.cols | append: "-of-12" }}{% else %}cf-width-12-of-12{% endif %}">
+        {% case block.settings.key %}
+                  {% when "custom_fields.date_and_time" %}
+            {% render "custom_fields.shop.date_and_time", block:block %}
+                  {% when "custom_fields.integer" %}
+            {% render "custom_fields.shop.integer", block:block %}
+                  {% when "custom_fields.single_line_text" %}
+            {% render "custom_fields.shop.single_line_text", block:block %}
+                  {% when "custom_fields.image" %}
+            {% render "custom_fields.shop.image", block:block %}
+        
+        {% endcase %}
+      </div>
+      {% endif %}
+      {% endfor %}
+    </div>
+    {% endif %}
+  
+</div>

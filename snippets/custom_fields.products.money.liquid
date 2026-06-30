@@ -1,0 +1,9 @@
+{% if product.metafields["custom_fields"]["money"] != blank %}
+  <div class="custom-field custom-field__money custom-field__type--money">
+    <h3 class="custom-field--title">money</h3>
+    <div class="custom-field--value">
+{{ product.metafields["custom_fields"]["money"] | metafield_tag }}
+
+    </div>
+  </div>
+{% endif %}

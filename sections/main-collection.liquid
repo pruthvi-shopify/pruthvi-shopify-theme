@@ -1,0 +1,870 @@
+<section class="prod-filter" data-section="main-collection">
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Filter Sidebar (STATIC) -->
+      {% comment %}
+        <div class="col-3 col-m-12">
+          <div class="filterBtn mobileOnly"><img width="" height="" src="{{ 'filter.png' | asset_url }}" alt="Filter"> Filter</div>
+          <div class="filter-inner desktopOnly" id="filterSidebar">
+            <!-- ACTIVE FILTERS -->
+            {% if collection.filters.size > 0 %}
+              {% assign has_active = false %}
+              {% for filter in collection.filters %}
+                {% if filter.active_values.size > 0 %}
+                  {% assign has_active = true %}
+                {% endif %}
+              {% endfor %}
+
+              {% if has_active %}
+                <div class="filter-content">
+                  <div class="filter-header">
+                    <p><strong>Filter by:</strong></p>
+                    <div class="clear-all">
+                      <a href="{{ collection.url }}" id="clearAllBtn"> Clear all </a>
+                    </div>
+                  </div>
+
+                  <div class="accessories">
+                    <ul>
+                      {% for filter in collection.filters %}
+                        {% for active in filter.active_values %}
+                          <li>
+                            <a href="{{ active.url_to_remove }}">
+                              {{ active.label }}
+                              <span><img width="" height="" src="{{ 'close-btn.png' | file_url }}" alt="Close-btn"></span>
+                            </a>
+                          </li>
+                        {% endfor %}
+                      {% endfor %}
+                    </ul>
+                  </div>
+                </div>
+              {% endif %}
+            {% endif %}
+
+            <!-- ALWAYS SHOW FILTER OPTIONS (Hide on clear all by JS) -->
+            <div id="allFilters">
+              {% for filter in collection.filters %}
+                <div class="filter-content">
+                  <div class="filter-header">
+                    <p>
+                      <strong>{{ filter.label | escape }}:</strong>
+                    </p>
+                  </div>
+
+                  {% if filter.type == 'list' %}
+                    <div class="shop-filter">
+                      <ul>
+                        {% for value in filter.values %}
+                          <li class="{% if value.active %}active{% endif %}">
+                            <a href="{{ value.url_to_add }}"> {{ value.label }} ({{ value.count }}) </a>
+                            {% if value.count == 0 %}
+                              <span style="color:red"> no more product are available </span>
+                            {% endif %}
+                          </li>
+                        {% endfor %}
+                      </ul>
+                    </div>
+                  {% elsif filter.type == 'price_range' %}
+                    <form action="{{ collection.url }}" method="get" id="priceFilterForm">
+                      {% for param in collection.filters %}
+                        {% for active in param.active_values %}
+                          <input type="hidden" name="{{ param.param_name }}" value="{{ active.value }}">
+                        {% endfor %}
+                      {% endfor %}
+
+                      <div>
+                        <label>Min</label>
+                        <input
+                          id="minPrice"
+                          type="number"
+                          min="0"
+                          value="{% if filter.min_value.value %}{{ filter.min_value.value | divided_by: 100 }}{% endif %}"
+                        >
+                        <input type="hidden" name="{{ filter.min_value.param_name }}" id="minPriceCents">
+                      </div>
+
+                      <div>
+                        <label>Max</label>
+                        <input
+                          id="maxPrice"
+                          type="number"
+                          min="0"
+                          value="{% if filter.max_value.value %}{{ filter.max_value.value | divided_by: 100 }}{% endif %}"
+                        >
+                        <input type="hidden" name="{{ filter.max_value.param_name }}" id="maxPriceCents">
+                      </div>
+                      <button type="submit">ok</button>
+                    </form>
+                  {% endif %}
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      {% endcomment %}
+      {% render 'collection-filter' %}
+      <!-- Product Grid (DYNAMIC) -->
+      <div class="col-9 col-m-12">
+        {% comment %}
+          {{ product.metafields.custom.demo1 }}=========== {{ collection.metafields.custom.collection }}
+          <br>
+          {{ collection.metafields.custom.collection2 }}
+          <br>
+          {{ collection.metafields.custom.collection3 }}
+          <br>
+          {{ collection.metafields.custom.collection4 }}
+          <br>
+          {{ collection.metafields.custom.collection5 }}
+          <br>
+          {{ collection.metafields.custom.collection6 }}
+          <br>
+          {{ collection.metafields.custom.collection7 }}
+          <br>
+          {{ collection.metafields.custom.collection8 }}
+        {% endcomment %}
+        <div class="collection-prod">
+          <div class="collection-prod-inner" id="productGrid">
+            <!-- PRODUCT LISTING SAME J RAKHYO -->
+
+            {% comment %}
+              <div class="collection-prod-top prod-top-header">
+                <div class="row jc-sb">
+                  <div class="change-view-option">
+                    <button class="display-grid-view">
+                      <img
+                        src="https://cdn.shopify.com/s/files/1/0640/4839/8454/files/change-view-1_e112ef23-9ad0-4497-be41-e06106c39e34.png?v=1751865090"
+                        alt="Grid View"
+                      >
+                    </button>
+                    <button class="display-list-view">
+                      <img
+                        src="https://cdn.shopify.com/s/files/1/0640/4839/8454/files/change-view-2.png?v=1751865098"
+                        alt="List View"
+                      >
+                    </button>
+                  </div>
+                  <div class="sort-by-prod">
+                    <select class="niceSelect product-qty">
+                      {% for i in (1..20) %}
+                        <option value="{{ i }}">0{{ i }}</option>
+                      {% endfor %}
+                    </select>
+
+                    <select class="niceSelect sort-product" id="sortBySelect">
+                      <option
+                        value="best-selling"
+                        {% if collection.sort_by == 'best-selling' %}
+                          selected
+                        {% endif %}
+                      >
+                        Best selling
+                      </option>
+                      <option
+                        value="title-ascending"
+                        {% if collection.sort_by == 'title-ascending' %}
+                          selected
+                        {% endif %}
+                      >
+                        Product title A-Z
+                      </option>
+                      <option
+                        value="title-descending"
+                        {% if collection.sort_by == 'title-descending' %}
+                          selected
+                        {% endif %}
+                      >
+                        Product title Z-A
+                      </option>
+                      <option
+                        value="price-descending"
+                        {% if collection.sort_by == 'price-descending' %}
+                          selected
+                        {% endif %}
+                      >
+                        Highest price
+                      </option>
+                      <option
+                        value="price-ascending"
+                        {% if collection.sort_by == 'price-ascending' %}
+                          selected
+                        {% endif %}
+                      >
+                        Lowest price
+                      </option>
+                      <option
+                        value="created-descending"
+                        {% if collection.sort_by == 'created-descending' %}
+                          selected
+                        {% endif %}
+                      >
+                        Newest
+                      </option>
+                      <option
+                        value="created-ascending"
+                        {% if collection.sort_by == 'created-ascending' %}
+                          selected
+                        {% endif %}
+                      >
+                        Oldest
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            {% endcomment %}
+
+            {% comment %} {% if collection.all_tags.size > 0 %}
+              <div class="collection-tags-filter">
+                <strong>Filter by Tag:</strong>
+                <ul class="tag-list">
+                  {% for tag in collection.all_tags %}
+                    <li>
+                      {{ tag | link_to_tag: tag }}
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            {% endif %} {% endcomment %}
+            {% render 'top-filter' %}
+
+            {% comment %} {% assign banner_blocks = section.blocks | where: 'type', 'banner_block' %} {% endcomment %}
+
+            {% comment %}
+              Text : {{ collection.metafields.Custome.text }} selected-variants :
+              {{ collection.metafields.custome['selected-variant'] }} add-Image :
+              {{
+                collection.metafields.custom.image
+                | image_url: width: 500
+                | image_tag: alt: 'Description of the image', class: 'my-custom-image'
+              }}
+            {% endcomment %}
+{% assign collection_products = section.settings.range2 %}
+            {% paginate collection.products by collection_products %}
+              <div class="row" id="product-grid" data-next-url="{{ paginate.next.url }}">
+                {% comment %} {% assign beg_product_in_cart = false %} {% endcomment %}
+                {% for product in collection.products %}
+                  {% comment %} {% assign product_index = forloop.index %} {% endcomment %}
+                  {% comment %}
+                    <div class="col-4 col-s-6">
+                      <div class="product-card">
+                        <div class="prod-card-img text-center">
+                          <!-- Add to cart + quick view -->
+                          <div class="prod-card-badge">
+                            <div>
+                              <product-form>
+                                <form method="post" action="/cart/add" class="product-form">
+                                  <input type="hidden" name="form_type" value="product">
+                                  <input type="hidden" name="utf8">
+                                  <input
+                                    type="hidden"
+                                    name="id"
+                                    value="{{  product.selected_or_first_available_variant.id }}"
+                                  >
+                                  <input type="hidden" name="quantity" value="1">
+                                  <button type="submit" class="product-form__submit">
+                                    <img width="" height=""
+                                      src="https://cdn.shopify.com/s/files/1/0640/4839/8454/files/cart-icon.png?v=1751865122"
+                                      alt="Add to Cart"
+                                    >
+                                  </button>
+                                </form>
+                              </product-form>
+                            </div>
+                            {% comment %}
+                              <div class="quick-view">
+                                <img
+                                  src="https://cdn.shopify.com/s/files/1/0640/4839/8454/files/zoom.png?v=1751865146"
+                                  alt="zoom"
+                                >
+                              </div>
+                            {% endcomment %}
+                             <div>
+                            <a href="#" class="quick-view" data-product-handle="{{ product.handle }}">
+                              <img width="" height=""
+                                src="https://cdn.shopify.com/s/files/1/0640/4839/8454/files/zoom.png?v=1751865146"
+                                alt="zoom"
+                              >
+                            </a>
+                          </div>
+                          </div>
+
+                          <div class="prod-img">
+                            {% if product.featured_image != blank %}
+                              <a href="{{ product.url }}">
+                                <img width="" height="" src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.title }}">
+                              </a>
+                            {% endif %}
+                          </div>
+
+                          {% if product.variants.size > 1 %}
+                            <div class="prod-color mb-1">
+                              <ul>
+                                {% assign colors = product.variants | map: 'option1' | uniq %}
+                                {% for color in colors %}
+                                  {% assign color_down = color | downcase %}
+                                  <li>
+                                    <span
+                                      href="#"
+                                      class="card-color-swatch"
+                                      style="background-color: {{ color_down }};"
+                                      title="{{ color }}"
+                                    ></span>
+                                  </li>
+                                {% endfor %}
+                              </ul>
+                            </div>
+                            <div class="prod-size-on-hover" style="margin-top: 8px;">
+                              <ul style="display: flex; flex-wrap: wrap; gap: 6px; padding: 0; margin:0; list-style: none; text-align: center;">
+                                {% assign sizes = product.variants | map: 'option2' | uniq %}
+                                {% for size in sizes %}
+                                  <li>
+                                    <span
+                                      class="card-size-swatch"
+                                      title="{{ size }}"
+                                      style="display: inline-block; padding: 6px 10px; border: 1px solid #ccc; border-radius: 10px; font-size: 10px; background: #f8f8f8; color: #333; text-align: center;"
+                                    >
+                                      {{ size }}
+                                    </span>
+                                  </li>
+                                {% endfor %}
+                              </ul>
+                            </div>
+                          {% endif %}
+                        </div>
+
+                        <div class="prod-detail">
+                          <div class="prod-title">
+                            <h4>
+                              <a href="{{ product.url }}">{{ product.title }}</a>
+                            </h4>
+                          </div>
+                          <div class="compare-price" id="productprice">
+                            {% if product.selected_or_first_available_variant.compare_at_price
+                                > product.selected_or_first_available_variant.price
+                            %}
+                              <span id="compareatprice2"
+                                ><del>
+                                  {{-
+                                    product.selected_or_first_available_variant.compare_at_price
+                                    | money_without_trailing_zeros
+                                  -}}
+                                </del></span
+                              >
+                            {% endif %}
+                            <span id="price2">
+                              {{ product.selected_or_first_available_variant.price | money_without_trailing_zeros }}
+                            </span>
+                          </div>
+                        </div>
+                        <script type="application/json" class="variant-data" id="variantscript">
+                          {{ product.variants | json }}
+                        </script>
+                      </div>
+                    </div>
+                  {% endcomment %}
+
+                  {% render 'product-grid', product: product %}
+                  {% comment %}
+                    {% for banner in banner_blocks %}
+                      {% assign banner_index = banner.settings.add_index_no | plus: 0 %}
+                      {% comment %} {{ banner.settings.add_index_no }} {% endcomment %}
+                      {% if product_index == banner_index %}
+                        <div class="col-8" style="height : 350px;">
+                          <div
+                            class="custom-banner-block text-center"
+                            id="banner-{{ banner.id }}"
+                            style="border: 1px solid #ddd; padding: 20px; background: #f9f9f9; border: 1px solid #DDDDDD; transition: .4s all;"
+                          >
+                            {% if banner.settings.image != blank %}
+                              <a href="{{ banner.settings.link }}" style="display:block;">
+                                <img
+                                  width=""
+                                  height=""
+                                  src="{{ banner.settings.image | image_url: width: 600 }}"
+                                  alt="{{ banner.settings.heading }}"
+                                >
+                              </a>
+                            {% endif %}
+                            {% if banner.settings.heading != blank %}
+                              <h2>{{ banner.settings.heading }}</h2>
+                            {% endif %}
+                            {% if banner.settings.subtext != blank %}
+                              <p>{{ banner.settings.subtext }}</p>
+                            {% endif %}
+                          </div>
+                        </div>
+                      {% endif %}
+                    {% endfor %}
+                  {% endcomment %}
+                {% endfor %}
+              </div>
+
+              <!-- Pagination -->
+              {% comment %}
+                {% if paginate.pages > 1 %}
+                  <div class="pagination text-center mt-4">
+                    {% if paginate.previous %}
+                      <a href="{{ paginate.previous.url }}" class="pagination-prev">← Previous</a>
+                    {% endif %}
+                    {% for part in paginate.parts %}
+                      {% if part.is_link %}
+                        <a href="{{ part.url }}">{{ part.title }}</a>
+                      {% else %}
+                        <span class="current">{{ part.title }}</span>
+                      {% endif %}
+                    {% endfor %}
+                    {% if paginate.next %}
+                      <a href="{{ paginate.next.url }}" class="pagination-next">Next →</a>
+                    {% endif %}
+                  </div>
+                {% endif %}
+              {% endcomment %}
+
+              <!-- load more -->
+              {% if paginate.next %}
+                <a href="{{ paginate.next.url }}" id="next-page-url-holder" style="display: none;">Next Page</a>
+              {% endif %}
+              <div
+                class="load-more-wrapper"
+                style="padding: 10px 15px;"
+                data-pagination-type="{{ section.settings.pagination_type | default: 'load_more' }}"
+                {% comment %}
+                  {% if paginate.pages == paginate.current_page %}
+                    style="display: none;"
+                  {% endif %}
+                {% endcomment %}
+              >
+                <button
+                  id="LoadMoreBtn"
+                  {% comment %} class="btn" {% endcomment %}
+                  style="
+                    padding: 20px 25px; text-align: center; display: flex;adding: 15px 32px;
+                    text-align: center;
+                    font-size: 16px;
+                    cursor: pointer;
+                    border-radius: 8px;
+                    transition: background-color 0.3s, transform 0.3s;
+                  "
+                >
+                  Load More
+                </button>
+                <div class="loading-spinner" style="display: none;">Loading...</div>
+                <div id="infinite-scroll-trigger" style="height: 10px;"></div>
+              </div>
+
+              {% comment %}
+                {% if pagination_type == 'infinite_scroll' %}
+                  <div id="infinite-scroll-trigger" style="height: 10px;">
+                  </div>
+                {% endif %}
+              {% endcomment %}
+              {% comment %}
+                <div id="pagination-links" style="display: none;">
+                  {% comment %} {% if paginate.next %} {% endcomment %}
+                  <a href="{{ paginate.next.url }}" id="next-page-link">
+                    {{ 'general.pagination.next' | t }}
+                  </a>
+                  {% comment %} {% endif %} {% endcomment %}
+                </div>
+              {% endcomment %}
+            {% endpaginate %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% comment %}
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const sidebar = document.getElementById('filterSidebar');
+    console.log(sidebar);
+    const productGrid = document.getElementById('productGrid');
+    console.log(productGrid);
+
+    {% comment %} if (!sidebar || !productGrid) return; {% endcomment %}
+
+    sidebar.addEventListener('click', function(event) {
+      const target = event.target.closest('a.data-ajax-link');
+      console.log(target);
+
+      if (target) {
+        event.preventDefault();
+        const url = target.getAttribute('href');
+        console.log(url);
+
+        fetch(url)
+          .then(response => response.text())
+          .then(html => {
+            const parser = new DOMParser();
+            console.log(parser);
+            const doc = parser.parseFromString(html, 'text/html');
+            console.log(doc);
+            const newProductGrid = doc.getElementById('productGrid');
+            console.log(newProductGrid);
+            if (newProductGrid) {
+              productGrid.innerHTML = newProductGrid.innerHTML;
+            }
+
+            const newSidebar = doc.getElementById('filterSidebar');
+            if (newSidebar) {
+              sidebar.innerHTML = newSidebar.innerHTML;
+            }
+
+
+            window.history.pushState({ path: url }, '', url);
+
+            productGrid.style.opacity = '1';
+          })
+          .catch(error => {
+            console.error('Error fetching data:', error);
+            productGrid.style.opacity = '1';
+          });
+      }
+    });
+  });
+  </script>
+{% endcomment %}
+
+{% comment %} <style>
+    collection-tags-filter {
+    margin-bottom: 20px;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    line-height : 2em;
+  }
+
+  #collection-filters{
+    margin-top: 20px;
+    padding : 10px;
+    border-bottom : 1px solid #ddd;
+  }
+  .tag-list-blank{
+    list-style : none;
+    padding-top: 12px;
+    margin : 15px;
+    display : flex;
+    gap : 10px ;
+    flex-wrap : wrap;
+  }
+
+  .tag-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .tag-list li {
+    display: inline-block;
+  }
+
+  .tag-list a {
+    text-decoration: none;
+    background-color: #f0f0f0;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: #333;
+  }
+
+  .tag-list a:hover {
+    background-color: #e0e0e0;
+  }
+</style> {% endcomment %}
+
+{% schema %}
+{
+  "name": "Collection Pagination",
+  "settings": [
+    {
+      "type": "select",
+      "id": "pagination_type",
+      "label": "Choose pagination type",
+      "options": [
+        {
+          "value": "load_more",
+          "label": "Load more button"
+        },
+        {
+          "value": "infinite_scroll",
+          "label": "Infinite scroll"
+        }
+      ]
+    },
+    {
+      "type" : "range",
+      "id" : "range2",
+      "min" : 2,
+      "max" : 20,
+      "default": 4,
+      "label": "Collection Product Range"
+    },
+  ]
+}
+{% endschema %}
+
+<script type="application/json" class="variant-data" id="variantscript">
+  {{ product.variants | json }}
+</script>
+
+{% comment %}
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const svariant = {};
+      console.log(svariant);
+
+      $(document).on('click', '.card-color-swatch, .card-size-swatch', function (e) {
+        e.preventDefault();
+        const $this = $(this);
+        const card = $this.closest('.product-card');
+        const handle = card.find('.prod-title a').text().trim();
+        const title = $this.attr('title');
+        const variants = JSON.parse(card.find('script.variant-data').html());
+        const priceEl = card.find('#price2');
+        console.log(priceEl);
+        const compareEl = card.find('#compareatprice2');
+        console.log(compareEl);
+
+        svariant[handle] = svariant[handle] || {};
+
+        if ($this.hasClass('card-color-swatch')) {
+          card.find('.card-color-swatch').removeClass('selected');
+          $this.addClass('selected');
+          svariant[handle].color = title;
+        } else if ($this.hasClass('card-size-swatch')) {
+          card.find('.card-size-swatch').removeClass('selected');
+          $this.addClass('selected');
+          svariant[handle].size = title;
+        }
+
+        const selected = svariant[handle];
+        {% comment %} console.log(selected); {% endcomment %}
+
+        // Find matching variant
+        const samevariant = variants.find((v) => {
+          const colorMatch = v.option1 === selected.color || !selected.color;
+          console.log(colorMatch);
+          const sizeMatch = v.option2 === selected.size || !selected.size;
+          console.log(sizeMatch);
+          return colorMatch && sizeMatch;
+        });
+        console.log(samevariant);
+
+        //  Update price in frontend immediately
+        if (samevariant) {
+          const newPrice = (samevariant.price / 100).toFixed(2);
+          console.log(newPrice);
+          const newCompare = samevariant.compare_at_price ? (samevariant.compare_at_price / 100).toFixed(2) : null;
+          console.log(newCompare);
+
+          // Update visible price
+          priceEl.text(`${newPrice}`);
+
+          if (newCompare && samevariant.compare_at_price > samevariant.price) {
+            compareEl.html(`<del>${newCompare}</del>`).show();
+          } else {
+            compareEl.hide();
+          }
+        }
+      });
+
+      //  Add to cart variant logic (same as your working code)
+      $(document).on('click', '.product-form__submit', function (e) {
+        const form = $(this).closest('form');
+        const card = $(this).closest('.product-card');
+        const handle = card.find('.prod-title a').text().trim();
+        const selected = svariant[handle] || {};
+        const variants = JSON.parse(card.find('script.variant-data').html());
+
+        const samevariant = variants.find((v) => {
+          const colorMatch = v.option1 === selected.color || !selected.color;
+          const sizeMatch = v.option2 === selected.size || !selected.size;
+          return colorMatch && sizeMatch;
+        });
+
+        if (samevariant) {
+          form.find('input[name="id"]').val(samevariant.id);
+        }
+      });
+    });
+  </script>
+{% endcomment %}
+
+{% comment %}
+  <script>
+    document.addEventListener('DOMContentLoaded',() => {
+      const forms = document.querySelectorAll('form.product-form');
+
+      forms.forEach((form) => {
+      form.addEventListener('submit',(e) => {
+      e.preventDefault();
+
+      const formData = new FormData(form);
+      const items = [{id : formData.get('id'), quantity: formData.get('quantity')}];
+
+        fetch('/cart/add.js', {
+        method: 'POST',
+        headers : {'Content-Type' : 'application/json'},
+        body: JSON.stringify({items}),
+        })
+
+        .then((res) => res.json())
+        .then(() => {
+            document.querySelector('.cart-drawer')?.classList.add('showCart');
+            document.querySelector('.cart-drawer-btn')?.classList.add('openCart');
+
+        return fetch(window.location.pathname + '?section_id=header');
+        })
+        .then((res) => res.text())
+        .then((html) => {
+          const temp = document.createElement('div');
+          temp.innerHTML = html;
+          const Content = temp.querySelector('.cart-drawer-content');
+          const Subtotal = temp.querySelector('.subtotal-price');
+
+          document.querySelector('.cart-drawer-content').innerHTML = Content.innerHTML;
+          document.querySelector('.subtotal-price').textContent = Subtotal.textContent;
+        })
+      })
+    })
+    })
+  </script>
+{% endcomment %}
+{% comment %} // filter: {% endcomment %}
+
+{% comment %}
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const productGrid = document.querySelector('#productGrid');
+      console.log(productGrid);
+      const filterSidebar = document.querySelector('#filterSidebar');
+      console.log(filterSidebar);
+
+      //  Get current URL params
+      function getCurrentParams() {
+        return new URLSearchParams(window.location.search);
+      }
+
+      //  Fetch collection & update DOM
+      function fetchCollection(params) {
+        const url = window.location.pathname + '?' + params.toString();
+        fetch(url)
+          .then((res) => res.text())
+          .then((html) => {
+            const doc = new DOMParser().parseFromString(html, 'text/html');
+            productGrid.innerHTML = doc.querySelector('#productGrid').innerHTML;
+            filterSidebar.innerHTML = doc.querySelector('#filterSidebar').innerHTML;
+            history.pushState({}, '', url);
+            attachClickEvents();
+          });
+      }
+
+      //  Build params (includes filters + price + sort)
+      function buildParams() {
+        const params = getCurrentParams();
+
+        // Keep price filter values
+        const priceForm = document.getElementById('priceFilterForm');
+        if (priceForm) {
+          const minInput = priceForm.querySelector('#minPrice');
+          const maxInput = priceForm.querySelector('#maxPrice');
+          const minName = priceForm.querySelector('#minPriceCents')?.name;
+          const maxName = priceForm.querySelector('#maxPriceCents')?.name;
+
+          if (minInput?.value) params.set(minName, parseInt(minInput.value * 100));
+          if (maxInput?.value) params.set(maxName, parseInt(maxInput.value * 100));
+        }
+
+        return params;
+      }
+
+      //  Attach all event handlers
+      function attachClickEvents() {
+        // FILTER LINKS
+        filterSidebar.querySelectorAll('a').forEach((link) => {
+          link.onclick = (e) => {
+            e.preventDefault();
+
+            // Clear all
+            if (link.id === 'clearAllBtn') {
+              fetchCollection(new URLSearchParams());
+              return;
+            }
+
+            const currentParams = getCurrentParams();
+            console.log(currentParams);
+            const linkParams = new URL(link.href).searchParams;
+            console.log(linkParams);
+
+            // Merge all link params (keep old + new)
+            linkParams.forEach((value, key) => {
+              const existingValues = currentParams.getAll(key);
+              // Add only if not already present
+              if (!existingValues.includes(value)) {
+                currentParams.append(key, value);
+              }
+            });
+
+            fetchCollection(currentParams);
+          };
+        });
+
+        // PRICE FILTER
+        const priceForm = document.getElementById('priceFilterForm');
+        console.log(priceForm);
+        if (priceForm) {
+          priceForm.onsubmit = (e) => {
+            e.preventDefault();
+            fetchCollection(buildParams());
+          };
+        }
+
+        // SORT BY DROPDOWN
+        const sortBy = document.getElementById('sortBySelect');
+        console.log(sortBy.value);
+        if (sortBy) {
+          sortBy.onchange = (e) => {
+            const params2 = buildParams();
+            params2.set('sort_by', e.target.value);
+             console.log('sort_by value:', e.target.value);
+            fetchCollection(params2);
+          };
+        }
+      }
+      console.log(attachClickEvents);
+
+      attachClickEvents();
+    });
+  </script>
+{% endcomment %}
+
+<style>
+    .card-color-swatch.selected ,
+    .card-size-swatch.selected {
+    outline : 3px solid black;
+    box-shadow : 0 0 0 2px #fff;
+    background : pink;
+    background-color: transparent;
+    box-shadow: 0 0 3px #00000026;
+    }
+    .card-color-swatch {
+    display : inline-block;
+    width : 20px;
+    height : 20px;
+    border : 0;
+    }
+    .card-size-swatch.selected {
+    background: #000 ;
+  }
+
+  #LoadMoreBtn:hover {
+  background-color:rgb(111, 109, 111);
+  transform: scale(1.05);
+  }
+</style>
+
+

@@ -1,0 +1,4080 @@
+@font-face {
+  font-family: 'GothamMedium';
+  src: url('../images/GothamMedium.eot?#iefix') format('embedded-opentype'),
+       url('../images/GothamMedium.woff') format('woff'), 
+       url('../images/GothamMedium.ttf')  format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Gotham-Book';
+  src: url('../images/Gotham-Book.eot?#iefix') format('embedded-opentype'),
+        url('../images/Gotham-Book.otf')  format('opentype'),
+        url('../images/Gotham-Book.woff') format('woff'),
+        url('../images/Gotham-Book.ttf')  format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Gotham-Bold';
+  src: url('../images/Gotham-Bold.eot?#iefix') format('embedded-opentype'),
+        url('../images/Gotham-Bold.otf')  format('opentype'),
+        url('../images/Gotham-Bold.woff') format('woff'),
+        url('../images/Gotham-Bold.ttf')  format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+//COMMON
+//HEADER
+//FOOTER
+
+$primary-font: 'Gotham-Book';//Body
+$secondary-font: 'GothamMedium';
+$main-title-font: 'Gotham-Bold';//heading
+
+$font-light:300;
+$font-regular:400;
+$font-medium:500;
+$font-semibold:600;
+$font-bold:700;
+
+$font8:8px;
+$font10:10px;
+$font11:11px;
+$font12:12px;
+$font13:13px;
+$font14:14px;
+$font15:15px;
+$font16:16px;
+$font17:17px;
+$font18:18px;
+$font20:20px;
+$font21:21px;
+$font22:22px;
+$font23:23px;
+$font24:24px;
+$font25:25px;
+$font26:26px;
+$font27:27px;
+$font28:28px;
+$font30:30px;
+$font32:32px;
+$font34:34px;
+$font35:35px;
+$font36:36px;
+$font38:38px;
+$font40:40px;
+$font45:45px;
+$font50:50px;
+
+$themecolor1: #FFFFFF;
+$themecolor2: #000000;
+$themecolor3: #333333;
+$themecolor4: #DDDDDD;
+$themecolor5: #666666;
+$themecolor6: transparent;
+$themecolor7: #707070;
+
+$bgcolor1: #FFFFFF;
+$bgcolor2: #000000;
+$bgcolor3: #333333;
+$bgcolor4: #DDDDDD;
+$bgcolor5: #666666;
+$bgcolor6:#F5F5F5;
+$bgcolor7: transparent;
+$bgcolor8:#F3CFB3;
+
+$btntransparent:transparent;
+$btncolor1:#000000;
+$btncolor1bg:transparent;
+$btnhover1bg:#000000;
+$btnhover1txt:#fff;
+
+$btncolor2:#000000;
+$btncolor2bg:#FFFFFF;
+$btnhover2bg:#000000;
+$btnhover2txt:#FFFFFF;
+
+$btncolor3:#ffffff;
+$btncolor3bg:#333333;
+$btnhover3bg:#ffffff;
+$btnhover3txt:#333333;
+
+$btncolor4:#333333;
+$btncolor4bg: #F3CFB3;;
+$btnhover4bg:#333333;
+$btnhover4txt:#FFFFFF;
+
+
+$textcolor1:#FFFFFF;
+$textcolor2:#000000;
+$textcolor3:#333333;
+$textcolor4:#DDDDDD;
+$textcolor5:#666666;
+$textcolor6:#121212;
+
+$bordercolor1:#FFFFFF;
+$bordercolor2:#000000;
+$bordercolor3:#333333;
+$bordercolor4:#DDDDDD;;
+$bordercolor5:#666666;
+$bordercolor6:#F5F5F5;
+$bordercolor7: transparent;
+$bordercolor8:#F3CFB3;
+
+
+$screen1920:1920px;
+$screen1800:1800px;
+$screen1600:1600px;
+$screen1550:1550px;
+$screen1460:1460px;
+$screen1440:1440px;
+$screen1368:1368px;
+$screen1350:1350px;
+$screen1260:1260px;
+$screen1200:1200px;
+$screen1199:1199px;
+$screen1096:1096px;
+$screen1081:1081px;
+$screen1080:1080px;
+$screen1060:1060px;
+$screen1025:1025px;
+$screen1024:1024px;
+$screen992:992px;
+$screen991:991px;
+$screen990:990px;
+$screen950:950px;
+$screen900:900px;
+$screen899:899px;
+$screen768:768px;
+$screen767:767px;
+$screen736:736px;
+$screen640:640px;
+$screen595:595px;
+$screen540:540px;
+$screen481:481px;
+$screen480:480px;
+$screen435:435px;
+$screen400:400px;
+$screen375:375px;
+$screen360:360px;
+$screen340:340px;
+$screen320:320px;
+
+//MIXIN
+@mixin respond-to($breakpoint){
+  @if $breakpoint == $screen1920{
+      @media only screen and (max-width:$screen1920){
+          @content;
+      }
+  }
+  @if $breakpoint == $screen1800{
+    @media only screen and (max-width:$screen1800){
+        @content;
+    }
+  }
+  @if $breakpoint == $screen1600{
+    @media only screen and (max-width:$screen1600){
+        @content;
+    }
+  }
+  @if $breakpoint == $screen1550{
+    @media only screen and (max-width:$screen1550){
+        @content;
+    }
+  }
+  @if $breakpoint == $screen1460{
+      @media only screen and (max-width:$screen1460){
+          @content;
+      }
+  }
+  @if $breakpoint == $screen1440{
+      @media only screen and (max-width:$screen1440){
+          @content;
+      }
+  }
+  @if $breakpoint == $screen1368{
+      @media only screen and (max-width:$screen1368){
+          @content;
+      }
+  }
+  @if $breakpoint == $screen1350{
+      @media only screen and (max-width:$screen1350){
+          @content;
+      }
+  }
+  @if $breakpoint == $screen1260{
+      @media only screen and (max-width:$screen1260){
+          @content;
+      }
+  }
+  @if $breakpoint == $screen1200{
+      @media only screen and (max-width:$screen1200){
+          @content;
+      }
+  }
+  @if $breakpoint == $screen1199{
+      @media only screen and (max-width:$screen1199){
+          @content;
+      }
+  }
+  @if $breakpoint == $screen1096{
+      @media only screen and (max-width:$screen1096){
+          @content;
+      }
+  }
+  @if $breakpoint == $screen1081{
+    @media only screen and (max-width:$screen1081){
+        @content;
+    }
+  }
+  @if $breakpoint == $screen1080{
+      @media only screen and (max-width:$screen1080){
+          @content;
+      }
+  }
+  @if $breakpoint == $screen1060{
+    @media only screen and (max-width:$screen1060){
+        @content;
+    }
+}
+  @if $breakpoint == $screen1025{
+      @media only screen and (max-width:$screen1025){
+          @content;
+      }
+  }
+  @if $breakpoint == $screen992{
+      @media only screen and (max-width:$screen992){
+          @content;
+      }
+  }
+  @if $breakpoint == $screen991{
+      @media only screen and (max-width:$screen991){
+          @content;
+      }
+  }
+  @if $breakpoint == $screen950{
+      @media only screen and (max-width:$screen950){
+          @content;
+      }
+  }
+  @if $breakpoint == $screen900{
+      @media only screen and (max-width:$screen900){
+          @content;
+      }
+  }
+  @if $breakpoint == $screen899{
+      @media only screen and (max-width:$screen899){
+          @content;
+      }
+  }
+  @if $breakpoint == $screen768{
+      @media only screen and (max-width:$screen768){
+          @content;
+      }
+  }
+  @if $breakpoint == $screen767{
+      @media only screen and (max-width:$screen767){
+          @content;
+      }
+  }
+  @if $breakpoint == $screen736{
+    @media only screen and (max-width:$screen736){
+        @content;
+    }
+}
+  @if $breakpoint == $screen640{
+      @media only screen and (max-width:$screen640){
+          @content;
+      }
+  }
+  @if $breakpoint == $screen595{
+      @media only screen and (max-width:$screen595){
+          @content;
+      }
+  }
+  @if $breakpoint == $screen540{
+      @media only screen and (max-width:$screen540){
+          @content;
+      }
+  }
+  @if $breakpoint == $screen481{
+      @media only screen and (max-width:$screen481){
+          @content;
+      }
+  }
+  @if $breakpoint == $screen480{
+      @media only screen and (max-width:$screen480){
+          @content;
+      }
+  }
+  @if $breakpoint == $screen435{
+      @media only screen and (max-width:$screen435){
+          @content;
+      }
+  }
+  @if $breakpoint == $screen400{
+    @media only screen and (max-width:$screen400){
+        @content;
+    }
+}
+  @if $breakpoint == $screen375{
+      @media only screen and (max-width:$screen375){
+          @content;
+      }
+  }
+  @if $breakpoint == $screen360{
+      @media only screen and (max-width:$screen360){
+          @content;
+      }
+  } 
+  @if $breakpoint == $screen340{
+      @media only screen and (max-width:$screen340){
+          @content;
+      }
+  }
+  @if $breakpoint == $screen320{
+      @media only screen and (max-width:$screen320){
+          @content;
+      }
+  }
+
+}
+
+@mixin button ($background, $textcolor, $btnbghover, $btntexthover) {
+  display: inline-block;
+  padding:12px 20px 11px;
+  font-size: $font12;
+  line-height: 14px;
+  font-family: $main-title-font;
+  transition: ease-in 0.3s;
+  -webkit-appearance: none;
+  cursor: pointer;
+  max-width: 140px;
+  width: 100%;
+  text-transform: uppercase;
+  text-align: center;
+  background: $background;
+  color: $textcolor;
+  @if($background == $btntransparent){
+    border: 2px solid $textcolor;
+  }else{
+    border: 0;
+  }
+  &:hover{
+    background: $btnbghover;
+    color: $btntexthover;
+    border-color: $btnbghover;  
+  }
+}
+
+/**-------------------
+      COMMON
+--------------------**/
+*{
+  box-sizing:border-box;
+  padding: 0;
+  margin: 0;
+  &:focus{
+    outline:none;
+  }
+}
+body{
+  font-family: $primary-font;
+  font-size: $font14;
+  line-height: 1.8;
+  font-weight: $font-light;
+  @include respond-to($screen767){
+    font-size: $font14;
+  }
+}
+h1,h2,h3,h4,h5,h6{
+  font-family: $main-title-font;
+  text-transform: capitalize;
+  margin-bottom: 30px;
+  line-height: 1.5;
+  @include respond-to($screen767){
+    margin-bottom: 15px;
+  }
+}
+h1, .h1{
+  font-size: $font50;
+  line-height: 57px;
+  @include respond-to($screen1550){
+    font-size: $font35;
+    line-height: 1.2;
+  }
+  @include respond-to($screen767){
+    font-size: $font23;
+  }
+}
+h2, .h2{
+  font-size: $font40;
+  line-height: 44px;
+  @include respond-to($screen1550){
+    font-size: $font28;
+    line-height: 1.2;
+  }
+  @include respond-to($screen767){
+    font-size: $font20;
+  }
+}
+h3, .h3{
+  font-size: $font36;
+  line-height: 41px;
+  @include respond-to($screen1550){
+    font-size: $font25;
+    line-height: 1.2;
+  }
+  @include respond-to($screen767){
+    font-size: $font18;
+  }
+}
+h4, .h4{
+  font-size: $font25;
+  line-height: 28px;
+  @include respond-to($screen1550){
+    font-size: $font16;
+    line-height: 1.2;
+  }
+  @include respond-to($screen767){
+    font-size: $font14;
+  }
+}
+h5, .h5{
+  font-size: $font14;
+  line-height: 21px;
+  @include respond-to($screen767){
+    font-size: $font13;
+    line-height: 1.2;
+  }
+}
+h6, .h6{
+  font-size: $font12;
+  line-height:18px;
+}
+p{
+  margin-bottom: 15px;
+}
+img{
+  max-width: 100%;
+}
+a{
+  text-decoration: none;
+  cursor: pointer;
+  color: $textcolor2;
+  display: inline-block;
+}
+input{
+  border-radius: 0;
+}
+button{
+  cursor: pointer;
+}
+.link{
+  text-transform: uppercase;
+}
+.a-black{
+  font-size: $font12;
+  text-decoration: underline;
+  color: $textcolor2;
+  line-height: 24px;
+}
+.a-white{
+  font-size: $font16;
+  border-bottom: 1px solid $bordercolor7;
+  color: $textcolor2;
+  line-height: 19px;
+}
+.a-white:hover,
+.a-black:hover{
+  color:$textcolor4;
+}
+.btn-large{
+  max-width: 326px;
+  width: 100%;
+}
+.rte{
+  h1{
+    font-size: $font30;
+    line-height: $font40;
+    margin-bottom: 25px;
+    color:$textcolor3;
+    @include respond-to($screen736){
+      font-size: $font28;
+      line-height: $font38;
+      margin-bottom: 10px;
+    }
+  }
+  h2 {
+    font-size: $font28;
+    line-height: $font36;
+    margin-bottom: 25px;
+    color:$textcolor3;
+    @include respond-to($screen736){
+      font-size: $font26;
+      line-height: $font34;
+      margin-bottom: 10px;
+    }
+  }
+
+  h3 {
+    font-size: $font24;
+    line-height: $font34;
+    margin-bottom: 20px;
+    color:$textcolor3;
+    @include respond-to($screen736){
+      font-size: $font22;
+      line-height: $font32;
+      margin-bottom: 10px;
+    }
+  }
+
+  h4 {
+    font-size: $font22;
+    line-height: $font34;
+    margin-bottom: 20px;
+    color:$textcolor3;
+    @include respond-to($screen736){
+      font-size: $font20;
+      line-height: $font30;
+      margin-bottom: 10px;
+    }
+  }
+  h5 {
+    font-size: $font16;
+    line-height: 1.5;
+    margin-bottom: 15px;
+    color:$textcolor3;
+    @include respond-to($screen736){
+      font-size: $font14;
+      line-height:1.2;
+      margin-bottom: 10px;
+    }
+  }
+  h6 {
+    font-size: $font14;
+    line-height:1.2;
+    margin-bottom: 15px;
+    @include respond-to($screen736){
+      font-size: $font12;
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+  }
+  font-size: $font14;
+  line-height: 1.8;
+  color:$textcolor5;
+  @include respond-to($screen767){
+    font-size: $font14;
+  } 
+  p {
+    margin-bottom: 30px;
+    &:last-child{
+      margin-bottom: 0;
+    }
+  }
+
+  img, p img {
+    margin-bottom: 10px;
+    max-width: 100%;
+    border: 0 solid #ccc !important;
+    &.img-left{
+      margin-right:45px;
+      margin-bottom: 40px;
+    }
+    &.img-right{
+      margin-left:45px;
+      margin-bottom: 40px;
+    }
+  }
+  a {
+    color:#F3CFB3;
+  }
+  ol {
+    padding-left: 30px;
+    li{
+      line-height: 25px;
+      &:last-child{
+        margin-bottom: 15px;
+      }
+    }
+  }
+  ul{
+    display: block;
+    list-style-type: none;
+    li{
+      margin-bottom: 20px;
+      font-size: $font14;
+      line-height: 1.5;
+      color:$textcolor5;
+      position: relative;
+      padding-left: 30px;
+     
+      &:before, &:after{
+        content: '';
+        display: block;
+        position: absolute;
+        border-radius: 50%;
+      }
+      &:before{
+        top: 5px;
+        left: 0;
+        width: 12px;
+        height: 12px;
+        background-color: $bgcolor3;
+        
+      }
+      &:after{
+        top: 6px;
+        left: 1px;
+        width: 6px;
+        height: 6px;
+        background-color: $bgcolor3;
+        border: 2px solid $bordercolor1;
+      }
+    }
+  }
+  blockquote{
+    border-left:4px solid $bordercolor3;
+    padding: 10px 20px;
+    margin: 0 0 20px;
+    font-size: 17.5px;
+    footer{
+      font-size: 80%;
+      line-height: 1.4;
+      color: #777;
+    }
+  }
+  .blockquote-reverse{
+    border-left:0 solid $bordercolor3;
+    border-right:4px solid $bordercolor3;
+    text-align: right;
+  }
+
+  address {
+    margin-bottom: 20px;
+    font-style: normal;
+    line-height: 1.4;
+  }
+  mark {
+    background-color: $bgcolor2;
+    padding: 0 3px;
+  }
+  .h1 .small, .h1 small, .h2 .small, .h2 small, .h3 .small, .h3 small, h1 .small, h1 small, h2 .small, h2 small, h3 .small, h3 small {
+    font-size: 65%;
+    color: #000;
+  }
+}
+.btn-outline {
+  @include button($btntransparent, $btncolor1, $btnhover1bg, $btnhover1txt);
+}
+.btn-pink{
+  @include button($btncolor4bg, $btncolor4, $btnhover4bg, $btnhover4txt);
+  border: 2px solid $bordercolor8;
+}
+
+.btn-black{
+  @include button($btncolor3bg, $btncolor3, $btnhover3bg, $btnhover3txt);
+  border: 2px solid $bordercolor7;
+  &:hover{
+    border: 2px solid $bordercolor2;
+  }
+}
+.container{
+  max-width: 2020px;
+  width: 100%;
+  padding: 0 50px;
+  margin: 0 auto;
+  @include respond-to($screen1081){
+    padding: 0 20px;
+  }
+  @include respond-to($screen767){
+    padding: 0 15px;
+  }
+}
+.container-fluid {
+  max-width: 1630px;
+  width: 100%;
+  padding: 0 50px;
+  margin: 0 auto;
+  @include respond-to($screen1025){
+    padding: 0 20px;
+  }
+  @include respond-to($screen767){
+    padding: 0 15px;
+  }
+}
+.row{
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin: 0 -15px;
+}
+.row-reverse{
+  flex-direction: row-reverse;
+}
+
+.ai-c{align-items: center;}
+.ai-s{align-items: flex-start;}
+.ai-e{align-items: flex-end;}
+
+.jc-c{justify-content: center;}
+.jc-s{justify-content: flex-start;}
+.jc-e{justify-content: flex-end;}
+.jc-sb{justify-content: space-between;}
+
+.text-left{
+  text-align: left;
+}
+.text-center{
+  text-align: center;
+}
+.text-right{
+  text-align: right;
+}
+.index-section{
+  position: relative;
+}
+.col-1 {
+  width: 8.33%; 
+  padding:0 15px;
+}
+.col-2 {
+  width: 16.66%; 
+  padding: 0 15px;
+}
+.col-3 {
+  width: 25%; 
+   padding: 0 15px;
+}
+.col-4 {
+  width: 33.33%; 
+   padding: 0 15px;
+}
+.col-5 {
+  width: 41.66%; 
+   padding: 0 15px;
+}
+.col-6 {
+  width: 50%; 
+   padding: 0 15px;
+}
+.col-7 {
+  width: 58.33%;
+   padding: 0 15px;
+}
+.col-8 {
+  width: 66.66%;
+   padding: 0 15px;
+}.col-9 {
+  width: 75%; 
+   padding: 0 15px;
+}
+.col-10 {
+  width: 83.33%; 
+   padding: 0 15px;
+}
+.col-11 {
+  width: 91.66%; 
+   padding: 0 15px;
+}
+.col-12 {
+  width: 100%; 
+   padding: 0 15px;
+}
+@include respond-to($screen991){
+  .col-m-1 {
+      width: 8.33%;
+  }
+  .col-m-2 {
+      width: 16.66%;
+  }
+  .col-m-3 {
+      width: 25%;
+  }
+  .col-m-4 {
+      width: 33.33%;
+  }
+  .col-m-5 {
+      width: 41.66%;
+  }
+  .col-m-6 {
+      width: 50%;
+  }
+  .col-m-7 {
+      width: 58.33%
+  }
+  .col-m-8 {
+      width: 66.66%
+  }
+  .col-m-9 {
+      width: 75%;
+  }
+  .col-m-10 {
+      width: 83.33%;
+  }
+  .col-m-11 {
+      width: 91.66%;
+  }
+  .col-m-12 {
+      width: 100%;
+  }
+}
+@include respond-to($screen767){
+  .col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12,
+  .col-m-1, .col-m-2, .col-m-3, .col-m-4, .col-m-5, .col-m-6, .col-m-7, .col-m-8, .col-m-9, .col-m-10, .col-m-11, .col-m-12 {
+      width: 100%;
+  }
+  .col-s-1 {
+      width: 8.33%; 
+  }
+  .col-s-2 {
+      width: 16.66%; 
+  }
+  .col-s-3 {
+      width: 25%; 
+  }
+  .col-s-4 {
+      width: 33.33%; 
+  }
+  .col-s-5 {
+      width: 41.66%; 
+  }
+  .col-s-6 {
+      width: 50%;
+  }
+  .col-s-7 {
+      width: 58.33%;
+  }
+  .col-s-8 {
+      width: 66.66%;
+  }
+  .col-s-9 {
+      width: 75%; 
+  }
+  .col-s-10 {
+      width: 83.33%; 
+  }
+  .col-s-11 {
+      width: 91.66%;
+  }
+  .col-s-12 {
+      width: 100%;
+  }
+}
+
+
+  
+.desktopOnly{
+  display: block;
+  @include respond-to($screen991){
+    display: none;
+  }
+}
+.mobileOnly{
+  display: none;
+  @include respond-to($screen991){
+    display: block;
+  }
+}
+
+button, input[type="submit"], .input[type="text"] {
+  -webkit-appearance: none;
+  cursor: pointer;
+  border-radius: 0;
+}
+
+
+/*---------Slider----------*/
+.slick-slider{
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  -webkit-touch-callout: none;
+  -khtml-user-select: none;
+  -ms-touch-action: pan-y;
+      touch-action: pan-y;
+  -webkit-tap-highlight-color: transparent;
+  overflow: hidden;
+}
+.slick-list{
+  position: relative;
+  display: block;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+.slick-list:focus{
+  outline: none;
+}
+.slick-list.dragging{
+  cursor: pointer;
+  cursor: hand;
+}
+.slick-slider .slick-track,
+.slick-slider .slick-list{
+  -webkit-transform: translate3d(0, 0, 0);
+      -moz-transform: translate3d(0, 0, 0);
+      -ms-transform: translate3d(0, 0, 0);
+        -o-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+}
+.slick-track{
+  position: relative;
+  top: 0;
+  left: 0;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.slick-track:before,
+.slick-track:after{
+  display: table;
+  content: '';
+}
+.slick-track:after{
+  clear: both;
+}
+.slick-loading .slick-track{
+  visibility: hidden;
+}
+.slick-slide{
+  display: none;
+  float: left;
+  height: auto;
+  min-height: 1px;
+}
+[dir='rtl'] .slick-slide{
+  float: right;
+}
+.slick-slide img{
+  display: inline-block;
+}
+.slick-slide.slick-loading img{
+  display: none;
+}
+.slick-slide.dragging img{
+  pointer-events: none;
+}
+.slick-initialized .slick-slide{
+  display: block;
+}
+.slick-loading .slick-slide{
+  visibility: hidden;
+}
+.slick-vertical .slick-slide{
+  display: block;
+  height: auto;
+  border: 1px solid transparent;
+}
+.slick-arrow.slick-hidden {
+  display: none;
+}
+.slick-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-size:  100% auto;
+  z-index: 100;
+  text-indent: -100000px;
+  height: 34px;
+  width: 19px;
+  border: 0;
+  cursor: pointer;
+  @include respond-to($screen767){
+    top: inherit;
+    transform: inherit;
+    bottom: 5%;
+  }
+  &.slick-prev{
+    background-image: url(../images/left.svg);
+    left: 0;
+    @include respond-to($screen767){
+      left: 40%;
+    }
+  }
+  &.slick-next{
+    background-image: url(../images/right.svg);
+    right:0;
+    @include respond-to($screen767){
+      right: 40%;
+    }
+  }
+}
+
+.slick-dots {
+  display: block;
+  text-align: center;
+  li{
+    display: inline-block;
+    margin:0 2px;
+    button{
+      border:0;
+      height:8px;
+      width:8px;
+      border-radius:50%;
+      background-color: $bgcolor5;
+      text-indent: 1000000px;
+      z-index: 10;
+      display: inline-block;
+    }
+    &.slick-active{
+      button{
+        background-color: $bgcolor3;
+      }
+    }
+  }
+}
+.header{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  background-color: $bgcolor1;
+  box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.08);
+  .main-navigation{
+    .mobmenu{
+      display: none;
+      @include respond-to($screen991){
+        display: block;
+      }
+      .mobile-nav-btn{
+        border:0;
+        background: transparent;
+        transition: ease 0.2s;
+        display: block;
+        margin-left: 0;
+        position: relative;
+        height: 25px;
+        width: 30px;    
+        #menu-open{
+          position: absolute;
+          top: 50%;
+          left: 0;
+          transform: translateY(-50%);
+          content:"";
+          z-index:122;
+          height:2px;
+          width: 15px;
+          background-color: $bgcolor2;
+          transition:all 0.3s ease-out;
+          &:before,
+          &:after{
+            position: absolute;
+            content:"";
+            height:2px;
+            background-color: $bgcolor2;
+            left:0;
+            transition:all 0.3s ease-out;
+          
+          }
+          &:before{
+            top:-7px;
+            width: 20px;
+            @include respond-to($screen540){
+              top:-5px;
+            }
+          }
+          &:after{
+            bottom:-7px;
+            width: 10px;
+            @include respond-to($screen540){
+              bottom:-5px;
+            }
+          }
+        }
+        
+        &.openmobNav{        
+          #menu-open{
+            background-color: $bgcolor6;
+            height:0;
+            &:before{
+              transform: rotate(51deg);
+              top:-2px;
+              width: 20px;
+              background-color: $bgcolor2;
+            } 
+            &:after{  
+              transform: rotate(-51deg);
+              bottom: 0;
+              width: 20px;
+              background-color: $bgcolor2;
+            }
+          }
+          .mob-item{
+            display: block;
+            
+          }
+      }
+    }
+  }
+    .nav-item{
+     
+      &.mob-nav{
+        display: none;
+        position: absolute;
+        top: 100%;
+        background: #fff;
+        width: 100%;
+        left: 0;
+        padding: 20px;
+        height: calc(100vh - 85px);
+        overflow-y: scroll;
+        border-top: 1px solid #333;
+        @include respond-to($screen991){
+          height: calc(100vh - 70px);
+        }
+        @include respond-to($screen736){
+          height: calc(100vh - 50px);
+        }
+
+        ul{
+          display: block;
+          width: 100%;
+          li{
+            padding: 20px 0;
+            margin: 0;
+            display: block;
+            border-bottom: 1px solid $bordercolor4;
+            &:last-child{
+              @include respond-to($screen991){
+                border-bottom: 0;
+              }
+            }
+            &.nav-list-item{
+              @include respond-to($screen991){
+                position: relative;
+              }
+              &.showNav{
+                .dropdown-icon{
+                  transform: rotate(180deg);
+                }
+              }
+            } 
+            a{
+              border-bottom: 0;
+              text-transform: capitalize;
+              font-size: $font14;
+              line-height: 25px;
+              display: block;
+            }
+          }
+        }
+      }
+      &.left-nav, &.right-nav{
+        @include respond-to($screen991){
+          display: none;
+        }
+      }
+      ul{
+        display: inline-block;
+         
+        li{
+          display: inline-block;
+          list-style-type: none;
+          padding:  20px 0;
+          margin: 0 22px;
+          position: relative;
+          &:first-child{
+            padding-left: 0;
+            margin-left: 0;
+          }
+          &:last-child{
+            padding-right: 0;
+            margin-right: 0;
+          }
+          &.nav-list-item{
+            @include respond-to($screen991){
+              position: relative;
+            }
+          }
+          @include respond-to($screen1600){
+            margin: 0 17px;
+          }
+          @include respond-to($screen1440){
+            margin: 0 15px;
+          }
+          @include respond-to($screen1260){
+            margin: 0 9px;
+          }
+      
+          a{
+            display: inline-block;
+            font-weight: $font-light;
+            font-size: $font15;
+            line-height: 17px;           
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: $textcolor3;
+            font-family: $primary-font;
+            border-bottom: 1px solid transparent;
+            @media(min-width:992px){
+              &:hover{
+                border-bottom: 1px solid #000;
+              }
+            }
+            @include respond-to($screen1550){
+              font-size: $font12;
+            }
+            @include respond-to($screen1260){
+              font-size: $font10;
+            }
+          }
+          .dropdown-icon{
+            background-image: url(../images/down-arrow.png);
+            background-repeat: no-repeat;
+            background-position: right center;
+            background-size: 8px 4px;
+            transition: 0.3s all;
+            margin-left: 8px;
+            display: inline-block;
+            width: 8px;
+            height: 6px;    
+            @include respond-to($screen991){
+              position: absolute;
+              right: 0;
+              top: 32px;
+              transform: none;
+            }
+          }
+          .sub-nav{   
+            opacity: 0;
+            position: absolute;
+            left: -140px;
+            width: 325px;
+            top: 100%;
+            z-index: 112;
+            background: $bgcolor1;
+            box-shadow: 0px -3px 15px rgba(0, 0, 0, 0.08);
+            transform: scaleY(0);
+            transform-origin: top center;
+            transition: transform 0.2s cubic-bezier(0, 0, 0.2, 1);
+            display: flex;
+            margin: 0 auto;
+            padding: 0 30px;
+            visibility: hidden;
+            &:before{
+              content: "";
+              border-left: 10px solid transparent;
+              border-right: 10px solid transparent;
+              border-bottom: 10px solid $bordercolor1;
+              position: absolute;
+              top: -10px;
+              left: 50%;
+              transform: translateX(-50%);
+              
+              @include respond-to($screen991){
+                display: none;
+              }
+            }
+            @include respond-to($screen1550){
+              width: 270px;
+              padding: 0 20px;
+              left:-110px;
+            }
+            @include respond-to($screen1260){
+              width: 210px;
+              padding: 0 15px;
+              left: -72px;
+            }
+            @include respond-to($screen1025){
+              width: 200px;
+              padding: 0 10px;
+            }
+            @include respond-to($screen991){
+              width: 100%;
+              display: none;
+              position: static;
+              opacity: 1;
+              visibility: visible;
+              transform:none;
+              box-shadow: 0 0 0;
+              padding: 15px 0 0 0;
+            }
+            ul{
+              display: block;
+              width: 100%;
+              li{
+                padding: 20px;
+                margin: 0;
+                display: block;
+                border-bottom: 1px solid $bordercolor4;
+                &:last-child{
+                  border-bottom:0;
+                }
+                @include respond-to($screen1550){
+                  padding:15px 0;
+                }
+                @include respond-to($screen1025){
+                  padding: 10px;
+                }
+                @include respond-to($screen991){
+                  padding: 10px 0;
+                }
+                &:first-child{
+                  @include respond-to($screen991){
+                    padding: 10px 0;
+                  }
+                }
+                a{
+                  border-bottom: 0;
+                  text-transform: capitalize;
+                  font-size: $font14;
+                  line-height: 25px;
+                  @include respond-to($screen1260){
+                    font-size: $font12;
+                    line-height: 20px;
+                  }
+                  span{
+                    margin-right: 16px;
+                    display: inline-block;
+                    vertical-align: middle;
+                    @include respond-to($screen1025){
+                      margin-right: 10px;
+                    }
+                    img{
+                      display: block;
+                      margin: 0 auto;
+                    }
+                  }
+                  &:hover{
+                    border-bottom: 0;
+                  }
+                }
+              }
+            } 
+          
+            &.showNav{
+              opacity: 1;
+              transform: scaleX(1);
+              display: block;
+              visibility: visible;
+              z-index: 1;
+            }
+          }
+          &:hover{
+            @media(min-width:992px){
+              .dropdown-icon{
+                transform: rotate(180deg);
+              }
+              .sub-nav{   
+                opacity: 1;
+                transform: scaleX(1);
+                display: block;
+                visibility: visible;
+                z-index: 1;
+              }
+            }
+          }
+         
+        }
+      }
+    }
+    .nav-icon{
+      ul{
+        display: inline-block;
+        list-style-type: none;
+        li{
+          display: inline-block;
+          margin: 0 10px;
+          @include respond-to($screen767){
+            margin: 0 5px;
+          }
+          &:last-child{
+            margin-right: 0;
+          }
+          a{
+            display: inline-block;
+            padding: 0 5px;
+            img{
+              max-width: 20px;
+              @include respond-to($screen540){
+                max-width: 15px;
+              }
+            }
+          }
+        }
+      }
+    }
+    .header-logo{
+      a{
+        padding: 20px 0;
+        display:block;
+        @include respond-to($screen1260){
+          padding: 10px 0;
+        }
+        img{
+          max-width: 118px;
+          width: 100%;
+          display: block;    
+          margin: 0 auto;
+          @include respond-to($screen991){
+            max-width: 100%;
+            width: auto;
+            max-height: 50px;
+          }
+          @include respond-to($screen736){
+            max-width: 100%;
+            width: auto;
+            max-height: 30px;
+          }
+        }
+      }
+    } 
+  }
+}
+
+.main-content{
+  margin-top: 110px;
+  @include respond-to($screen1260){
+    margin-top: 90px;
+  }
+  @include respond-to($screen1080){
+    margin-top: 85px;
+  }
+  @include respond-to($screen991){
+    margin-top: 70px;
+  }
+  @include respond-to($screen736){
+    margin-top: 50px;
+  }
+}
+
+// HERO_SECTION
+.hero-section{
+  position: relative;
+  margin-bottom: 50px;
+  @include respond-to($screen991){
+    margin-bottom: 30px; 
+  }
+  .hero-section-inner{
+    img{
+      display: block;
+      width: 100%;
+    }
+  }
+  .hero-slider{
+    position: relative;
+    .slick-dots{
+      position: absolute;
+      bottom: 30px;
+      right: 30px;
+      @include respond-to($screen991){
+        bottom: 20px;
+        right: 20px;
+      }
+      @include respond-to($screen767){
+        bottom: 10px;
+        right: 10px;
+      }
+      li{
+        margin: 10px 0;
+        display: block;
+        border: 1px solid $bordercolor7;
+        border-radius: 50%;
+        @include respond-to($screen991){
+          margin: 5px 0;
+        }
+        @include respond-to($screen767){
+          margin: 3px 0;
+        }
+        button{
+          display: block;
+          border-radius: 50%;
+          width: 8px;
+          height: 8px;
+          border: 1px solid $bordercolor7; 
+          background-color: $bgcolor3;
+       
+          @include respond-to($screen767){
+            width: 5px;
+            height: 5px;
+          } 
+        }
+        &.slick-active{
+          border: 1px solid $bordercolor3;
+          button{
+            border: 1px solid $bordercolor1; 
+          }
+        }
+      }
+    }
+  }
+  .cta-btn{
+    position: absolute;
+    right: 24%;
+    bottom: 26%;
+    .btn-pink{
+      letter-spacing: 0.06em;
+      font-family: $secondary-font;
+      font-size: $font12;
+      line-height: 18px;
+      padding: 10px 20px 9px;
+      min-width: 145px;
+    }
+  }
+}
+.section-title{
+  margin-bottom: 80px;
+  text-align: center;
+  @include respond-to($screen991){
+    margin-bottom: 30px;
+  }
+}
+
+.collection-prod{
+  margin-bottom: 70px;
+  @include respond-to($screen1260){
+    margin-bottom: 30px;
+  }
+  @include respond-to($screen991){
+    margin-bottom: 20px;
+  }
+  @include respond-to($screen540){
+    margin-bottom: 10px;
+  }
+  h1{
+    color:$textcolor6;
+  }
+  .col-s-6{
+    @include respond-to($screen480){
+      width: 100%;
+    }
+  }
+  .collection-prod-img{
+    margin-bottom: 30px;
+    @include respond-to($screen1550){
+      margin-bottom: 20px;
+    }
+    img{
+      display: block;
+      width: 100%;
+    }
+  }
+  .collection-prod-title p{
+    font-size: $font25;
+    line-height: 24px;
+    text-transform: capitalize;
+    font-family: $secondary-font;
+    color:$textcolor3;
+    margin-bottom: 30px;
+    @include respond-to($screen1550){
+      font-size: $font20;
+      line-height: 1.2;
+    }
+    @include respond-to($screen767){
+      margin-bottom: 20px;
+      font-size: $font15;
+    }
+  }
+}
+
+.join-us-section{
+  background-color: $bgcolor6;
+  padding: 100px 0;
+  @include respond-to($screen1550){
+    padding: 70px 0;
+  }
+  @include respond-to($screen1260){
+    padding: 50px 0;
+  }
+  @include respond-to($screen991){
+    padding: 30px 0;
+  }
+}
+
+.product-card{
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  padding-bottom: 12px;
+  .prod-card-img{
+    background-color: $bgcolor1;
+    border: 1px solid #DDDDDD;
+    margin-bottom: 20px;
+    position: relative;
+    transition: 0.4s all;
+    @include respond-to($screen767){
+      margin-bottom: 10px;
+    }
+    .prod-card-badge{
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      opacity: 0;
+      visibility: hidden;
+      transition: 0.4s all;
+      @include respond-to($screen991){
+        right: 10px;
+        top: 10px;
+      }
+      button{
+        border: 0;
+      }
+      .quick-cart{
+        background-color: #F3CFB3;
+        margin-bottom: 10px;
+        padding: 9px 8px;
+        @include respond-to($screen1260){
+          padding: 6px;
+        }
+      }
+      .quick-view{
+        padding: 13px 8px;
+        background-color: $bgcolor3;
+        @include respond-to($screen1260){
+          padding: 8px 6px;
+        }
+        @include respond-to($screen991){
+          padding: 6px;
+        }
+        @include respond-to($screen767){
+          display: none;
+        }
+      }
+      img{
+        max-width: 24px;
+        @include respond-to($screen1260){
+          max-width: 20px;
+        }
+        @include respond-to($screen991){
+          max-width: 15px;
+        }
+      }
+    }
+  }
+  .prod-color{
+    position: absolute;
+    bottom: 30px;
+    width: 100%;
+    left: 0;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.4s all;
+    @include respond-to($screen1260){
+      bottom: 20px;
+    }
+    @include respond-to($screen767){
+      bottom: 10px;
+    }
+    ul{
+      display: inline-block;
+      li{
+        list-style-type: none;
+        display: inline-block;
+        margin: 0 2px;
+       
+      }
+    }
+  }
+ .prod-title h4{
+    margin-bottom: 20px;
+    font-weight: $font-light;
+    font-family: $primary-font;
+    color:$textcolor5;
+    @include respond-to($screen1550){
+      margin-bottom: 10px;
+    }
+    @include respond-to($screen991){
+      margin-bottom: 7px;
+    }
+  }
+  
+  .compare-price{
+    margin-bottom: 30px;
+    @include respond-to($screen1550){
+      margin-bottom: 20px;
+    }
+    @include respond-to($screen767){
+      margin-bottom: 10px;
+    }
+    span{   
+      font-size: $font26;
+      line-height: 30px;
+      color: $textcolor3;
+      font-family: $secondary-font;
+      margin-bottom: 30px;
+      @include respond-to($screen1550){
+        font-size: $font17;
+        line-height: 22px;
+      }
+      @include respond-to($screen767){
+        font-size: $font15;
+      }
+    }
+  }
+   
+  &:hover{
+    .prod-card-img{
+      box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
+    }
+    .prod-card-badge, .prod-color{
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+}
+
+.card-color-swatch{
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  border: 0;
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.15);
+  @include respond-to($screen1260){
+    width: 20px;
+    height: 20px;
+  }
+  img{
+    border-radius: 50%;
+  }
+}
+
+.footer{
+  position: relative;
+  background-color: $bgcolor1;
+  padding-top: 100px;
+  @include respond-to($screen1260){
+    padding-top: 60px;
+  }
+  @include respond-to($screen991){
+    padding-top: 30px;
+  }
+  @include respond-to($screen767){
+    padding-top: 20px;
+  }
+  .footer-nav{
+    @include respond-to($screen991){
+      padding-bottom: 20px;
+      margin-bottom: 30px;
+    }
+    @include respond-to($screen767){
+      border-bottom: 1px solid $bordercolor4;
+      padding-bottom: 15px;
+      margin-bottom: 20px;
+    }
+    &.newsLetter{
+      @include respond-to($screen991){
+        padding-bottom:0;
+      }
+      @include respond-to($screen767){
+        border-bottom: 0;
+      }
+    }
+    h3{
+      margin-bottom: 25px;
+      color: $textcolor3;
+      @include respond-to($screen991){
+        margin-bottom: 20px;
+      }
+      @include respond-to($screen767){
+        margin-bottom: 10px;
+      }
+    }
+    p{
+      margin-bottom: 30px;
+      color: $textcolor5;
+      @include respond-to($screen991){
+        margin-bottom: 20px;
+      }
+      @include respond-to($screen540){
+        font-size: $font10;
+        line-height: 22px;
+      }
+    }
+    ul{
+      display: block;
+      list-style-type: none;
+      li{
+        a{
+          display: block;
+          font-size: $font14;
+          line-height: 50px;
+          color: $textcolor5;
+          @include respond-to($screen991){
+            font-size: $font14;
+            line-height: 40px;
+          }
+          @include respond-to($screen540){
+            font-size: $font12;
+            line-height: 35px;
+          }
+          
+          &:hover{
+            color: $themecolor3;
+          }
+        }
+      }
+    }
+    .inputWrapper{
+      display: flex;
+      max-width: 490px;
+      input{
+        padding: 7px 10px 7px 10px;
+        border: 1px solid $bordercolor2;
+        color: #A4A4A4;
+        letter-spacing: 0.02em;
+        font-size: $font14;
+        width: calc(100% - 40px);
+        height: 40px;
+        @include respond-to($screen540){
+          font-size: $font10;
+          line-height: 10px;
+          padding: 8px;
+          width: calc(100% - 30px);
+          height: 30px;
+        }
+      }
+      button{
+        border: 1px solid $bordercolor2;
+        background-color: transparent;
+        width: 40px;
+        height: 40px;
+        border-left: 0;
+        @include respond-to($screen540){
+          width: 30px;
+          height: 30px;
+        }
+      }
+    }
+  }
+  .footer-bottom{
+    margin-top: 100px;
+    border-top: 1px solid $bordercolor4;
+    padding: 20px 0;
+    @include respond-to($screen1260){
+      margin-top: 60px;
+    }
+    @include respond-to($screen991){
+      margin-top: 0;
+      border-top: 0;
+      padding: 0 0 18px;
+    }
+    @include respond-to($screen767){
+      padding: 0 0 15px;
+    }
+    .footer-navigation {
+      @include respond-to($screen991){
+        border-top: 1px solid $bordercolor4;
+        border-bottom: 1px solid $bordercolor4;
+        margin-bottom: 20px;
+      }
+      @include respond-to($screen767){
+        margin-bottom: 15px;
+      }
+      ul{
+        display: block;
+        @include respond-to($screen991){
+          display: flex;
+          justify-content: space-between;
+          flex-wrap: wrap;
+        }
+        @include respond-to($screen375){
+          padding: 12px 0;
+        }
+        li{
+          display: inline-block;
+          list-style-type: none;
+          margin: 0 25px;
+          @include respond-to($screen1550){
+            margin: 0 20px;
+          }
+          @include respond-to($screen1199){
+            margin: 0 10px;
+          }
+          @include respond-to($screen736){
+            margin: 0 8px;
+          }
+          @include respond-to($screen435){
+            margin: 0 3px;
+          }
+          
+          a{
+            display: inline-block;
+            font-size: $font14;
+            line-height: 26px;
+            letter-spacing: 0.02em;
+            color:$textcolor3;
+            padding: 15px 0;
+            &:hover{
+              color:$textcolor2;
+            }
+            @include respond-to($screen1550){
+              font-size: $font12;
+              line-height:1.2;
+            }
+            @include respond-to($screen991){
+              color:$textcolor5;
+            }
+            @include respond-to($screen640){
+              font-size: $font10;
+              line-height: 25px;
+            }
+            @include respond-to($screen540){
+              font-size: $font8;
+              line-height: 8px;
+            }
+            @include respond-to($screen375){
+              line-height: 1;
+              padding: 0;
+            }
+          }
+          &:first-child{
+            margin-left: 0;
+            a{
+              padding-left: 0;
+            }
+          }
+        }
+      }
+    }
+    .footer-bottom-right{
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      @include respond-to($screen991){
+        justify-content: space-between;
+      }
+      p{
+        margin-bottom: 0;
+        letter-spacing: 0.02em;
+        color: $textcolor3;
+        font-size: $font14;
+        line-height: 14px;
+        margin-right: 30px;
+        @include respond-to($screen1550){
+          margin-right: 18px;
+        }
+        @include respond-to($screen1440){
+          margin-right: 13px;
+          font-size: $font12;
+          line-height:1.2;
+        }
+        @include respond-to($screen1060){
+          margin-right: 7px;
+        }
+        @include respond-to($screen540){
+          font-size: 8px;
+          line-height: 8px;
+        }
+        
+      }
+      ul{
+        display: inline-block;
+        li{
+          display: inline-block;
+          list-style-type: none;
+          margin: 0 2px;
+          @include respond-to($screen1550){
+            margin: 0;
+          }
+          a{
+            display: inline-block;
+            padding: 5px;
+            @include respond-to($screen1550){
+              padding: 3px;
+            }
+            @include respond-to($screen435){
+              font-size: 8px;
+              line-height: 8px;
+            }
+            img{
+              max-width: 30px;
+              @include respond-to($screen1550){
+                max-width: 20px;
+              }
+              @include respond-to($screen1199){
+                max-width: 15px;
+              }
+            }
+          }
+          &:last-child{
+            margin-right: 0;
+            a{
+              padding-right: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+  
+}
+
+.about-collection-desc{
+  margin-bottom: 80px;
+  @include respond-to($screen1550){
+    margin-bottom: 70px;
+  }
+  @include respond-to($screen1260){
+    margin-bottom: 50px;
+  }
+  @include respond-to($screen991){
+    margin-bottom: 30px;
+  }
+  .container-fluid{
+    max-width: 1162px;
+  }
+  .about-collection-text{
+    h1{
+      color:$textcolor3;
+    }
+    .collection-content {
+      font-size: $font18;
+      line-height: 35px;
+      color: $textcolor5;
+      @include respond-to($screen1550){
+        font-size: $font16;
+        line-height: 1.8;
+      }
+      @include respond-to($screen1260){
+        font-size: $font15;
+      }
+      @include respond-to($screen991){
+        font-size: $font14;
+      }
+      @include respond-to($screen767){
+        font-size: $font12;
+      }
+    }
+  }
+}
+
+.collection-prod-top{
+  margin-bottom: 30px;
+  @include respond-to($screen540){
+    margin-bottom: 20px;
+  }
+}
+.prod-top-header{
+  .row{
+    margin: 0;
+    @include respond-to($screen767){
+      justify-content: center;
+    }
+    @include respond-to($screen400){
+      display: block;
+    }
+  }
+  .change-view-option{
+    border: 1px solid $bordercolor3;
+    background-color: #fff;
+    padding: 4px;
+    @include respond-to($screen767){
+      display: none;
+    }
+    button{
+      border: 0;
+      background-color: $bgcolor1;
+      margin: 0 10px;
+      display: inline-block;
+      vertical-align: middle;
+    }
+  }
+  
+  .sort-by-prod{
+    @include respond-to($screen540){
+     text-align: center;
+    }
+  }
+}
+
+.pagination{
+  margin: 100px 0;
+  @include respond-to($screen1550){
+    margin: 70px 0;
+  }
+  @include respond-to($screen1260){
+    margin: 50px 0;
+  }
+  @include respond-to($screen991){
+    margin: 30px 0;
+  }
+  ul{
+    display: inline-block;
+    margin: 0 30px;
+    @include respond-to($screen540){
+      margin: 0;
+    }
+    li{
+      display: inline-block;
+      list-style-type: none;
+      padding: 0 10px;
+      margin: 0 5px;
+      position: relative;
+      @include respond-to($screen540){
+        padding: 0 5px;
+      }
+      &:after{
+       content: "";
+       width: 20px;
+       height: 2px;
+       background-color: $bgcolor3;
+       position: absolute;
+       bottom: 0;
+       left: 50%;
+       transform:translateX(-50%);
+       opacity: 0;
+       visibility: hidden;
+      }
+      &.active , &:hover{
+        &::after{
+          opacity: 1;
+          visibility: visible;
+        }
+      }
+      &:first-child, &:last-child{
+        border: 1px solid $bordercolor3;
+        background-color: $bgcolor1;
+        margin: 0 25px;
+        @include respond-to($screen540){
+          margin: 0 10px;
+          padding: 0 10px;
+        } 
+        @include respond-to($screen360){
+          margin: 0;
+        }
+        &.active , &:hover{
+          &::after{
+            opacity: 0;
+            visibility: hidden;
+          }
+        }
+      }
+
+      a{
+        display: inline-block;
+        font-size: $font20;
+        line-height: 26px;
+        color:$textcolor3;
+        @include respond-to($screen767){
+          font-size: $font14;
+        }
+      }
+    }
+  }
+}
+
+
+
+// nice-select css
+
+// Default variables
+$font_size: 14px !default;
+$font_size_small: 12px !default;
+
+$input_border_radius: 5px !default;
+$input_height: 35px !default;
+$input_height_small: 36px !default;
+$dropdown_padding: 20px !default;
+
+$gray_dark: #444 !default;
+$gray: #999 !default;
+$gray_light: #e8e8e8 !default;
+$gray_lighter: #f6f6f6 !default;
+$primary_light: $gray !default;
+$arrow_color: $gray !default;
+
+// Style the dropdown
+.nice-select {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  background-color: #fff;
+  border-radius: $input_border_radius;
+  border: solid 1px $gray_light; 
+  box-sizing: border-box;
+  cursor: pointer;
+  display: block;
+  font-family: inherit;
+  font-size: $font_size;
+  font-weight: normal;
+  height: $input_height;
+  line-height: $input_height - 2;
+  outline: none;
+  padding-left: $dropdown_padding;
+  padding-right: $dropdown_padding;
+  position: relative;
+  text-align: left !important;
+  transition: all 0.2s ease-in-out;
+  user-select: none;
+  white-space: nowrap;
+  width: auto;
+  &:hover {
+    border-color: darken($gray_light, 5%);
+  }
+  &:active, &:focus {
+    border-color: $primary_light;
+  }
+  // Arrow
+  &:after { 
+    border-bottom: 2px solid $arrow_color;
+    border-right: 2px solid $arrow_color;
+    content: '';
+    display: block; 
+    height: 5px;
+    margin-top: -4px;
+    pointer-events: none;
+    position: absolute; 
+    right: 12px; 
+    top: 50%; 
+    transform-origin: 66% 66%;
+    transform: rotate(45deg);
+    transition: all 0.15s ease-in-out;
+    width: 5px;
+  }
+  
+  &.open {
+    @extend :active;
+    &:after {
+      transform: rotate(-135deg);
+    }
+    .list {
+      opacity: 1;
+      pointer-events: auto;
+      transform: scale(1) translateY(0);
+    }
+  }
+  &.disabled {
+    border-color: lighten($gray_light, 2%);
+    color: $gray;
+    pointer-events: none;
+    &:after { 
+      border-color: lighten($arrow_color, 20%);
+    }
+  }
+  
+  // Modifiers
+  &.wide {
+    width: 100%;
+    .list {
+      left: 0 !important;
+      right: 0 !important;
+    }
+  }
+  &.right {
+    float: right;
+    .list {
+      left: auto;
+      right: 0;
+    }
+  }
+  &.small {
+    font-size: $font_size_small;
+    height: $input_height_small;
+    line-height: $input_height_small - 2;
+    &:after { 
+      height: 4px;
+      width: 4px;
+    }
+    .option {
+      line-height: $input_height_small - 2;
+      min-height: $input_height_small - 2;
+    }
+  }
+  
+  // List and options
+  .list {
+    background-color: #fff;
+    border-radius: 0;
+    box-shadow: 2px -4px 10px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    margin-top: 4px;
+    opacity: 0;
+    // overflow: hidden;
+    padding: 0;
+    pointer-events: none;
+    position: absolute;
+    top: 125%; left: 0;
+    transform-origin: 50% 0;
+    transform: scale(.75) translateY(- $input_height / 2);
+    transition: all .2s cubic-bezier(0.5, 0, 0, 1.25), opacity .15s ease-out;
+    z-index: 9;
+    &:before{
+      content: "";
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-bottom: 10px solid $bordercolor1;
+      position: absolute;
+      top: -9px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    &:hover .option:not(:hover) {
+      background-color: transparent !important;
+    }
+  }
+  .option {
+    cursor: pointer;
+    font-weight: 300;
+    line-height: $input_height - 2;
+    list-style: none;
+    min-height: $input_height - 2;
+    outline: none;
+    padding-left: $dropdown_padding;
+    padding-right: $dropdown_padding;
+    text-align: left;
+    transition: all 0.2s;
+    color:$textcolor3;
+    // &:hover, &.focus, &.selected.focus { 
+    //   background-color: $gray_lighter;
+    // }
+    &.selected { 
+      font-weight: bold;
+    }
+    &.disabled {
+      background-color: transparent;
+      color: $gray;
+      cursor: default;
+    }
+  }
+}
+
+// Use display instead of opacity for IE <= 10
+.no-csspointerevents .nice-select {
+  .list {
+    display: none;
+  }
+  &.open {
+    .list {
+      display: block;
+    }
+  }
+}
+// nice-select css
+
+.filter-inner{
+  .filter-content{
+    padding: 20px;
+    border:1px solid $bordercolor4;
+    margin-bottom: 30px;
+    .filter-header{
+      border-bottom:1px solid $bordercolor4;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 10px;
+      p{
+        margin-bottom: 0;
+        font-family:$secondary-font;
+        font-size: $font16;
+        line-height: 26px;
+        color:$textcolor3;
+        text-transform: uppercase;
+      }
+      .clear-all a{
+        color: $textcolor5;
+        font-size: $font12;
+        line-height: 12px;
+        text-transform: uppercase;
+
+      }
+    }
+    .accessories{
+      margin-top: 20px;
+      ul{
+        display: inline-block;
+        li{
+          display: inline-block;
+          list-style-type: none;
+          margin: 0 10px 10px 0;
+         
+          a{
+            display: inline-block;
+            font-size: $font12;
+            line-height: 14px;
+            color:$textcolor3;
+            padding:10px;
+            background-color: $bgcolor6;
+            span{
+              margin-left: 30px;
+              img{
+                max-width: 10px;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .shop-filter{
+      margin-top: 20px;
+      ul{
+        list-style-type: none;
+        padding-left: 10px;
+        li{
+          margin-bottom: 20px;
+          &:last-child{
+            margin-bottom: 10px;
+          }
+          a{
+            display: block;
+            position: relative;
+            padding-left: 20px;
+            font-size: $font14;
+            line-height: 14px;
+            color:$textcolor5;
+            &:before, &:after{
+              content: '';
+              display: block;
+              position: absolute;
+              border-radius: 50%;
+
+            }
+            &:before{
+              top: 50%;
+              transform: translateY(-50%);
+              left: 0;
+              width: 10px;
+              height: 10px;
+              background-color: $bgcolor7;
+              border: 1px solid $bordercolor3;
+              
+            }
+            &:after{
+              top: 50%;
+              transform: translateY(-50%);
+              left: 3px;
+              width: 6px;
+              height: 6px;
+              background-color: $bgcolor7;
+            }
+          }
+          &.active, &:hover{
+            a:after{
+              background-color: $bgcolor3;
+            }
+          }
+        }
+      }
+    }
+    
+  }
+}
+.filterBtn {
+  border: 1px solid #000;
+  padding: 4px 10px;
+  cursor: pointer;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  @include respond-to($screen991){
+    display: flex;
+  }
+  img {
+    display: inline-block;
+    vertical-align: middle;
+    max-height: 17px;
+  }
+}
+.shop-by-color{
+  margin-top: 30px;
+  ul{
+    display: inline-block;
+    margin: 0 -5px;
+    li{
+      display: inline-block;
+      list-style-type: none;
+      border: 1px solid transparent;
+      padding: 5px;
+    
+      border-radius: 50%;
+      position: relative;
+      &:first-child{
+        margin-left: 0;
+      }
+      .card-color-swatch{
+        display: inline-block;
+        position: relative;
+        height: 35px;
+        width: 35px;
+        img{
+          border-radius: 50%;
+        }
+        &:before{
+          content: '';
+          display: block;
+          position: absolute;
+          border-radius: 50%;
+        }
+        &:before{
+          top: 1px;
+          left: 1px;
+          width: calc(100% - 10px);
+          height: calc(100% - 10px);
+          background-color: $bgcolor7;
+          border: 4px solid transparent; 
+          box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.15);
+        }
+        &.active, &:hover{
+          &:before{
+            border-color: $bordercolor1;
+          }
+        }
+      }
+    }
+  }
+}
+.product-info-content .select-option ul li .stand-material{
+  display: block;
+  position: relative;
+  height: 36px;
+  width: 36px;
+  &.active, &:hover{
+    border: 1px solid $bordercolor8;
+    border-radius: 50%;
+  }
+ 
+  img{
+    max-width: 25px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+.product-details{
+  background-color: $bgcolor6;
+  padding-top: 100px;
+  @include respond-to($screen1550){
+    padding-top: 70px;
+  }
+ @include respond-to($screen1260){
+    padding-top: 50px;
+ }
+ @include respond-to($screen991){
+    padding-top: 30px;
+ }
+  @include respond-to($screen767){
+    padding-top: 20px;
+  }
+}
+.top-slider{
+  margin-bottom: 40px;
+  @include respond-to($screen991){
+    margin-bottom: 20px;
+  }
+  .slide-img{
+    img{
+      border: 1px solid #DDDDDD;
+      filter: drop-shadow(0px 0px 20px rgba(0, 0, 0, 0.05));
+    }
+  }
+}
+
+.bottom-slider{
+  margin: 0 -20px;
+  margin-bottom:40px;
+  @include respond-to($screen991){
+    margin: 0 -12px;
+    margin-bottom:30px;
+  }
+  .bottom-slider-inner{
+    padding: 0 20px;
+    @include respond-to($screen991){
+      padding: 0 12px;
+    }
+  }
+}
+.slide-img{
+  img{
+    width: 100%;
+    display: block;
+  }
+}
+
+.quantity-box{
+  max-width:115px;
+  width: 100%;
+  border-top: 1px solid $bordercolor4;
+  border-bottom: 1px solid $bordercolor4;
+  font-family: inherit;
+  margin-right: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @include respond-to($screen1550){
+    margin-right: 15px;
+  }
+  @include respond-to($screen1368){
+    margin-right: 0;
+  }
+  .quantity-wrap{
+   padding: 0 5px;
+    span{
+        cursor: pointer;
+        line-height: inherit;
+        font-size: inherit;
+        img{
+          max-width: 15px;
+          display: inline-block;
+          vertical-align: middle;
+        }
+    }
+    input{
+      width: 50px;
+      background-color: transparent;
+      border: 0;
+      text-align: center;
+      padding: 5px 5px 6px;
+      letter-spacing: 0.04em;
+      font-size: 15px;
+      line-height: 21px;
+      font-family: $secondary-font;
+      color:$textcolor3;
+      @include respond-to($screen1440){
+        width: 45px;
+      }
+    }
+  }
+}
+.product-info-content{
+  padding-left: 70px;
+  @include respond-to($screen1260){
+    padding-left:40px;
+  }
+  @include respond-to($screen991){
+    padding-left:0;
+  }
+  .h3{
+    color:$textcolor3;
+    @include respond-to($screen991){
+      margin-bottom: 15px;
+    }
+  }
+  .product-price{
+    font-size: 25px;
+    line-height: 22px;
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid $bordercolor4;
+    color:$textcolor3;
+    @include respond-to($screen991){
+      padding-bottom: 20px;
+      margin-bottom: 20px;
+      font-size: 20px;
+      line-height: 22px;
+    }
+  }
+  .select-option{
+    margin-top: 30px;
+    @include respond-to($screen991){
+      margin-top: 20px;
+    }
+    h5{
+      color: $textcolor3;
+      font-family: $secondary-font;
+      font-size: $font16;
+      line-height: 26px;
+      text-transform: uppercase;
+      @include respond-to($screen991){
+        margin-bottom: 15px;
+      }  
+      @include respond-to($screen400){
+        font-size: $font14;
+      }  
+    }
+    p{
+      font-size: 16px;
+      line-height: 26px;
+      font-family: $secondary-font;
+      margin-bottom: 20px;
+      color:$textcolor3;
+    }
+    ul{
+      display: inline-block;
+      list-style-type: none;
+      li{
+        display: inline-block;
+        margin-right: 5px;
+        a{
+          width: 35px;
+          height: 35px;
+          @include respond-to($screen991){
+            width: 30px;
+            height: 30px;
+          }
+          img{
+            border-radius: 50%;
+          }
+        }
+      }
+    }
+    .shop-by-color{
+      margin-top: 0;
+      .card-color-swatch{
+        &.active, &:hover{
+          &:before{
+            border-color: $bordercolor6;
+          }
+        }
+      }
+    }
+  } 
+  .select-addtocart{
+    display: flex;
+    margin: 50px 0;
+    @include respond-to($screen1368){
+      display: block;
+    }
+    @include respond-to($screen991){
+      margin: 30px 0;
+    }
+    .addtocart-btn{
+      display: flex;
+      flex-wrap: nowrap;
+      width: 100%;
+    
+       @include respond-to($screen1368){
+          margin-top: 20px;
+        }
+      .btn{
+        letter-spacing: 0.06em;
+        font-size: $font12;
+        line-height: 22px;
+        font-family: $secondary-font;
+        padding: 7px 10px 8px;
+        @include respond-to($screen1550){
+          min-width: 160px;
+        }
+        @include respond-to($screen375){
+          min-width: 130px;
+          padding: 7px 5px 8px;
+          font-size: $font10;
+          line-height: 1.2;
+        }
+        
+      }
+      .btn-pink{
+        margin-right: 10px;
+        max-width: 200px;
+      }
+      .btn-black{
+        max-width: 170px;
+      }
+    }
+  }
+  .prod-desc{
+    margin-bottom: 30px;
+    @include respond-to($screen767){
+      margin-bottom: 20px;
+    }
+  }
+  .prod-details-text{
+    margin-bottom: 30px;
+    h5{
+      margin-bottom: 20px;
+    }
+
+  }
+  
+  .specification{
+    border-top:1px solid $bordercolor4;
+    padding-bottom:100px;
+    @include respond-to($screen1550){
+       padding-bottom: 70px;
+    }
+    @include respond-to($screen1260){
+       padding-bottom: 50px;
+    }
+    @include respond-to($screen991){
+       padding-bottom: 30px;
+    }
+    h6{
+      cursor: pointer;
+      font-weight: $font-light;
+      font-family: $primary-font;
+      line-height: 22px;
+      color: $textcolor3;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 0;
+      position: relative;
+      background-image: url(../images/plus.png);
+      background-repeat: no-repeat;
+      background-position: right center;
+      &.openSpec{
+        background-image: url(../images/minus.png);
+      }
+      img{
+        display: inline-block;
+        vertical-align: sub;
+      }
+    }
+    p{
+      margin-bottom: 0;
+    }
+    .spec-detail{
+      padding: 15px 0;
+      border-bottom:1px solid $bordercolor4;
+    }
+    .review{
+      padding: 20px 0;
+      border-bottom:1px solid $bordercolor4;
+   
+    }
+    .spec-info{
+      display: none;
+      margin: 15px 0;
+    }
+  }
+}
+
+.interior-ceramic{
+  margin: 100px 0;
+  @include respond-to($screen1550){
+    margin: 70px 0;
+  }
+  @include respond-to($screen1260){
+    margin: 50px 0;
+  }
+  @include respond-to($screen991){
+    margin: 30px 0;
+  }
+  @include respond-to($screen767){
+    margin: 20px 0;
+  }
+}
+.you-may-like{
+  h3{
+    margin-bottom: 50px;
+    @include respond-to($screen991){
+      margin-bottom: 30px;
+    }
+  }
+}
+.product-slider{
+  margin: 0 -15px;
+  @include respond-to($screen991){
+    margin-bottom: 50px;
+  }
+  @include respond-to($screen767){
+    margin-bottom: 30px;
+  }
+  .product-slider-inner{
+    padding: 0 15px;
+    .product-card {
+      padding-bottom: 0;
+      .compare-price {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+.our-story{
+  margin-bottom: 100px;
+  @include respond-to($screen1550){
+    margin-bottom: 70px;
+  }
+  @include respond-to($screen1260){
+    margin-bottom: 50px;
+  }
+  @include respond-to($screen991){
+    margin-bottom: 30px;
+  }
+  .img-with-content{
+    .content-text{
+      margin-right:50px;
+      @include respond-to($screen1440){
+        margin-right:0;
+        padding: 30px 15px;
+      }
+    }
+  }      
+}
+.driving-principle{
+  background-color: $bgcolor6;
+  padding-top: 50px;
+  padding-bottom: 310px;
+  @include respond-to($screen767){
+    padding-bottom: 100px;
+    padding-top: 30px;
+  }
+}
+.content-img-content{
+  .row{
+    margin: 0;
+    .col-6{
+      padding: 0;
+    }
+  }
+}
+.marginLeft{
+  margin-left: 100px;
+  @include respond-to($screen1440){
+    margin-left: 0;
+  }
+}
+.img-with-content{
+  .content-text{
+    margin-right:50px;
+    @include respond-to($screen1440){
+      margin-right:0;
+      padding: 30px;
+    }
+    @include respond-to($screen991){
+      margin: 30px 0;
+    }
+    h3{
+      color: $textcolor3;
+      text-transform: none;
+      @include respond-to($screen767){
+        margin-bottom: 20px;
+      }
+    }
+    .apply-now-btn{
+      margin-top: 30px;
+      @include respond-to($screen767){
+        margin-top: 20px;
+      }
+      .btn-pink{
+        font-size: 12px;
+        line-height: 12px;
+        font-family: $secondary-font;
+        padding: 15px 20px 14px;
+        letter-spacing: 0.06em;
+        max-width: 130px;
+      }
+    }
+  }
+}
+
+.right-col{
+  width: 50%;
+  @include respond-to($screen767){
+    width: 100%;
+    .row {
+      flex-wrap: nowrap;
+      -webkit-flex-wrap: nowrap;
+      justify-content: center;
+    }
+  }
+  form{
+    width: 100%;
+    max-width: calc(100% - 160px);
+    @include respond-to($screen400){
+      max-width: 100%;
+      margin-bottom: 10px;
+    }
+  }
+  .sort-product {
+    @include respond-to($screen400){
+      width: 100%;
+      margin-left: 0;
+      .list {
+        width: 100%;
+      }
+    } 
+  }
+  .inputWrapper{
+    display: flex;
+    input{
+      background: $bgcolor1;
+      border: 1px solid #121212;
+      font-size: 12px;
+      line-height: 12px;
+      color:#121212;
+      padding:10px 15px 9px;
+      width: calc(100% - 35px);
+      height: 35px;
+    }
+    button{
+      background: $bgcolor3;
+      border: 1px solid $bordercolor3;
+      width: 35px;
+      height: 35px;
+      img{
+        max-width: 15px;
+      }
+    }
+  }
+}
+.video-section{
+  position: relative;
+  margin-top: -233px;
+  margin-bottom: 100px;
+  @include respond-to($screen1550){
+    margin-bottom: 70px;
+  }
+  @include respond-to($screen1260){
+    margin-bottom: 50px;
+  }
+  @include respond-to($screen991){
+    margin-bottom: 30px;
+  }
+  @include respond-to($screen767){
+    margin-top: -100px;
+  }
+  .video-wrap img{
+    display: block;
+    width: 100%;
+  }
+  
+  .play-btn{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 90px;
+    width: 100%;
+    @include respond-to($screen1550){
+      max-width: 70px;
+    }
+    @include respond-to($screen991){
+      max-width: 50px;
+    }
+    @include respond-to($screen767){
+      max-width: 30px;
+    }
+  }
+}
+
+.wholesale-trade{
+  padding: 50px 0;
+  background-color:$bgcolor6;
+ 
+  .marginLeft{
+    margin-left: 70px;
+    @include respond-to($screen1440){
+      margin-left: 0;
+    }
+  }
+}
+.wholesale-info{
+  margin: 100px 0;
+  @include respond-to($screen1550){
+    margin: 70px 0;
+  }
+  @include respond-to($screen1260){
+    margin: 50px 0;
+  }
+  @include respond-to($screen991){
+    margin: 30px 0;
+  }
+}
+
+.wholesaleImg{
+  @include respond-to($screen767){
+    margin-bottom: 20px;
+  }
+  img{
+    display: block;
+    margin: 0 auto;
+    max-width: 300px;
+    @include respond-to($screen1440){
+      max-width: 250px;
+    }
+  }
+}
+.wholesale-content-text{
+  h3{
+    text-transform: none;
+    @include respond-to($screen767){
+      margin-bottom: 20px;
+    }
+  }
+}
+
+.thumbnail-nav{
+  text-align: center;
+  margin-bottom: 45px;
+  @include respond-to($screen767){
+    margin-bottom: 10px;
+  }
+  ul{
+    display: inline-block;
+    list-style-type: none;
+    li{
+      display: inline-block;
+      margin: 0 20px 15px;
+      a{
+        display: inline-block;
+        font-size: 20px;
+        line-height: 20px;
+        color: $textcolor3;
+        text-transform: uppercase;
+        position: relative;
+        &::after{
+          content: "";
+          width: 50px;
+          height: 2px;
+          background-color:$bgcolor3;
+          position: absolute;
+          bottom: -8px;
+          left: 50%;
+          transform: translateX(-50%);
+          opacity: 0;
+          visibility: hidden;
+          @include respond-to($screen991){
+            bottom: -5px;
+          }
+          @include respond-to($screen767){
+            bottom: 0;
+          }
+        }
+        &:hover, &.active{
+          &::after{
+            opacity: 1;
+            visibility: visible;
+          }
+        }
+      }
+      @include respond-to($screen1550){
+        margin:0 15px 15px;
+        a {
+          font-size: 18px;
+        }
+      }
+      @include respond-to($screen1080){
+        margin:0 12px 15px;
+      }
+      @include respond-to($screen991){
+        a {
+          font-size: 15px;
+        }
+      }
+      @include respond-to($screen767){
+        margin:0 10px 15px;
+        a {
+          font-size: $font12;
+        }
+      }
+    }
+  }
+}
+
+.product-release{
+
+  ul{
+    display: inline-block;
+    list-style-type: none;
+    li{
+      vertical-align: middle;
+      text-transform: uppercase;
+      display: inline-block;
+      color: $textcolor2;
+      letter-spacing: 2.5px;
+      font-size:$font13;
+      font-weight: $font-regular;
+      @include respond-to($screen1440){
+        font-size:$font12;
+      }
+      @include respond-to($screen991){
+        font-size:$font10;
+      }
+      &.date {
+        color: $textcolor3;
+      }
+    }
+  }
+}
+.community-inner{
+  h1{
+    margin-bottom: 50px;
+    @include respond-to($screen991){
+      margin-bottom: 30px;
+    }
+  }
+  .container-fluid{
+    max-width: 1330px;
+  }
+  .plant-a-seed{
+    padding: 50px 0;
+    background-color: $bgcolor6;
+  }
+  .plant-a-seed-img{
+    img{
+      max-width:300px;
+      display: block;
+      margin: 0 auto;
+    }
+  }
+}
+.community{
+  margin-top: 50px;
+  margin-bottom: 100px;
+  @include respond-to($screen991){
+    margin: 0 0 30px;
+  }
+}
+
+.about-journal, .about-community{
+  margin-top: 50px;
+  @include respond-to($screen1440){
+    margin-top: 40px;
+  }
+  @include respond-to($screen767){
+    margin-top: 30px;
+  }
+  .journal-img, .community-img{
+    margin-bottom: 30px;  
+    @include respond-to($screen1440){
+      margin-bottom: 20px;
+    }
+    @include respond-to($screen767){
+      margin-bottom: 10px;
+    }
+  }
+  h3, h5{
+    margin: 10px 0 12px;
+    color: $textcolor2;
+  }
+  h5{
+    font-family: $primary-font;
+    line-height: 14px;
+    font-style: italic;
+    text-transform: none;
+  }
+  .rte p{
+    color:$textcolor2;
+  }
+  .community-text{
+    h3, h5{
+      margin-bottom: 20px;
+    }
+    .rte p{
+      margin-bottom: 30px;
+    }
+  }
+  .continue-reading-btn{
+    margin-top: 20px;
+    @include respond-to($screen767){
+      margin-top: 10px;
+    }
+    .btn-pink{
+      max-width: 200px;
+      font-family: $secondary-font;
+      font-size: 12px;
+      line-height: 22px;
+      padding: 10px 20px 9px;
+      text-transform: none;
+      @include respond-to($screen767){
+        max-width: 175px;
+        line-height: 15px;
+      }
+    }
+  }
+}
+
+.niceSelect{
+  border: 1px solid $bordercolor3;
+  background-color:$bgcolor1;
+  padding: 10px 15px;
+  font-size: $font12;
+  line-height: 13px;
+  text-align: center;
+  border-radius: 0;  
+  margin-left: 10px;
+  font-family: $secondary-font;
+  letter-spacing: 0.06em;
+  display: inline-block;
+  color: $textcolor3;
+  .list{
+    padding: 20px 0;
+  }
+  &.product-qty{
+    min-width: 75px;
+  }
+  &.sort-product{
+    min-width: 150px;
+    .list{
+      min-width: 180px;
+      @include respond-to($screen1080){
+        min-width: 100%;
+      }
+    }
+  }
+}
+.contentImg {
+  img {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+  }
+}
+#html5-watermark {
+  display: none !important;
+}
+.revival-ceramic{
+  margin-top: 30px;
+  margin-bottom: 30px;
+  @include respond-to($screen767){
+    margin-bottom: 0;
+  }
+  .container-fluid{
+    max-width: 1682px;
+    .row{
+      margin: 0 -10px;
+      .col-6, .col-3, .col-9{
+        padding: 0 10px;
+      }
+    }
+  }
+  .img-with-content .content-text{
+    margin-right: 0;
+    margin-top: -15px;
+    @include respond-to($screen1440){
+      padding: 0;
+    }
+  }
+  .revival-ceramic-content{
+    margin-top: 50px;
+    margin-bottom: 30px;
+    @include respond-to($screen1550){
+      margin-top: 30px;
+      margin-bottom: 20px;
+    }
+    @include respond-to($screen991){
+      margin-bottom: 0;
+    }
+    @include respond-to($screen767){
+      margin-top: 20px;;
+    }
+    .col-6{
+      @include respond-to($screen767){
+        margin-bottom: 20px;
+      }
+    }
+    // .revival-ceramic-imgcontent{
+    //   display: flex;
+    //   align-items: flex-start;
+    // }
+    h3{
+      margin-bottom: 20px;
+    }
+    h4{
+      margin-bottom: 10px;
+      font-size:$font20;
+      line-height: 22px;
+      font-family: $secondary-font;
+      text-transform: capitalize;
+      @include respond-to($screen1550){
+        font-size:$font18;
+        line-height: 20px;
+      }
+    }
+    .contentImg{
+      img{
+        width: auto;
+      }
+    }
+  
+    .revival-ceramic-text{
+      margin-bottom: 70px;
+      @include respond-to($screen1550){
+        margin-bottom: 30px;
+      }
+      @include respond-to($screen991){
+        margin-bottom: 20px;
+      }
+      @include respond-to($screen767){
+        margin-bottom: 0;
+      }
+      p{
+        line-height: 22px;
+        letter-spacing: 0.06em;
+      }
+    }
+  }
+}
+
+.lbe-design-content{
+  .row{
+    margin: 0;
+  }
+  .content-text{
+    padding: 30px 150px;
+    margin: 0;
+    @include respond-to($screen1550){
+      padding: 30px 100px;
+    }
+    @include respond-to($screen1440){
+      padding: 30px 70px;
+    }
+    @include respond-to($screen1368){
+      padding: 30px 50px;
+    }
+    @include respond-to($screen1260){
+      padding: 30px 40px;
+    }
+    @include respond-to($screen991){
+      padding: 30px 20px;
+    }
+    h3{
+      @include respond-to($screen1260){
+        margin-bottom: 20px;
+      }
+      @include respond-to($screen767){
+        margin-bottom: 15px;
+      }
+    }
+    .shop-now-btn{
+      margin-top: 50px;
+      @include respond-to($screen1550){
+        margin-top: 30px;
+      }
+      @include respond-to($screen1260){
+        margin-top: 20px;
+      }
+      @include respond-to($screen767){
+        margin-top: 15px;
+      }
+    }
+  }
+}
+
+.customer-love-section{
+  position: relative;
+  background-color: $bgcolor6;
+  padding-top: 50px;
+  padding-bottom: 333px;
+  @include respond-to($screen767){
+    padding-bottom: 100px;
+    padding-top: 30px;
+  }
+  h3{
+    text-align: center;
+    margin-bottom: 50px;
+    color: $textcolor3;
+    @include respond-to($screen991){
+      margin-bottom: 30px;
+    }
+    @include respond-to($screen767){
+      margin-bottom: 20px;
+    }
+  }
+  .customerLove-slider{
+    overflow-x: hidden;
+    margin: 0 -15px;
+    .slick-dots{
+      margin-bottom: 20px;
+    }
+    .customerLove-slides{
+      padding: 0 15px;
+      .slide-content{
+        padding: 35px 35px 47px;
+        background: $bgcolor1;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.08);
+        margin-bottom: 50px;
+        @include respond-to($screen1080){
+          padding-bottom: 20px;
+        }
+        @include respond-to($screen991){
+          padding: 20px 20px 5px;
+          margin-bottom: 30px;
+        }
+        @include respond-to($screen767){
+          margin-bottom: 15px;
+        }
+        .customer-detail{
+          margin-bottom:20px;
+          img{
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.15));
+            margin-right: 20px;
+            display: inline-block;
+            vertical-align: middle;
+            @include respond-to($screen991){
+              width: 40px;
+              height: 40px;
+              margin-right: 10px;
+            }
+          }
+          
+          .customer-name{
+            display: inline-block;
+            vertical-align: middle;
+            color: $textcolor3;
+            text-transform: capitalize;
+            font-size: $font18;
+            line-height: 28px;
+            font-family: $secondary-font;
+            @include respond-to($screen991){
+              font-size: $font15;
+              line-height: 1.8;
+            }
+          }
+          .rte p{
+            font-size:$font15;
+            @include respond-to($screen991){
+              font-size: $font14;
+            } 
+          }
+        }
+      }
+    }
+  }
+}
+
+.lbe-design-gives-back{
+  margin-top: 19%;
+  background-color:$bgcolor8; 
+  padding: 52px 0 51px;
+  position: relative;
+  @include respond-to($screen1800){
+    margin-top:20%;
+  }
+  @include respond-to($screen1550){
+    margin-top:18%;
+  }
+  @include respond-to($screen1080){
+    margin-top:10%;
+  }
+  @include respond-to($screen767){
+    margin-top:0;
+    padding: 30px 0;
+   }
+  .round-two-white-img{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 30%;
+    height: 175%;
+    @include respond-to($screen1800){
+      height: 165%;
+     }
+    @include respond-to($screen1600){
+      height: 150%;
+     }
+    @include respond-to($screen1260){
+     height: 140%;
+    }
+    @include respond-to($screen1080){
+      height: 120%;
+    }
+    @include respond-to($screen767){
+      display: none
+     }
+    img{
+      display: block;
+      height: 100%;
+      width: 100%;
+    }
+  }
+  .lbe-design-text{
+   width: 70%;
+   @include respond-to($screen767){
+    width: 100%;
+   }
+    .lbe-design-text-inner{
+      max-width: 530px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+  }
+  .lbe-design-logo{
+    margin-bottom: 7px;
+    @include respond-to($screen767){
+      margin-bottom: 0;
+     }
+    img{
+      max-width: 180px;
+      @include respond-to($screen1260){
+        max-width: 150px;
+       }
+       @include respond-to($screen991){
+        max-width: 120px;
+       }
+    }
+  }
+  .rte p{
+    color: $textcolor3;
+  }
+}
+
+.shopping-cart{
+  margin-bottom: 100px;
+  @include respond-to($screen1550){
+    margin-bottom: 70px;
+  }
+  @include respond-to($screen1260){
+    margin-bottom: 50px;
+  }
+  @include respond-to($screen991){
+    margin-bottom: 30px;
+  }
+}
+.cart-inner{
+  border: 1px solid $bordercolor4;
+  border-bottom: 0;
+  .col-2, .col-3, .col-4{
+    border-right: 1px solid $bordercolor4;
+  }
+  .row{
+    margin: 0;
+  }
+  .mob-border-bottom{
+    @include respond-to($screen767){
+      border-bottom: 1px solid $bordercolor4;
+    }
+  }
+  .col-s-8{
+    @include respond-to($screen767){
+      border-right: 0;
+    }
+  }
+  .cart-prod-detail{
+    border-bottom: 1px solid $bordercolor4;
+  }
+  .cart-prod-desc, .cart-prod-price, .cart-prod-qty, .remove{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+  .cart-prod-img-inner{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .cart-prod-desc{
+    padding: 15px 10px;
+   p{
+      margin-bottom: 0;
+      color: $textcolor3;
+
+      span{
+        font-size: $font12;
+      }
+    }
+  }
+}
+.continue-shopping{
+  margin-top: 30px;
+  @include respond-to($screen991){
+    text-align: center;
+    margin-top: 20px;
+  }
+  .btn-pink{
+    max-width: 248px;
+    @include respond-to($screen540){
+      margin-bottom: 10px;
+    }
+  }
+  .btn-black{
+    margin-left: 10px;
+    max-width: 198px;
+  }
+}
+.cart-prod-img{
+  padding: 30px 15px;
+  display: flex;
+  justify-content: center;
+  @include respond-to($screen1368){
+    padding: 15px 0;
+  }
+  @include respond-to($screen767){
+    padding: 10px 0;
+  }
+  a{
+    display: block;
+    img{
+      border: 1px solid $bordercolor4;
+      display: block;
+    }
+  }
+}
+.cart-title{
+  border: 1px solid $bordercolor3;
+  background-color: $bgcolor3;
+  @include respond-to($screen767){
+    display: none;
+  }
+  .col-2{
+    padding: 0 5px;
+  }
+  h5{
+    color:$textcolor1;
+    text-align: center;
+    padding: 14px 0;
+    margin-bottom: 0;
+    font-size: $font18;
+  }
+}
+.cart-prod-title{
+  h5{
+    color: $bgcolor3;
+    font-family: $primary-font;
+    margin-bottom: 0;
+    font-size: $font18;
+    line-height: 20px;
+    @include respond-to($screen1440){
+      font-size: $font15;
+      line-height: 16px;
+
+    }
+  }
+}
+.cart-prod-qty{
+  .quantity-box {
+    margin-right: 0;
+    @include respond-to($screen767){
+    border: 0;
+    }
+    .quantity-wrap{
+       span img {
+        @include respond-to($screen767){
+          max-width: 10px
+        }
+       }
+     input{
+      padding: 8px 8px 9px;
+     }
+    }
+  }
+}
+.delete-btn{
+  img{
+    max-width: 20px;
+    @include respond-to($screen767){
+      max-width: 16px;
+    }
+  }
+}
+.cart-prod-price{
+  h4{
+    font-size: $font20;
+    line-height: 22px;
+    color: $textcolor3;
+    margin-bottom: 0;
+
+    @include respond-to($screen1440){
+      font-size: $font15;
+      line-height: 18px;
+
+    }
+  }
+}
+.cart-total{
+  border: 1px solid $bordercolor4;
+  @include respond-to($screen991){
+    margin-top: 20px;
+  }
+}
+.cart-total-content{
+  padding: 30px;
+  @include respond-to($screen991){
+    padding: 20px;
+  }
+  .row{
+    margin: 0;
+  }
+  .subtotal{
+    margin-bottom:20px;
+    @include respond-to($screen1550){
+      margin-bottom:15px;
+    }
+  }
+  .shipping{
+    margin-bottom: 30px;
+    @include respond-to($screen991){
+      margin-bottom: 20px;
+    }
+  }
+  .cart-total-price, .cart-prod-price{
+    h5{
+      color: #393939;
+      text-transform: uppercase;
+      margin-bottom: 0;
+    }
+  }
+  .cart-prod-price{
+    h5{
+      font-family: $primary-font;
+    }
+  }
+  .discount-code{
+    padding: 20px 0;
+    border-top: 1px solid $bordercolor4;
+    border-bottom: 1px solid $bordercolor4;
+    @include respond-to($screen991){
+      padding: 15px 0;
+    }
+    .inputWrapper{
+      display: flex;
+    }
+    input{
+      background-color: $bgcolor1;
+      border: 1px solid $bordercolor3;
+      height: 40px;
+      color: #A4A4A4;
+      font-size: $font14;
+      line-height: 14px;
+      font-family: $primary-font;
+      font-weight: $font-light;
+      padding: 13px 20px;
+      width: calc(100% - 79px);
+      @include respond-to($screen1368){
+        padding: 13px 10px;
+      }
+      @include respond-to($screen767){
+        padding: 7px 10px;
+        height: 30px;
+        font-size: $font12;
+        width: calc(100% - 58px);
+      }
+    }
+    button{
+      letter-spacing: 0.06em;
+      color: $textcolor1;
+      font-family: $secondary-font;;
+      font-size: $font12;
+      line-height: 14px;
+      background-color: $bgcolor3;
+      padding: 12px 20px;
+      border: 0;
+      height: 40px;
+      @include respond-to($screen767){
+        padding: 7px 10px;
+        height: 30px;
+      }
+    }
+  }
+  .total{
+    padding: 20px 0;
+    border-bottom: 1px solid $bordercolor4;
+    margin-bottom: 20px;
+  }
+  .checkout-btn{
+    margin-top: 30px;
+    @include respond-to($screen991){
+      margin-top: 20px;
+    }
+    .btn-pink{
+      max-width: 270px;
+      letter-spacing: 0.06em;
+      font-family: $secondary-font;
+      font-size: $font12;
+      line-height: 13px;
+      padding: 12px 20px;
+    }
+  }
+}
+
+
+.cart-drawer{
+  position: fixed;
+  top: 0;
+  right: -570px;
+  max-width: 570px;
+  width: 100%;
+  background-color:$bgcolor1;
+  height: 100%;
+  z-index: 999;
+  transition: 0.3s ease-in-out all;
+  overflow-y: scroll;
+  @include respond-to($screen1550){
+    max-width: 470px;
+  }
+  @include respond-to($screen991){
+    max-width: 400px;
+  }
+  .bgoverlay{
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    transition: 0.3s ease all;
+    visibility: hidden;
+    opacity: 0;
+  }
+  &.showCart{
+    right: 0;
+    .bgoverlay{
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+  .cart-drawer-inner{
+   height: 100vh;
+    background: $bgcolor1;
+    position: relative;
+    z-index: 1000;
+    padding: 30px;
+    @include respond-to($screen991){
+      padding: 20px;
+    }
+  }
+  .cart-drawer-header{
+    position: sticky;
+    top: 0;
+    left: 0;
+    background-color: $bgcolor1;
+    border-bottom: 1px solid $bordercolor4;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 30px;
+    @include respond-to($screen991){
+      padding-bottom: 20px;
+    }
+    h4{
+      margin-bottom: 0;
+      letter-spacing: 1px;
+      color: #231F20;
+      font-family: $primary-font;
+    }
+    .close-btn{
+      button{
+        background-color: transparent;
+        border: 0;
+        display: block;
+        padding: 5px 10px;
+        img{
+          max-width: 25px;
+        }
+      }
+      &.showCart{
+        .cart-drawer{
+          right: -570px;
+        }
+      }
+    }
+  }
+  .cart-drawer-content{
+    position: absolute;
+    width: 100%;
+    background: #fff;
+    top: 92px;
+    height: calc(100% - 301px);
+    overflow-y: scroll;
+    left: 0;
+    padding: 0 30px;
+    @include respond-to($screen991){
+      height: calc(100% - 230px);
+      top:66px;
+      padding:0 20px;
+    }
+    @include respond-to($screen767){
+      height: calc(100% - 226px);
+    }
+    .products{
+      margin: 30px 0;
+      @include respond-to($screen991){
+        margin: 20px 0;
+      }
+    }
+    .row{
+      flex-wrap: nowrap;
+
+      .delete-btn{
+        img{
+          max-width: 20px;
+          @include respond-to($screen991){
+            max-height: 17px;
+          }
+        }
+      }
+      .cart-drawer-prod-img a{
+        display: block;
+          img{
+          background: $bgcolor1;
+          border: 1px solid $bordercolor4;
+          display: block;
+        }
+      }
+      h4{
+        color: $textcolor3;
+        font-family: $primary-font;
+        margin-bottom: 15px;
+        @include respond-to($screen767){
+          margin-bottom: 10px;
+        }
+      }
+      .cart-drawer-prod-qty{
+        @include respond-to($screen767){
+          .quantity-box{
+            width: 90px;
+            .quantity-wrap{
+              span img {
+                max-width: 10px;
+              }
+              input{
+                line-height: 17px;
+                width: 45px;
+              }
+            }
+          }  
+        }
+      }
+    }
+  }
+}
+.cart-drawer-footer{
+  position: absolute;
+  bottom: 0;
+  background: #fff;
+  width: 100%;
+  left: 0;
+  z-index: 1000;
+  .cart-drawer-footer-inner{
+    padding: 0 30px 30px;
+    @include respond-to($screen991){
+      padding: 0 20px 20px;
+    }
+  }
+  .cart-drawer-row{
+    border-top: 1px solid $bordercolor4;
+    border-bottom: 1px solid $bordercolor4;
+    display: flex;
+    padding: 20px 0;
+    margin-bottom: 20px;
+    @include respond-to($screen991){
+      padding: 15px 0;
+      margin-bottom: 10px;
+    }
+    h4{
+      margin-bottom: 0;
+      color: #393939;
+      text-transform: uppercase;
+      &.subtotal-price{
+        font-family: $secondary-font;
+      }
+    }
+  }
+  .rte{
+    margin-bottom: 20px;
+    @include respond-to($screen991){
+      margin-bottom: 10px;
+      font-size: $font12;
+    }
+  }
+  .view-cart-btn{
+    .btn-black, .btn-pink{
+      max-width: 200px;
+      width: 100%;
+      margin-bottom: 10px;
+      letter-spacing: 0.06em;
+      font-family: $secondary-font;
+      margin: 0 5px;
+      @include respond-to($screen1550){
+        max-width: 160px;
+      }
+      @include respond-to($screen991){
+        max-width: 120px;
+        padding: 6px 15px;
+        margin-bottom: 0;
+      }
+    }    
+  }
+}

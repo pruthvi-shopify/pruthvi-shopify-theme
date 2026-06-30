@@ -1,0 +1,52 @@
+<div class="journals">
+        <div class="row">
+          
+            <div class="col-12">
+              <div class="about-journal">
+                {% if article.image %}
+                  <div class="journal-img">
+                    <img width="" height="" src="{{ article.image | image_url }}" alt="{{ article.title }}">
+                  </div>
+                {% endif %}
+
+                <div class="product-release">
+                  <ul>
+                    {% if article.tags.size > 0 %}
+                      <li>{{ article.tags.first }}</li>
+                      <li class="separator">•</li>
+                    {% endif %}
+                    <li>{{ article.published_at | date: '%B %d, %Y' }}</li>
+                  </ul>
+                </div>
+
+                <div class="journal-text">
+                  <h3>{{ article.title }}</h3>
+                  <h5>by {{ article.author }}</h5>
+                  <div class="rte">
+                    <p>{{ article.excerpt_or_content | strip_html | truncatewords: 40 }}</p>
+                  </div>
+                </div>
+
+                {% comment %} <div class="continue-reading-btn">
+                  <a href="{{ article.url }}" class="btn-pink">Continue reading</a>
+                </div> {% endcomment %}
+              </div>
+            </div>
+          
+        </div>
+      </div>
+
+      {% schema %}
+  {
+    "name": "Article template",
+    "settings": [
+    
+    ],
+    "presets": [
+      {
+        "name": "Article with settings",
+        "category": "Blog"
+      }
+    ]
+  }
+{% endschema %}

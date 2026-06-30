@@ -1,0 +1,60 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {}
+    },
+    "hero_banner_yRJMAj": {
+      "type": "hero-banner",
+      "blocks": {
+        "slide_HGfcFN": {
+          "type": "slide",
+          "settings": {
+            "slide_image": "shopify://shop_images/Hero_img.jpg",
+            "alt_text": "Hero Image"
+          }
+        }
+      },
+      "block_order": [
+        "slide_HGfcFN"
+      ],
+      "name": "Hero banner",
+      "settings": {}
+    },
+    "community_LppryC": {
+      "type": "community",
+      "name": "Community Page",
+      "settings": {
+        "main_title": "Community",
+        "feature_image": "shopify://shop_images/plant-a-seed.png",
+        "feature_title": "Plant-a-Seed and Share Some Joy",
+        "feature_author": "by Erin Moore",
+        "feature_desc": "<p>LBE Design's Plant A Seed program enables retail partners who sell our pots to pair our still-beautiful seconds with their plants and deliver these gifts to a nonprofit of their choice.</p>",
+        "feature_btn_text": "Continue Reading",
+        "community_blog": "news"
+      }
+    },
+    "join_us_H3fjNh": {
+      "type": "join-us",
+      "name": "Join Us Section",
+      "settings": {
+        "heading": "Join Our Pack!"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "hero_banner_yRJMAj",
+    "community_LppryC",
+    "join_us_H3fjNh"
+  ]
+}

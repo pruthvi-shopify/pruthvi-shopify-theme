@@ -1,0 +1,127 @@
+{% comment %} <h1> FAQ page </h1> {% endcomment %}
+
+<div class="custom-faq-section-wrapper" data-section="Faq">
+  {% if section.settings.main_title != blank %}
+    <h2 class="main-faq-title">{{ section.settings.main_title | escape }}</h2>
+  {% endif %}
+
+  <div class="faq-accordion-container">
+    {% for block in section.blocks %}
+      <div class="faq-item">
+        <input type="checkbox" id="faq{{ section.id }}{{ forloop.index }}" class="faq-toggle">
+        <label for="faq{{ section.id }}{{ forloop.index }}" class="faq-question">
+          {{ block.settings.question_text | escape }}
+        </label>
+        <div class="faq-answer">
+          {{ block.settings.answer_richtext }}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Custom FAQ",
+  "tag": "section",
+  "class": "section-custom-faq",
+  "settings": [
+    {
+      "type": "text",
+      "id": "main_title",
+      "label": "Main Title",
+      "default": "title"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq_item",
+      "name": "FAQ Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question_text",
+          "label": "Question",
+          "default": "What is the return policy?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer_richtext",
+          "label": "Answer"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom FAQ Section",
+      "category": "Text",
+      "blocks": [
+        {
+          "type": "faq_item"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+  .main-faq-title {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2em;
+  }
+
+  .sub-title{
+    text-align: center;
+    font-size: 18px;
+    border: 1px solid black;
+    margin-bottom:40px;
+    }
+  .faq-accordion-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .faq-item {
+    border-bottom: 1px solid #ddd;
+  }
+  .faq-toggle {
+    display: none;
+  }
+  .faq-question {
+    display: block;
+    padding: 15px;
+    cursor: pointer;
+    font-weight: bold;
+    background-color: #f9f9f9;
+    position: relative;
+    transition: background-color 0.3s;
+  }
+  .faq-question:hover {
+    background-color: #f1f1f1;
+  }
+  /* Add an arrow icon using CSS */
+  .faq-question::after {
+    content: '+';
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2em;
+    transition: transform 0.3s;
+  }
+  .faq-toggle:checked + .faq-question::after {
+    content: '−';
+  }
+  .faq-answer {
+    padding: 15px;
+    background-color: #fff;
+    display: none;
+    overflow: hidden;
+  }
+  /* Show the answer when the checkbox is checked */
+  .faq-toggle:checked ~ .faq-answer {
+    display: block;
+  }
+</style>

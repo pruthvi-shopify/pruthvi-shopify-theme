@@ -1,0 +1,81 @@
+<div class="main-content" data-section="wholesale">
+  {% comment %}
+    <section class="hero-section">
+        <div class="hero-section-inner ">
+            <img src="images/Hero_img.jpg" alt="Hero_img">
+        </div>
+    </section>
+  {% endcomment %}
+
+  <section class="page-title">
+    <div class="container">
+      <h1 class="section-title">
+        {% if section.settings.main_title %}
+          {{ section.settings.main_title }}
+        {% endif %}
+        </h1>
+    </div>
+  </section>
+{{page.metafields.custome.pages}}
+  <section class="wholesale-trade">
+    <div class="container-fluid">
+      <div class="wholesale-trade-content">
+        <div class="row ai-c jc-c">
+          <div class="col-5 text-right">
+            <div class="wholesaleImg">
+              <img width="" height=""
+                src="https://cdn.shopify.com/s/files/1/0640/4839/8454/files/wholesale-trade-img.png?v=1760415709"
+                alt="Content Img"
+              >
+            </div>
+          </div>
+          <div class="col-7">
+            <div class="wholesale-content marginLeft">
+              <div class="wholesale-content-text">
+                <h3>{{ section.settings.right_title }}</h3>
+                <div class="rte">
+                  <p>{{ section.settings.right_content }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "wholesale",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "main_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "main_title",
+      "label": "Title",
+      "default": "Wholesale & trade"
+    },
+    {
+      "type": "text",
+      "id": "right_title",
+      "label": "Right title"
+    },
+    {
+      "type": "richtext",
+      "id": "right_content",
+      "label": "Right content"
+    }
+  ],
+
+  "presets": [
+    {
+      "name": "wholesale"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,98 @@
+{% if section.blocks.size > 0 %}
+<section class="revival-ceramic" data-section="image-content">
+  <div class="img-with-content">
+    <div class="container-fluid">
+      <div class="row ai-c">
+        <div class="col-5 col-m-12">
+          <div class="contentImg">
+            {% if section.settings.main_image != blank %}
+              {{
+                section.settings.main_image
+                | image_url: width: 3840
+                | image_tag:
+                  width: section.settings.main_image.width,
+                  sizes: sizes,
+                  widths: widths,
+                  alt: section.settings.main_image.alt
+              }}
+            {% endif %}
+          </div>
+        </div>
+        <div class="col-7 col-m-12">
+          <div class="content-text">
+            <div class="revival-ceramic-main-title">
+              {% if section.settings.main_title != blank %}
+                <h3>{{ section.settings.main_title }}</h3>
+              {% endif %}
+            </div>
+            <div class="revival-ceramic-content">
+              <div class="row">
+                {% for block in section.blocks %}
+                  <div class="col-6">
+                    <div class="revival-ceramic-imgcontent">
+                      <div class="revival-ceramic-text">
+                        {% if block.settings.feature_title != blank %}
+                          <h4>{{ block.settings.feature_title }}</h4>
+                        {% endif %}
+                        {% if block.settings.feature_text != blank %}
+                          <div class="rte">
+                            <p>{{ block.settings.feature_text }}</p>
+                          </div>
+                        {% endif %}
+                      </div>  
+                    </div>
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+
+{% schema %}
+{
+  "name": "image-content",
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "main_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "main_title",
+      "label": "Title",
+      "default": "Why Choose Revival Ceramics?"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "text",
+          "id": "feature_title",
+          "label": "Feature Title"
+        },
+        {
+          "type": "textarea",
+          "id": "feature_text",
+          "label": "Feature Text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "image-content"
+    }
+  ]
+}
+{% endschema %}

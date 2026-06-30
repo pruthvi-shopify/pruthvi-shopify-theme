@@ -1,0 +1,190 @@
+<div class="comparison-chart-container">
+  <h2>
+    Product Comparison Chart
+    <button
+      id="clear-all-compare"
+      style="padding:10px 15px; border:1px solid black; margin-left:75px; font-weight:700; cursor:pointer;"
+    >
+      CLEAR ALL
+    </button>
+  </h2>
+  <table id="comparison-table">
+    <thead>
+      <tr id="table-headers">
+        <th>Feature</th>
+        <!-- Product titles -->
+      </tr>
+    </thead>
+    <tbody id="table-body"></tbody>
+  </table>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const fristTR = document.getElementById('table-headers');
+    const tablebody = document.getElementById('table-body');
+    console.log(tablebody);
+
+    window.removeProductFromChart = function (productId) {
+      let products = JSON.parse(localStorage.getItem('compareProducts')) || [];
+      console.log(products);
+      products = products.filter((p) => p.id !== productId.toString());
+      localStorage.setItem('compareProducts', JSON.stringify(products));
+      comparisonchart();
+    };
+    function comparisonchart() {
+      const productsToCompare = JSON.parse(localStorage.getItem('compareProducts')) || [];
+      console.log(productsToCompare);
+      if (productsToCompare.length === 0) {
+        fristTR.innerHTML = '<th>Feature</th>';
+        tablebody.innerHTML =
+          '<tr><td colspan="5" style="text-align:center; padding:20px;">No products selected.</td></tr>';
+        return;
+      }
+      fristTR.innerHTML = '<th>Feature</th>';
+      productsToCompare.forEach((product) => {
+        const th = document.createElement('th');
+        th.innerHTML = `
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
+                    <span>${product.title}</span>
+                    <button onclick="removeProductFromChart('${product.id}')" 
+                            style="background:none; color:red; cursor:pointer; font-size:25px; border: 1px solid #e398ab; padding: 0 10px;" 
+                            title="Remove Product"> &times; </button>
+                </div>`;
+                fristTR.appendChild(th);
+      });
+
+      tablebody.innerHTML = '';
+      function addRow(featureName, dataKey, isImage = false) {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td><strong>${featureName}</strong></td>`;
+
+        productsToCompare.forEach((product) => {
+          const td = document.createElement('td');
+          if (isImage) {
+            {% comment %} const imgSrc = product[dataKey] ? product[dataKey] : 'via.placeholder.com'; {% endcomment %}
+            td.innerHTML = `<img src="${product[dataKey]}"  style="width:80px; height:auto; display:block; margin:0 auto;">`;
+          } else {
+            td.textContent = product[dataKey] || '';
+          }
+          tr.appendChild(td);
+        });
+        tablebody.appendChild(tr);
+      }      
+          addRow('Image', 'image', true);
+          addRow('Price', 'price');
+          addRow('Vendor', 'vendor');
+          addRow('Product Type', 'type');
+          addRow('Metafield-image', 'services');   
+          addRow('Metafield-Date', 'product2'); 
+          addRow('Metafield-Price', 'product7');
+          addRow('Product available', 'available');
+    }
+    console.log(comparisonchart);
+
+    document.getElementById('clear-all-compare').addEventListener('click', () => {
+      localStorage.removeItem('compareProducts');
+      comparisonchart();
+    })
+    comparisonchart();
+  });
+</script>
+
+{% schema %}
+{
+  "name": "comparison-chart-section",
+  "tag": "section",
+  "presets": [
+    {
+      "name": "comparison-chart-section"
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+  .comparison-chart-container {
+      width: 90%;
+      max-width: 1000px;
+      margin: 20px auto;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      overflow-x: auto;
+      background-color: #fff;
+    }
+
+
+    .comparison-chart-container h2 {
+      text-align: center;
+      color: #333;
+      padding: 15px;
+      margin: 0;
+      border-bottom: 1px solid #ccc;
+      background-color: #f9f9f9;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+    }
+
+    #comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: Arial, sans-serif;
+    }
+
+    #comparison-table thead th {
+      background-color:rgb(196, 112, 192);
+      color: white;
+      padding: 15px 10px;
+      text-align: center;
+      font-weight: bold;
+      border-right: 1px solidhsl(295, 75.20%, 54.10%);
+      border-bottom: 2px solidhsl(295, 75.20%, 54.10%);
+    }
+
+
+   #comparison-table thead th:first-child {
+      text-align: left;
+      background-color:rgba(194, 30, 219, 0.26);
+    }
+
+
+    #comparison-table tbody tr {
+      border-bottom: 1px solid #ddd;
+      transition: background-color 0.3s ease;
+    }
+
+
+    #comparison-table tbody tr:hover {
+      background-color: #f1f1f1;
+    }
+
+
+    #comparison-table tbody td {
+      padding: 12px 10px;
+      text-align: center;
+      vertical-align: middle;
+      border-right: 1px solid #eee;
+      color: #333;
+    }
+
+    #comparison-table tbody td:first-child {
+      text-align: left;
+      font-weight: bold;
+      background-color: #f9f9f9;
+      color: #000;
+    }
+
+    #comparison-table tbody tr:nth-child(even) {
+      background-color: #f5f5f5;
+    }
+
+    #comparison-table tbody tr:nth-child(even):hover {
+       background-color: #e9e9e9;
+     }
+
+    #comparison-table th:last-child,
+    #comparison-table td:last-child {
+      border-right: none;
+    }
+</style>

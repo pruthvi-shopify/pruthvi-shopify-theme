@@ -1,0 +1,364 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "okendo_star_rating_yDRR48": {
+          "type": "shopify://apps/okendo/blocks/star-rating/bb689e69-ea70-4661-8fb7-ad24a2e23c29",
+          "disabled": true,
+          "settings": {
+            "product": "beg-1"
+          }
+        },
+        "wishlist_plus_wishlist_pdp_button_RJVdDh": {
+          "type": "shopify://apps/wishlist-plus/blocks/wishlist-pdp-button/80c3b1fc-3a8f-407e-8367-ffdeebb8b612",
+          "disabled": true,
+          "settings": {
+            "swym_atw_button_icon": "star",
+            "swym_atw_icon_thickness": 2.2,
+            "swym_atw_custom_icon": "shopify://shop_images/star-without-fill-icon.png",
+            "swym_atw_display_btn_text": true,
+            "swym_button_position": "product_title_right",
+            "swym_atw_button_vertical_offset": 17,
+            "swym_atw_full_width": true,
+            "swym_atw_button_alignment": "center",
+            "swym_add_to_wishlist_color": "#5edc34",
+            "swym_added_to_wishlist_color": "#860909",
+            "swym_button_text_color": "#ffffff",
+            "swym_atw_border_color": "#494343",
+            "swym_atw_border_thickness": 4,
+            "swym_atw_button_border_radius": 27,
+            "swym_enable_hover_customization": true,
+            "swym_hover_add_to_wishlist_color": "#860909",
+            "swym_hover_added_to_wishlist_color": "#3963cb",
+            "swym_hover_button_text_color": "#ffffff",
+            "swym_hover_atw_border_color": "#e9c4c4",
+            "swym_hover_atw_border_thickness": 4.3,
+            "swym_hover_atw_button_border_radius": 19,
+            "swym_custom_css": ""
+          }
+        },
+        "product_title_bfA97g": {
+          "type": "product_title",
+          "settings": {}
+        },
+        "recurpay_subscriptions_app_recurpay_app_block_widget_86wYD9": {
+          "type": "shopify://apps/recurpay-subscriptions-app/blocks/recurpay-app-block-widget/c600a513-dad8-4030-8697-de47c18881f2",
+          "settings": {
+            "multiply_price_with_quantity": false,
+            "show_price_in_frequency_dropdown": true
+          }
+        },
+        "color_swatch_Ndqa3P": {
+          "type": "color_swatch",
+          "settings": {}
+        },
+        "stand_images_LQAbAP": {
+          "type": "stand_images",
+          "settings": {}
+        },
+        "add_to_cart_YYX4EL": {
+          "type": "add_to_cart",
+          "settings": {}
+        },
+        "subscriptions_app_block_6Myfe6": {
+          "type": "shopify://apps/subscriptions/blocks/app-block/a3bfe9ec-96f8-4508-a003-df608a36d2ad",
+          "disabled": true,
+          "settings": {
+            "subscription_policy_url": "",
+            "color_text_body": "#6d7175",
+            "dividers_color": "#8f8d8d",
+            "border_thickness": 1,
+            "border_radius": 6,
+            "product": "{{product}}"
+          }
+        },
+        "description_KNz6gk": {
+          "type": "description",
+          "settings": {}
+        },
+        "extra_details_R49piy": {
+          "type": "extra_details",
+          "settings": {}
+        },
+        "yotpo_product_reviews_star_rating_XnhPpq": {
+          "type": "shopify://apps/yotpo-product-reviews/blocks/star-rating/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
+          "disabled": true,
+          "settings": {
+            "product": "{{product}}"
+          }
+        }
+      },
+      "block_order": [
+        "okendo_star_rating_yDRR48",
+        "wishlist_plus_wishlist_pdp_button_RJVdDh",
+        "product_title_bfA97g",
+        "recurpay_subscriptions_app_recurpay_app_block_widget_86wYD9",
+        "color_swatch_Ndqa3P",
+        "stand_images_LQAbAP",
+        "add_to_cart_YYX4EL",
+        "subscriptions_app_block_6Myfe6",
+        "description_KNz6gk",
+        "extra_details_R49piy",
+        "yotpo_product_reviews_star_rating_XnhPpq"
+      ],
+      "settings": {
+        "step_1_heading": "{{ product.metafields.custom.product7 | metafield_text }}",
+        "enable_lightbox": true,
+        "enable_hover_zoom": true,
+        "step_2_heading": "STEP 2, Select A Hardwood Plinth:",
+        "stand_image_1": "shopify://shop_images/stand-material-1.png",
+        "stand_image_2": "shopify://shop_images/stand-material-2.png",
+        "stand_image_3": "shopify://shop_images/stand-material-3.png",
+        "stand_image_4": "shopify://shop_images/stand-material-4.png"
+      }
+    },
+    "17641504771348a12f": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_ugc_media_grid_bPyAQU": {
+          "type": "shopify://apps/judge-me-reviews/blocks/ugc_media_grid/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        },
+        "judge_me_reviews_preview_badge_kmdYa6": {
+          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_ugc_media_grid_bPyAQU",
+        "judge_me_reviews_preview_badge_kmdYa6"
+      ],
+      "disabled": true,
+      "settings": {}
+    },
+    "interior_ceramic_7tN8rX": {
+      "type": "interior-ceramic",
+      "name": "Interior Ceramic Section",
+      "settings": {
+        "interior_image": "shopify://shop_images/interior-ceramic.png"
+      }
+    },
+    "product_page_jaHVtd": {
+      "type": "product-page",
+      "name": "All Products Preview",
+      "settings": {}
+    },
+    "17641501495f43d20c": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_Jbd3B6": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "real_data",
+            "max_width": 950,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_Jbd3B6"
+      ],
+      "disabled": true,
+      "settings": {}
+    },
+    "recommendation_bPkcCK": {
+      "type": "recommendation",
+      "name": "recommendation",
+      "settings": {}
+    },
+    "17641502008e143d07": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_preview_badge_LiBdQC": {
+          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_preview_badge_LiBdQC"
+      ],
+      "disabled": true,
+      "settings": {}
+    },
+    "recently_viewed_h4Hb97": {
+      "type": "recently-viewed",
+      "name": "recent--view",
+      "settings": {}
+    },
+    "17641504301114fc0c": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_preview_badge_tfrnUh": {
+          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_preview_badge_tfrnUh"
+      ],
+      "disabled": true,
+      "settings": {}
+    },
+    "join_us_rytABR": {
+      "type": "join-us",
+      "name": "Join Us Section",
+      "settings": {
+        "heading": "join our us"
+      }
+    },
+    "1764147645512bddd3": {
+      "type": "apps",
+      "blocks": {
+        "wishlist_plus_wishlist_pdp_button_aHmR6a": {
+          "type": "shopify://apps/wishlist-plus/blocks/wishlist-pdp-button/80c3b1fc-3a8f-407e-8367-ffdeebb8b612",
+          "settings": {
+            "swym_atw_button_icon": "heart",
+            "swym_atw_icon_thickness": 2.5,
+            "swym_atw_custom_icon": "shopify://shop_images/whislist.png",
+            "swym_atw_display_btn_text": true,
+            "swym_button_position": "product_image_top_left",
+            "swym_atw_button_vertical_offset": 0,
+            "swym_atw_full_width": true,
+            "swym_atw_button_alignment": "left",
+            "swym_add_to_wishlist_color": "#000000",
+            "swym_added_to_wishlist_color": "#222222",
+            "swym_button_text_color": "#ffffff",
+            "swym_atw_border_color": "#000000",
+            "swym_atw_border_thickness": 0,
+            "swym_atw_button_border_radius": 0,
+            "swym_enable_hover_customization": true,
+            "swym_hover_add_to_wishlist_color": "#000000",
+            "swym_hover_added_to_wishlist_color": "#222222",
+            "swym_hover_button_text_color": "#ffffff",
+            "swym_hover_atw_border_color": "#000000",
+            "swym_hover_atw_border_thickness": 3.7,
+            "swym_hover_atw_button_border_radius": 22,
+            "swym_custom_css": ""
+          }
+        }
+      },
+      "block_order": [
+        "wishlist_plus_wishlist_pdp_button_aHmR6a"
+      ],
+      "disabled": true,
+      "settings": {}
+    },
+    "17641499447de966fb": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_4whhfD": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "no_reviews",
+            "max_width": 850,
+            "show_shop_reviews": true,
+            "empty_state": "other_products_reviews"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_4whhfD"
+      ],
+      "disabled": true,
+      "settings": {}
+    },
+    "1764150147029d9421": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_preview_badge_Jt4FnB": {
+          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_preview_badge_Jt4FnB"
+      ],
+      "disabled": true,
+      "settings": {}
+    },
+    "1764222615dd1960f8": {
+      "type": "apps",
+      "disabled": true,
+      "settings": {}
+    },
+    "1764307322f6e729f1": {
+      "type": "apps",
+      "disabled": true,
+      "settings": {}
+    },
+    "1764311821c9ec4623": {
+      "type": "apps",
+      "blocks": {
+        "yotpo_product_reviews_star_rating_iWjbfC": {
+          "type": "shopify://apps/yotpo-product-reviews/blocks/star-rating/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
+          "settings": {
+            "product": "{{product}}"
+          }
+        }
+      },
+      "block_order": [
+        "yotpo_product_reviews_star_rating_iWjbfC"
+      ],
+      "disabled": true,
+      "settings": {}
+    },
+    "1764658734024072d8": {
+      "type": "apps",
+      "blocks": {
+        "instafeed_app_block_Nij9YX": {
+          "type": "shopify://apps/instafeed/blocks/app-block/c447db20-095d-4a10-9725-b5977662c9d5",
+          "settings": {
+            "title": "instafeed",
+            "title_color": "#e62727",
+            "title_size_v2": 49,
+            "alignment": "center",
+            "instafeed_margin_top": 63,
+            "instafeed_margin_bottom": 66,
+            "instafeed_margin_sides": 75,
+            "show_instagram_link": true,
+            "link_alignment": "center",
+            "link_color": "#cc8b8b",
+            "background_color": "#aed1b1",
+            "feed_id": "https://apps.shopify.com/instafeed",
+            "html_area": ""
+          }
+        }
+      },
+      "block_order": [
+        "instafeed_app_block_Nij9YX"
+      ],
+      "disabled": true,
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "17641504771348a12f",
+    "interior_ceramic_7tN8rX",
+    "product_page_jaHVtd",
+    "17641501495f43d20c",
+    "recommendation_bPkcCK",
+    "17641502008e143d07",
+    "recently_viewed_h4Hb97",
+    "17641504301114fc0c",
+    "join_us_rytABR",
+    "1764147645512bddd3",
+    "17641499447de966fb",
+    "1764150147029d9421",
+    "1764222615dd1960f8",
+    "1764307322f6e729f1",
+    "1764311821c9ec4623",
+    "1764658734024072d8"
+  ]
+}

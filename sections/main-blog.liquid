@@ -1,0 +1,150 @@
+<section class="journal-page-wrapper" data-section="main-blog">
+  {% comment %} {% assign selected_blog = blogs[section.settings.blog_handle] %} {% endcomment %}
+
+  <!-- JOURNAL CONTENT -->
+  <section class="journal-page">
+    <div class="container-fluid">
+      <h1 class="section-title">{{ section.settings.section_title | default: 'Journal' }}</h1>
+
+      <!-- CATEGORY NAV -->
+      <div class="thumbnail-nav">
+        {% if section.settings.main_menu %}
+          <ul>
+            {% for link in linklists[section.settings.main_menu].links %}
+              <li>
+                <a
+                  href="{{ link.url }}"
+                >
+                  {{ link.title }}
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+
+      <!-- SEARCH + SORT AREA -->
+      <div class="prod-top-header">
+        <div class="row jc-sb">
+          <div class="left-col">
+            <div class="row">
+              <div class="change-view-option">
+                <button class="display-grid-view">
+                  <img
+                    width=""
+                    height=""
+                    src="https://cdn.shopify.com/s/files/1/0640/4839/8454/files/change-view-1_e112ef23-9ad0-4497-be41-e06106c39e34.png?v=1751865090"
+                    alt="Grid View"
+                  >
+                </button>
+                <button class="display-list-view">
+                  <img
+                    width=""
+                    height=""
+                    src="https://cdn.shopify.com/s/files/1/0640/4839/8454/files/change-view-2.png?v=1751865098"
+                    alt="List View"
+                  >
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="right-col">
+            <div class="row jc-e">
+              <form action="{{ routes.search_url }}" method="get" role="search">
+                <div class="inputWrapper">
+                  <input type="text" name="q" placeholder="Search" value="{{ search.terms | escape }}">
+                  <button type="submit">
+                    <img
+                      width=""
+                      height=""
+                      src="https://cdn.shopify.com/s/files/1/0640/4839/8454/files/search-white.png?v=1760439996"
+                      alt="Search"
+                    >
+                  </button>
+                </div>
+              </form>
+
+              <select class="niceSelect sort-product">
+                <option selected>All</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- JOURNAL ARTICLES -->
+
+      <div class="journals">
+        <div class="row">
+          {% for article in blog.articles %}
+            <div class="col-6">
+              <div class="about-journal">
+                {% if article.image %}
+                  <div class="journal-img">
+                    <img width="" height="" src="{{ article.image | image_url }}" alt="{{ article.title }}">
+                  </div>
+                {% endif %}
+
+                <div class="product-release">
+                  <ul>
+                    {% if article.tags.size > 0 %}
+                      {%- assign all_tags = blog.all_tags -%}
+                      {%- for tag in all_tags -%}
+                       <li><a href="{{ blog.url }}/tagged/{{ tag | handle }}" class="tag-filter-link">{{ tag }}</a></li> 
+                         {% comment %} <li>{{ article.tags.first }}</li> {% endcomment %}
+                      <li class="separator">•</li>
+                      {%- endfor -%}
+                     
+                    {% endif %}
+                    <li>{{ article.published_at | date: '%B %d, %Y' }}</li>
+                  </ul>
+                </div>
+
+                <div class="journal-text">
+                  <h3>{{ article.title }}</h3>
+                  <h5>by {{ article.author }}</h5>
+                  <div class="rte">
+                    <p>{{ article.excerpt_or_content | strip_html | truncatewords: 40 }}</p>
+                  </div>
+                </div>
+
+                <div class="continue-reading-btn">
+                  <a href="{{ article.url }}" class="btn-pink">Continue reading</a>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+          {%- assign all_tags = blog.all_tags -%}
+          {%- for tag in all_tags -%}
+            <a href="{{ blog.url }}/tagged/{{ tag | handle }}" class="tag-filter-link">{{ tag }}</a>
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </section>
+</section>
+
+{% schema %}
+{
+  "name": "main-blog",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "main_menu",
+      "label": "Main menu"
+    },
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title",
+      "default": "Journal"
+    }
+  ],
+  "presets": [
+    {
+      "name": "main-blog"
+    }
+  ]
+}
+{% endschema %}

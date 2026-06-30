@@ -1,0 +1,51 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {}
+    },
+    "hero_banner_yRJMAj": {
+      "type": "hero-banner",
+      "blocks": {
+        "slide_HGfcFN": {
+          "type": "slide",
+          "settings": {
+            "slide_image": "shopify://shop_images/Hero_img.jpg",
+            "alt_text": "Hero Image"
+          }
+        }
+      },
+      "block_order": [
+        "slide_HGfcFN"
+      ],
+      "name": "Hero banner",
+      "settings": {}
+    },
+    "comparison_chart_section_3rgD3E": {
+      "type": "comparison-chart-section",
+      "name": "comparison-chart-section",
+      "settings": {}
+    },
+    "roundtwo_collection_nXPqaN": {
+      "type": "roundtwo-collection",
+      "disabled": true,
+      "name": "comparison-chart-section",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "hero_banner_yRJMAj",
+    "comparison_chart_section_3rgD3E",
+    "roundtwo_collection_nXPqaN"
+  ]
+}

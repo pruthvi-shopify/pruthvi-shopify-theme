@@ -1,0 +1,25 @@
+ {% comment %} <form method="post" action="/cart/add">
+
+                        <div class="gift-card-recipient-form">
+                          <h3>Send as a gift</h3>
+                          <input type="hidden" name="properties[__shopify_send_gift_card_to_recipient]" value="true">
+                          <br>
+                          <label for="RecipientEmail">Recipient Email</label>
+                          <input type="email" id="RecipientEmail" name="properties[Recipient email]" required> <br>
+
+                          <label for="RecipientName">Recipient Name</label>
+                          <input type="text" id="RecipientName" name="properties[Recipient name]"><br>
+
+                          <label for="Message">Message</label>
+                          <textarea id="Message" name="properties[Message]"></textarea><br>
+
+                          <label for="SendOnDate">Send On Date</label>
+                          <input
+                            type="date"
+                            id="SendOnDate"
+                            name="properties[Send on]"
+                            min="{{ "now" | date: "%Y-%m-%d" }}"
+                          >
+                        </div>
+                     
+                    </form> {% endcomment %}

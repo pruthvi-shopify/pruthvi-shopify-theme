@@ -1,0 +1,6 @@
+
+<ul>
+{% for item in blog.metafields["custom"]["blog"].value %}
+<li><a href="{{ item.url }}" class="metafield-product_reference">{{ item.title }}</a></li>
+{% endfor %}
+</ul>

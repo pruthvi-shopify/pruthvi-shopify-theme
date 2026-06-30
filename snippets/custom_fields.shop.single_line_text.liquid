@@ -1,0 +1,13 @@
+{% if shop.metafields["custom_fields"]["single_line_text"] != blank %}
+  <div class="custom-field custom-field__single-line-text custom-field__type--text-list">
+    <h3 class="custom-field--title">single line text</h3>
+    <div class="custom-field--value">  
+      {% assign values = shop.metafields["custom_fields"]["single_line_text"] | split: "|" %}
+      <ul>
+      {% for value in values %}
+        <li>{{ value }}</li>
+      {% endfor %}
+      </ul>
+    </div>
+  </div>
+{% endif %}

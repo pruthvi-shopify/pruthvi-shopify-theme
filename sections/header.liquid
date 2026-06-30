@@ -1,0 +1,696 @@
+<div class="header" data-section="header">
+  <div class="main-navigation">
+    <div class="main-navigation-inner">
+      <div class="container">
+        <div class="row ai-c">
+          {% assign links = linklists[section.settings.main_menu].links %}
+
+          <!-- LEFT MENU COLUMN -->
+          <div class="col-5 col-m-5 col-s-4 text-left">
+            <div class="mobmenu">
+              <button type="submit" class="mobile-nav-btn">
+                <span id="menu-open" class="menu"></span>
+              </button>
+            </div>
+
+            <div class="nav-item left-nav">
+              <ul>
+                {% for link in links limit: 5 %}
+                  {% if link.links != blank %}
+                    <li class="nav-list-item">
+                      <a href="{{ link.url }}">{{ link.title }}</a>
+                      <span class="dropdown-icon"></span>
+                      <div class="sub-nav">
+                        <ul class="dropdown-with-image">
+                          {% for child_link in link.links %}
+                            <li class="submenu-with-image">
+                              <a href="{{ child_link.url }}">
+                                {% assign image_url = '' %}
+                                {% case child_link.title | downcase %}
+                                  {% when 'Round two' %}
+                                    {% assign image_url = 'https://cdn.shopify.com/s/files/1/0640/4839/8454/files/LBE_Round_Two_White_1.png?v=1751447963' %}
+                                  {% when 'Cyramic cylinder' %}
+                                    {% assign image_url = 'https://cdn.shopify.com/s/files/1/0640/4839/8454/files/Ceramic-Cylinder-1.png?v=1751447903' %}
+                                  {% when 'Shop all' %}
+                                    {% assign image_url = 'https://cdn.shopify.com/s/files/1/0640/4839/8454/files/cart-prod_a711841a-a353-4ded-82fd-b98b6c1e5a28.png?v=1751448013' %}
+                                {% endcase %}
+                                {% if image_url != blank %}
+                                  <img
+                                    width=""
+                                    height=""
+                                    src="{{ image_url }}"
+                                    alt="{{ child_link.title }}"
+                                    style="width: 40px; margin-right: 8px;"
+                                  >
+                                {% endif %}
+                                <span>{{ child_link.title }}</span>
+                              </a>
+                            </li>
+                          {% endfor %}
+                        </ul>
+                      </div>
+                    </li>
+                  {% else %}
+                    <li>
+                      <a href="{{ link.url }}">{{ link.title }}</a>
+                    </li>
+                  {% endif %}
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+
+          <!-- CENTER LOGO COLUMN -->
+          <div class="col-2 col-m-2 col-s-4 text-center">
+            <div class="header-logo">
+              <a href="{{ routes.root_url }}">
+                {% if section.settings.logo != blank %}
+                  <img
+                    width=""
+                    height=""
+                    src="{{ section.settings.logo | image_url }}"
+                    alt="{{ section.settings.logo.alt }}"
+                  >
+                {% else %}
+                  <span>{{ shop.name }}</span>
+                {% endif %}
+              </a>
+            </div>
+          </div>
+
+          <!-- RIGHT MENU COLUMN -->
+          <div class="col-5 col-m-5 col-s-4 text-right">
+            <div class="nav-item right-nav">
+              <ul>
+                {% for link in links offset: 5 limit: 3 %}
+                  <li>
+                    <a href="{{ link.url }}">{{ link.title }}</a>
+                  </li>
+                {% endfor %}
+                <li>
+                  <a href="{{ routes.search_url }}" class="search-btn" id="openSearchBtn">
+                    {{ 'cart.general.header_search_label' | t }}
+                  </a>
+                </li>
+
+                <li>
+                  <a href="{{ routes.cart_url }}" class="cart-drawer-btn">
+                    {{ 'cart.general.header_cart_label' | t }}({{ cart.item_count }})
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <p-search>
+              <div class="header-search-form" id="headerSearchForm" style="display: none; position:absolute z-index:1;">
+                <form action="{{ routes.search_url }}" method="get" role="search" id="searchForm">
+                  <input
+                    style="
+                      padding: 5px 15px 5px 15px; width: 100% ; border: solid 3px black; border-radius: 20px;  transition: all 10s ease-in-out; border-color:#ccc3a9;
+                      outline: none; transform: scale(1.05);
+                      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+                    "
+                    type="search"
+                    name="q"
+                    id="searchInput"
+                    value="{{ search.terms | escape }}"
+                    placeholder="Search..."
+                  >
+
+                  <div id="predictive-search" style="border-radius:30px; width:39%"></div>
+                </form>
+              </div>
+            </p-search>
+            {% comment %} {% render 'search', input_id: 'Search-In-Modal' %} {% endcomment %}
+            <div class="nav-icon mobileOnly text-right" class="search-btn" id="openSearchBtn">
+              <ul>
+                <li>
+                  <a href="{{ routes.search_url }}">
+                    <img
+                      src="https://cdn.shopify.com/s/files/1/0640/4839/8454/files/search.png?v=1751600658"
+                      alt="Search"
+                    >
+                  </a>
+                </li>
+
+                <li>
+                  <a href="{{ routes.cart_url }}" class="cart-drawer-btn">
+                    <img
+                      src="https://cdn.shopify.com/s/files/1/0640/4839/8454/files/shopping-cart.png?v=1751600683"
+                      alt="Cart Icon"
+                    >
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="header-search-form" id="headerSearchForm" style="display: none;">
+            <form action="{{ routes.search_url }}" method="get" role="search" id="searchForm">
+              <input
+                style="
+                  padding: 5px 15px 5px 15px; width: 100% ; border: solid 3px black; border-radius: 20px;  transition: all 10s ease-in-out; border-color:#ccc3a9;
+                  outline: none; transform: scale(1.05);
+                  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+                "
+                type="search"
+                name="q"
+                id="searchInput"
+                value="{{ search.terms | escape }}"
+                placeholder="Search..."
+                aria-label="Search"
+              >
+            </form>
+          </div>
+          <section class="cart-drawer">
+            <div class="bgoverlay"></div>
+            <div class="cart-drawer-inner">
+              <div class="cart-drawer-header">
+                <h4>Shopping Cart</h4>
+                <div class="close-btn">
+                  <button type="button">
+                    <img
+                      src="https://cdn.shopify.com/s/files/1/0640/4839/8454/files/close-btn.png?v=1751970192"
+                      alt="close btn"
+                    >
+                  </button>
+                </div>
+              </div>
+
+              <div class="cart-drawer-content">
+                <div
+                  id="cart-message"
+                ></div>
+                {% render 'shipping' %}
+                {% if cart.item_count > 0 %}
+                  {% for item in cart.items %}
+                    <div class="products" data-inventory="{{ item.product.variants.first.inventory_quantity }}">
+                      <div class="row ai-c">
+                        <div class="col-1 col-s-1">
+                          <div class="remove">
+                            {% comment %}
+                              <a
+                                href="{{ routes.cart_change_url }}?line={{ forloop.index }}&quantity=0"
+                                class="delete-btn"
+                              >
+                            {% endcomment %}
+                            <a href="#" data-line="{{ forloop.index }}" class="delete-btn">
+                              <img
+                                src="https://cdn.shopify.com/s/files/1/0640/4839/8454/files/delete-img.png?v=1752471467"
+                                alt="delete btn"
+                              >
+                            </a>
+                          </div>
+                        </div>
+                        <div class="col-4 col-s-4">
+                          <div class="cart-drawer-prod-img">
+                            <a href="{{ item.url }}">
+                              <img
+                                src="{{ item.image | image_url: width: 150 }}"
+                                alt="{{ item.product.title }}"
+                              >
+                            </a>
+                          </div>
+                        </div>
+                        <div class="col-7 col-s-7">
+                          <div class="cart-drawer-prod-info">
+                            <h4>
+                              <a href="{{ item.url }}">{{ item.product.title }}</a>
+                            </h4>
+
+                            {% if item.variant.title != 'Default Title' %}
+                              <ul class="variant-info">
+                                {% for option in item.options_with_values %}
+                                  <li>
+                                    <strong> {{ option.name }} = </strong>
+                                    {{ option.value }}
+                                  </li>
+                                {% endfor %}
+                              </ul>
+                            {% endif %}
+
+                            {% if item.selling_plan_allocation %}
+                              <p class="cart-item__selling-plan">
+                                {{ item.selling_plan_allocation.selling_plan.name }}
+                              </p>
+                            {% endif %}
+
+                            {% comment %} subscription: {{ item. selling_plan_allocation }} {% endcomment %}
+                            {% comment %} {% endif %} {% endcomment %}
+
+                            {% comment %}
+                              {%- if item.properties.size > 0 -%}
+                                <ul class="cart-line-properties">
+                                  {% for p in item.properties %}
+                                    {% assign key = p.first %}
+                                    {% unless key == 'unique_bundle_key' %}
+                                      <li>
+                                        <strong>{{ key }}:</strong> {{ p.last }}
+                                      </li>
+                                    {% endunless %}
+                                  {% endfor %}
+                                </ul>
+                              {%- endif -%}
+                            {% endcomment %}
+
+                            <!-- Show Bundle Key, ID, Cart Key -->
+                            {%- if item.properties != blank -%}
+                              <ul class="cart-extra-info">
+                                {% for p in item.properties %}
+                                  {% if p.first == 'bundle_key' %}
+                                    <li><strong>Bundle Key:</strong> {{ p.last }}</li>
+                                  {% endif %}
+                                  {% if p.first == 'bundle_id' %}
+                                    <li><strong>Bundle ID:</strong> {{ p.last }}</li>
+                                  {% endif %}
+                                {% endfor %}
+                                {% comment %} <li><strong>Cart Key:</strong> {{ item.key }}</li> {% endcomment %}
+                              </ul>
+                            {%- endif -%}
+
+                            <h4>{{ item.final_line_price | money_without_trailing_zeros }}</h4>
+
+                            <form method="post" action="/cart/add">
+                              <div class="cart-drawer-prod-qty">
+                                <div class="quantity-box">
+                                  <div class="quantity-wrap">
+                                    <input type="hidden" name="id" value="{{ item.key }}">
+                                    <input type="hidden" name="quantity" value="{{ item.quantity | minus: 1 }}">
+                                    <span type="submit" class="adjust minus">
+                                      <img
+                                        src="https://cdn.shopify.com/s/files/1/0640/4839/8454/files/minus.png?v=1752137483"
+                                        alt="Minus sign"
+                                      >
+                                    </span>
+
+                                    <input class="count" type="text" value="{{ item.quantity }}" readonly>
+
+                                    <input type="hidden" name="id" value="{{ item.key }}">
+                                    <input type="hidden" name="quantity" value="{{ item.quantity | plus: 1 }}" max="10">
+                                    <span type="submit" class="adjust plus">
+                                      <img
+                                        src="https://cdn.shopify.com/s/files/1/0640/4839/8454/files/plus.png?v=1752137500"
+                                        alt="plus sign"
+                                      >
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                              {% if item.selling_plan_allocation %}
+                                <p class="selling-plan-info">
+                                  {{ item.selling_plan_allocation.selling_plan.name }}
+                                </p>
+                              {% endif %}
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  {% endfor %}
+                {% else %}
+                  <p class="text-center">Your cart is currently empty.</p>
+                {% endif %}
+                <!-- Place this inside <div class="cart-drawer-content"> -->
+                <div
+                  id="cart-recommendations"
+                  class="cart-recommendations-container"
+                  data-url="{{ routes.product_recommendations_url }}"
+                  section_id="header"
+                  style="border:1px solid black"
+                >
+                  <!-- Recommendations will be injected here via JavaScript -->
+                </div>
+              </div>
+
+              <div
+                class="cart-drawer-footer"
+              >
+                <div class="cart-drawer-footer-inner">
+                  <div class="cart-drawer-row ai-c jc-sb">
+                    <h4>Subtotal:</h4>
+                    <h4 class="subtotal-price">{{ cart.total_price | money }}</h4>
+                  </div>
+                  <div class="rte text-center">
+                    <p>Shipping, Taxes, and Discount Codes Calculated at Checkout.</p>
+                  </div>
+                  <div class="view-cart-btn text-center">
+                    <a href="/cart" class="btn-pink">VIEW CART</a>
+                    <a href="/checkout" class="btn-black">CHECKOUT</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Header Menu",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "main_menu",
+      "label": "Main Menu"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+    #predictive-search {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 100%;
+    z-index: 999;
+    background: white;
+    display: none;
+  }
+</style>
+
+<style>
+  .cart-recommendations-container {
+    padding: 15px;
+    border-top: 1px solid #eee;
+    margin-top: 20px;
+  }
+  .recommendation-title {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  .recommendation-product {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  .recommendation-product img {
+    width: 60px;
+    height: auto;
+    margin-right: 15px;
+    border-radius: 4px;
+  }
+  .recommendation-info h5 { margin: 0; font-size: 0.9rem; }
+  .recommendation-info p { margin: 5px 0; color: #666; }
+  .add-recommendation-btn {
+    background: #000;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 0.8rem;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const searchbtn = document.getElementById('openSearchBtn');
+    {% comment %} console.log(searchbtn); {% endcomment %}
+    const searchbox = document.getElementById('headerSearchForm');
+    {% comment %} console.log(searchbox); {% endcomment %}
+    const input = document.getElementById('searchInput');
+    {% comment %} console.log(input); {% endcomment %}
+
+    searchbtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const isVisible = searchbox.style.display === 'block';
+      searchbox.style.display = isVisible ? 'none' : 'block';
+
+      if (!isVisible) {
+        setTimeout(() => input.focus(), 100);
+      }
+    });
+  });
+</script>
+
+{% comment %}
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('main-product-form');
+      if (!form) return;
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const formData = new FormData();
+
+        const mainId = form.querySelector('input[name="items[0][id]"]').value; // main product
+        const mainQty = form.querySelector('input[name="items[0][quantity]"]').value || 1;
+        formData.append('items[0][id]', mainId);
+        formData.append('items[0][quantity]', mainQty);
+
+        let i = 1;
+        form.querySelectorAll('.add-checkbox:checked').forEach((box) => {
+          // upsell products
+          formData.append(`items[${i}][id]`, box.value);
+          formData.append(`items[${i}][quantity]`, 1);
+          i++;
+        });
+
+        // send request
+        fetch('/cart/add.js', {
+          method: 'POST',
+          body: formData,
+        })
+          .then((r) => r.json())
+          .then(() => {
+            // open cart drawer
+            document.querySelector('.cart-drawer')?.classList.add('showCart');
+            document.querySelector('.cart-drawer-btn')?.classList.add('openCart');
+
+            // reload header section to update drawer
+            return fetch(`${location.pathname}?section_id=header`);
+          })
+          .then((r) => r.text())
+          .then((html) => {
+            const temp = document.createElement('div');
+            temp.innerHTML = html;
+
+            const newContent = temp.querySelector('.cart-drawer-content')?.innerHTML;
+            if (newContent) {
+              document.querySelector('.cart-drawer-content').innerHTML = newContent;
+            }
+
+            const newSubtotal = temp.querySelector('.subtotal-price')?.textContent;
+            if (newSubtotal) {
+              document.querySelector('.subtotal-price').textContent = newSubtotal;
+            }
+          })
+          .catch((err) => console.error('Add to cart error:', err));
+      });
+    });
+  </script>
+{% endcomment %}
+
+{% comment %}
+  quntity update cart drawer.....  // totally code for (cart drawer in 1. product add cart -drawer
+  2. perfect product bundle in cart-drawer)
+{% endcomment %}
+
+{% comment %} <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const fmt = (v) =>
+      new Intl.NumberFormat('en-IN', { style: 'currency', currency: Shopify.currency.active }).format(v / 100);
+
+    document.addEventListener('click', async (e) => {
+      const btn = e.target.closest('.adjust');
+      if (!btn) return;
+
+      const row = btn.closest('.products');
+      console.log(row);
+      const lineKey = row.querySelector('input[name="id"]').value; 
+      {% comment %} value = "{{ item.key }}" {% endcomment %}
+      console.log(lineKey);// use key instead of index
+      const currentQty = parseInt(row.querySelector('.count').value);
+      {% comment %} //value="{{ item.quantity }}" {% endcomment %}
+      console.log(currentQty);
+      const inventory = parseInt(row.dataset.inventory);
+      console.log(inventory);
+
+      let qty = currentQty + (btn.classList.contains('plus') ? 1 : -1);
+      console.log(qty);
+      if (qty < 1) qty = 1;
+
+      if (btn.classList.contains('plus') && qty > inventory) {
+        cartmessage('No more products can be added');
+        return;
+      }
+
+      const cart = await (await fetch('/cart.js')).json();
+      console.log(cart);
+      const targetItem = cart.items.find((it) => it.key === lineKey);
+      console.log(targetItem);
+      const bundleKey = targetItem?.properties?.bundle_key;
+      console.log(bundleKey);
+
+      let updates = {};
+      if (bundleKey) {
+        cart.items.forEach((it) => {
+          if (it.properties?.bundle_key === bundleKey) {
+            updates[it.key] = qty;
+          }
+        });
+      } else {
+        updates[lineKey] = qty;
+      }
+
+      const newCart = await (
+        await fetch('/cart/update.js', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ updates }),
+        })
+      ).json();
+
+      // refresh drawer DOM
+      const html = await (await fetch(`${location.pathname}?section_id=header`)).text();
+      const temp = document.createElement('div');
+      temp.innerHTML = html;
+      loadCartRecommendations();
+
+      document.querySelector('.cart-drawer-content').innerHTML = temp.querySelector('.cart-drawer-content').innerHTML;
+      document.querySelector('.subtotal-price').textContent = temp.querySelector('.subtotal-price').textContent;
+      loadCartRecommendations(); 
+
+    });
+   
+    function cartmessage(msg) {
+      const msgBox = document.getElementById('cart-message');
+      msgBox.textContent = msg;
+      msgBox.style.display = 'block';
+      msgBox.style.opacity = '1';
+      setTimeout(() => {
+        msgBox.style.opacity = '0';
+        setTimeout(() => (msgBox.style.display = 'none'), 300);
+      }, 2000);
+    }
+  });
+</script> {% endcomment %}
+
+{% comment %} remove api - cart drawer  {% endcomment %}
+
+{% comment %} <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('click', async (event) => {
+      const button = event.target.closest('.delete-btn');
+      console.log(button);
+      if (!button) return;
+
+      event.preventDefault();
+
+      const url = new URL(button.href);
+      const line = url.searchParams.get('line');
+
+      try {
+        const response = await fetch('/cart/change.js', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ line: parseInt(line), quantity: 0 }),
+        });
+
+        const cart = await response.json();
+
+        const sectionResponse = await fetch('/?sections=header');
+        const sectionData = await sectionResponse.json();
+
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(sectionData.header, 'text/html');
+
+        const newContent = doc.querySelector('.cart-drawer-content');
+        const currentContent = document.querySelector('.cart-drawer-content');
+        if (newContent && currentContent) {
+          currentContent.innerHTML = newContent.innerHTML;
+        }
+
+        const newSubtotal = doc.querySelector('.subtotal-price');
+        const currentSubtotal = document.querySelector('.subtotal-price');
+        if (newSubtotal && currentSubtotal) {
+          currentSubtotal.innerHTML = newSubtotal.innerHTML;
+        }
+
+        document.querySelectorAll('.cart-drawer-btn').forEach((btn) => {
+          const newCount = doc.querySelector('.cart-drawer-btn');
+          if (newCount) btn.innerHTML = newCount.innerHTML;
+        });
+
+        if (cart.item_count === 0) {
+          if (currentContent) currentContent.innerHTML = '<p class="text-center">Your cart is currently empty.</p>';
+        }
+
+        if (typeof loadCartRecommendations === 'function') {
+          loadCartRecommendations();
+        }
+      } catch (error) {
+        console.error('Error removing item:', error);
+      }
+    });
+  });
+</script>
+ {% endcomment %}
+
+
+{% comment %} <script>
+document.addEventListener('DOMContentLoaded', () => {
+  // Listen for clicks on any element with the class 'cart__remove'
+  document.querySelectorAll('.delete-btn').forEach(button => {
+    button.addEventListener('click', function(event) {
+      event.preventDefault(); // Stop the link from redirecting/refreshing the page
+
+      const itemKey = this.getAttribute('data-line-item-key');
+      const removeURL = `/cart/change.js`;
+
+      // Use the Fetch API to send a POST request to update the cart
+      fetch(removeURL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          id: itemKey, // or line: lineIndex, depending on your liquid
+          quantity: 0
+        })
+      })
+      .then(response => response.json())
+      .then(cart => {
+        // After successful API call, dynamically update the cart drawer HTML
+        updateCartDrawerUI(); 
+      })
+      .catch(error => {
+        console.error('Error removing item from cart:', error);
+      });
+    });
+  });
+
+  // Function to fetch the updated cart HTML and replace the current drawer content
+  function updateCartDrawerUI() {
+    // This fetches the entire cart drawer section again from the server
+    fetch('?section_id=header') // Replace 'cart-drawer' with your cart drawer's section ID
+      .then((response) => response.text())
+      .then((responseText) => {
+        const html = new DOMParser().parseFromString(responseText, 'text/html');
+        const newDrawerContent = html.querySelector('.cart-drawer-content'); // Match your main drawer container class
+        const currentDrawerContent = document.querySelector('.cart-drawer-content'); // Match your main drawer container class
+
+        if (newDrawerContent && currentDrawerContent) {
+          currentDrawerContent.replaceWith(newDrawerContent);
+        }
+        
+        // You may need to dispatch a custom event for other theme scripts to update counts/totals
+        document.dispatchEvent(new CustomEvent('cart:updated', { bubbles: true })); //
+      })
+      .catch((e) => {
+        console.error('Error fetching new cart HTML:', e);
+      });
+  }
+});
+</script> {% endcomment %}
+
+

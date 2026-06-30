@@ -1,0 +1,262 @@
+<div
+  class="main-class"
+  style="
+    display:flex; border-bottom: .1rem solid rgba(var(--color-foreground), .08);
+    margin: 0 2rem;
+    padding: 1.5rem 0 .75rem;
+    color: rgba(var(--color-foreground), .7); font-size: 1rem;
+    letter-spacing: .13rem;
+    line-height: calc(1 + .2 / var(--font-body-scale));
+    text-transform: uppercase; font-family: var(--font-body-family);
+    font-style: var(--font-body-style);
+    font-weight: var(--font-body-weight); box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  "
+>
+  {%- if predictive_search.performed -%}
+    <div id="predictive-search-results" style="padding:15px;">
+      {%- if predictive_search.resources.collections.size > 0 -%}
+        <h3 id="predictive-search-collections" style="font-size:20px; text-align:left">collection</h3>
+        <ul
+          role="listbox"
+          aria-labelledby="predictive-search-collections"
+          style="color: rgba(var(--color-foreground), 0.75);header-height: 85px;"
+        >
+          {%- for collection in predictive_search.resources.collections -%}
+            <li role="option">
+              <a href="{{ collection.url }}">
+                {%- if collection.image -%}
+                  {{ collection | image_url: width: 50 | image_tag }}
+                {%- else -%}
+                  <div style="width: 50px; height: 50px; background: #eee;"></div>
+                {%- endif -%}
+                <span>{{ collection.title }}</span>
+              </a>
+            </li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+
+  {%- if predictive_search.performed -%}
+    <div id="predictive-search-results2" style="padding:15px;">
+      {%- if predictive_search.resources.products.size > 0 -%}
+        <h3 id="predictive-search-products" style="font-size:20px; text-align:center;">Products</h3>
+        <ul
+          role="listbox"
+          aria-labelledby="predictive-search-products"
+          style="color: rgba(var(--color-foreground), 0.75);"
+        >
+          {%- for product in predictive_search.resources.products -%}
+            <li role="option">
+              <a href="{{ product.url }}">
+                {{ product | image_url: width: 50 | image_tag }}
+
+                
+              </a>
+              <span>{{ product.title }}</span>
+            </li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+  {%- if predictive_search.performed -%}
+    <div id="predictive-search-results3" style="padding:15px;">
+      {%- if predictive_search.resources.articles.size > 0 -%}
+        <h3 id="predictive-search-blogs" style="font-size:20px; text-align:center;">blogs</h3>
+        <ul
+          role="listbox"
+          aria-labelledby="predictive-search-blogs"
+          style="align-item:left; "
+        >
+          {%- for articles in predictive_search.resources.articles -%}
+            <li role="option">
+              <a href="{{ articles.url }}">
+                {{ articles | image_url: width: 50 | image_tag }}
+              </a>
+              <span>{{ articles.title }}</span>
+            </li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+</div>
+<button
+  style="
+    padding-top: 1rem;
+            padding-bottom: 1rem; justify-content: space-between;
+        align-items: center;
+        padding: 1.3rem 2rem;
+
+        line-height: calc(1 + .4 / var(--font-body-scale));display: flex
+    ;
+        padding: 1rem 2rem;
+        text-align: center;
+        text-decoration: none;
+        width: 50%; display: block;
+            margin: 0 auto;
+            width: 50%; margin-top:10px; box-shadow: 0 0 10px rgba(0.2, 0.2, 0.2, 0.2); margin-bottom:10px;
+  "
+>
+  Search for “{{ predictive_search.terms }}”
+</button>
+
+<style>
+  #predictive-search {
+  position: absolute;
+  background : white;
+  border : 1px solid #ddd;
+  border-radius : 6px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  width: 350px;
+  margin-top : 4px;
+  display : none;
+  z-index : 10;
+  }
+
+  #predictive-search-results ul{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  }
+
+    #predictive-search-results2 ul{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  }
+      #predictive-search-results3 ul{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  }
+
+
+  #predictive-search-results li{
+  padding : 8px 12px;
+  }
+
+  #predictive-search-results li a {
+  display : flex;
+  align-items: center;
+  gap : 8px;
+  text-decoration : none;
+  color : #333;
+  }
+
+  #predictive-search-results li:hover{
+  background: #f5f5f5;
+  }
+</style>
+
+{% comment %} 
+<script>
+  class PredictiveSearch extends HTMLElement {
+  connectedCallback() {
+    this.input = this.querySelector('input[type="search"]');
+    this.resultbox = this.querySelector('#predictive-search');
+
+    if (this.input) {
+      this.input.addEventListener('input', this.debounce((event) => {
+        this.onChange(event);
+      }, 500));
+
+      this.input.addEventListener('click', (event) => {
+        event.stopPropagation();
+        if (this.input.value.length === 0) {
+          this.renderRecentViews();
+        }
+      });
+    }
+
+    // --- CLEAR BUTTON  EVENT DELEGATION ---
+    this.resultbox.addEventListener('click', (event) => {
+      if (event.target.classList.contains('clear-recent-btn')) {
+        this.clearRecentHistory();
+      }
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!this.contains(event.target)) this.close();
+    });
+  }
+
+  // --- RECENT HISTORY  ---
+  clearRecentHistory() {
+    localStorage.removeItem('recently_viewed'); 
+    this.renderRecentViews(); // ui updated
+  }
+
+  renderRecentViews() {
+    const recentData = JSON.parse(localStorage.getItem('recently_viewed')) || [];
+    
+    if (recentData.length > 0) {
+ 
+      let html = `
+      <div class="recent-views" style="padding: 15px; background:white; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); text-align: center;">
+        <button class="clear-recent-btn" style="padding: 5px 15px; margin-bottom: 15px; cursor: pointer; background: #ff4d4d; color: white; border: none; border-radius: 4px;">
+          CLEAR RECENT PRODUCT
+        </button>
+        <h4 style="border-bottom:1px solid #eee; margin: 0 0 10px 0; font-size: 16px; padding-bottom: 5px; color: #333;">Recent Views</h4>
+        <ul style="list-style:none; padding: 0; margin: 0; display:flex; flex-wrap: wrap; gap: 10px; justify-content: center;">`;
+      
+      recentData.forEach(product => {
+        html += `
+          <li style="border-radius: 4px; width: 80px; text-align: center;">
+            <a href="${product.url}" style="text-decoration:none; color:black;">
+              <img src="${product.image}" width="50" height="50" style="border-radius: 4px; object-fit: cover; margin-bottom: 5px;">
+              <span style="font-size: 11px; font-weight: 500; display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${product.title}</span>
+            </a>
+          </li>`;
+      });
+      
+      html += '</ul></div>';
+      this.resultbox.innerHTML = html;
+      this.open();
+    } else {
+      this.resultbox.innerHTML = '<p style="padding:20px; text-align: center; background: white;">No recent views yet.</p>';
+      this.open(); // જો બટન દબાય તો "No recent views" બોક્સ દેખાડવા માટે
+    }
+  }
+
+  // ... બાકીનો onChange અને getSearchResults કોડ સેમ રહેશે ...
+  onChange() {
+    const searchvalue = this.input.value.trim();
+    if (!searchvalue.length) {
+      this.renderRecentViews();
+      return;
+    }
+    this.getSearchResults(searchvalue);
+  }
+
+  getSearchResults(searchvalue) {
+    fetch(`${window.Shopify.routes.root}search/suggest?q=${searchvalue}&section_id=predictive-search`)
+      .then((response) => response.text())
+      .then((text) => {
+        const doc = new DOMParser().parseFromString(text, 'text/html');
+        const resultsMarkup = doc.querySelector('#shopify-section-predictive-search');
+        if (resultsMarkup) {
+          this.resultbox.innerHTML = resultsMarkup.innerHTML;
+          this.open();
+        }
+      });
+  }
+
+  open() { this.resultbox.style.display = 'block'; }
+  close() { this.resultbox.style.display = 'none'; }
+
+  debounce(fn, wait) {
+    let t;
+    return (...args) => {
+      clearTimeout(t);
+      t = setTimeout(() => fn.apply(this, args), wait);
+    };
+  }
+}
+customElements.define('p-search', PredictiveSearch);
+
+</script> {% endcomment %}

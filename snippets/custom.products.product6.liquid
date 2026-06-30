@@ -1,0 +1,6 @@
+
+<ul>
+{% for item in product.metafields["custom"]["product6"].value %}
+<li><a href="{{ item.url }}" class="metafield-variant_reference">{{ item.title }}</a></li>
+{% endfor %}
+</ul>

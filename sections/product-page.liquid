@@ -1,0 +1,20 @@
+ 
+ <section class="collection-prod you-may-like" data-section="product-page" >
+  <div class="collection-prod-inner">
+    <div class="container-fluid">
+      <h3 class="text-center">You may also like</h3>
+      
+       {% comment %} <div class="row"> 
+        {% assign related_products = collections['all-display-products'].products %}
+        {% for product in related_products limit: 3 %}
+      {% render 'product-grid' %}
+      {% endfor %}
+      </div>  {% endcomment %}
+      {% render 'collection-products' %}
+      {% comment %} <div id="dynamic-recommendations" class="product-recommendations" data-url="/recommendations/products.json?product_id={{ product.id }}&limit=4"></div> {% endcomment %}
+     </div>
+  </div>
+</section>  
+
+
+     

@@ -1,0 +1,128 @@
+{% if customer.metafields["custom_fields"]["widget"] != blank %}
+{% style %}
+
+{% if block.settings.title_font_custom != blank %}
+{{ block.settings.title_font | font_face }}
+{% endif %}
+
+#block-{{ block.id }} {
+  --margin-top: {{ block.settings.margin_top }}rem;
+  --margin-bottom: {{ block.settings.margin_bottom }}rem;
+  --bg-color: {{ block.settings.bg_color }};
+  --title-font-size: {{ block.settings.title_font_size }}px;
+  --title-font-color: {{ block.settings.title_font_color }};
+  {% if block.settings.title_font_custom != blank %}
+  --title-font-weight: {{ block.settings.title_font.weight }};
+  --title-font-style: {{ block.settings.title_font.style }};
+  --title-font-family: {{ block.settings.title_font.family }};
+  {% endif %}
+  --title-font-color: {{ block.settings.title_font_color }};
+  --title-padding: {{ block.settings.title_padding }};
+  --body-padding: {{ block.settings.body_padding }};
+  --body-font-size: {{ block.settings.body_font_size }}px;
+  --body-font-color: {{ block.settings.body_font_color }};
+  --item-border: {{ block.settings.item_border }};
+  --item-margin-bottom: {{ block.settings.item_margin_bottom }}px;
+  --item-border-radius: {{ block.settings.item_border_radius }};
+  {% if block.settings.arrow_image != blank %}
+  --arrow-image: url({{ block.settings.arrow_image | image_url: width: block.settings.arrow_size, height: block.settings.arrow_size }});
+  {% endif %}
+  --arrow-top: {{ block.settings.arrow_top }}px;
+  --arrow-right: {{ block.settings.arrow_right }}px;
+  --arrow-rotation-closed: rotate({{ block.settings.arrow_rotation_closed }}deg);
+  --arrow-rotation-open: rotate({{ block.settings.arrow_rotation_open }}deg);
+
+  {% if block.settings.margin_top != blank %}margin-top: var(--margin-top);{% endif %}
+  {% if block.settings.margin_bottom != blank %}margin-bottom: var(--margin-bottom);{% endif %}
+}
+
+#block-{{ block.id }} .cf-widget-item {
+  {% if block.settings.bg_color != blank %}background-color: var(--bg-color);{% endif %}
+  {% if block.settings.item_border != blank %}border: var(--item-border);{% endif %}
+  {% if block.settings.item_margin_bottom != blank %}margin-bottom: var(--item-margin-bottom);{% endif %}
+  {% if block.settings.item_border_radius != blank %}border-radius: var(--item-border-radius);{% endif %}
+  &:last-child{
+    margin-bottom: 0;
+  }
+}
+
+#block-{{ block.id }} .cf-widget-item .cf-accordion-title {
+  {% if block.settings.title_font_size != blank %}font-size: var(--title-font-size);{% endif %}
+  {% if block.settings.title_font_color != blank %}color: var(--title-font-color);{% endif %}
+  {% if block.settings.title_padding != blank %}padding: var(--title-padding);{% endif %}
+  {% if block.settings.title_font_custom != blank %}
+  font-family: var(--title-font-family) !important;
+  font-style: var(--title-font-style) !important;
+  font-weight: var(--title-font-weight) !important;
+  {% endif %}
+}
+
+#block-{{ block.id }} .cf-accordion-title:after {
+  {% if block.settings.arrow_image != blank %}
+    background-image: var(--arrow-image);
+    width: {{ block.settings.arrow_size }}px;
+    height: {{ block.settings.arrow_size }}px;
+  {% endif %}
+  {% if block.settings.arrow_rotation_open != blank %}transform: var(--arrow-rotation-open);{% endif %}
+  {% if block.settings.arrow_top != blank %}top: var(--arrow-top);{% endif %}
+  {% if block.settings.arrow_right != blank %}right: var(--arrow-right);{% endif %}
+}
+
+#block-{{ block.id }} .cf-widget-item.closed .cf-accordion-title:after {
+  {% if block.settings.arrow_rotation_closed != blank %}transform: var(--arrow-rotation-closed);{% endif %}
+}
+
+#block-{{ block.id }} .inner-padding {
+  {% if block.settings.body_padding != blank %}padding: var(--body-padding);{% endif %}
+}
+
+#block-{{ block.id }} .cf-widget-item .inner {
+  {% if block.settings.body_font_size != blank %}font-size: var(--body-font-size);{% endif %}
+  {% if block.settings.body_font_color != blank %}color: var(--body-font-color);{% endif %}
+}
+
+{% if block.settings.section_title_text != blank %}
+#block-{{ block.id }} .cf-widget-section-title {
+  {% if block.settings.section_title_margin_bottom != blank %}margin-bottom: {{ block.settings.section_title_margin_bottom }}em;{% endif %}
+}
+{% endif %}
+
+{% if block.settings.section_title_color != blank %}
+#block-{{ block.id }} .cf-widget-section-title {{ block.settings.section_title_tag }}{
+  color: {{ block.settings.section_title_color }};
+}
+{% endif %}
+
+{% endstyle %}
+<div class="cf-widget-widget cf-widget__accordion-v2 cf-auto-init" id="block-{{ block.id }}"
+  data-open_first="{% if block.settings.widget_open_first %}1{% else %}0{% endif %}"
+  data-allow_all_closed="{% if block.settings.widget_allow_all_closed %}1{% else %}0{% endif %}"
+  data-allow_multiple_open="{% if block.settings.widget_allow_multiple_open %}1{% else %}0{% endif %}"
+  data-animate_speed="{{ block.settings.widget_animate_speed }}">
+  {% if block.settings.section_title_text != blank %}
+  <div class="cf-widget-section-title">
+    <{{ block.settings.section_title_tag }} class="cf-widget-sectiont-title__text">{{ block.settings.section_title_text }}</{{ block.settings.section_title_tag }}>
+  </div>
+  {% endif %}
+  <div class="cf-widget-items-wrapper">
+    {% for item in customer.metafields["custom_fields"]["widget"] %}
+    <div class="cf-widget-item" data-index="{{ forloop.index0 }}">
+      <div class="cf-accordion-title">
+        {{ item.title }}
+      </div>
+      <div class="inner">
+        <div class="inner-padding">
+          
+            {% if item.body != blank %}
+            <div class="cf-widget-field cf-widget-field__body cf-widget-field--html">
+              {{ item.body }}
+            </div>
+            {% endif %}
+          
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}

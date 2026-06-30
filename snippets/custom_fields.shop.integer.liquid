@@ -1,0 +1,9 @@
+{% if shop.metafields["custom_fields"]["integer"] != blank %}
+  <div class="custom-field custom-field__integer custom-field__type--number-integer">
+    <h3 class="custom-field--title">INteger</h3>
+    <div class="custom-field--value">
+{{ shop.metafields["custom_fields"]["integer"] | metafield_tag }}
+
+    </div>
+  </div>
+{% endif %}

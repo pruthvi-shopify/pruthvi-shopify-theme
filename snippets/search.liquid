@@ -1,0 +1,87 @@
+<div class="header-search-form" id="headerSearchForm">
+  <form action="{{ routes.search_url }}" method="get" role="search" id="searchForm">
+     <label for="Search">Search</label>
+    <input
+      type="search"
+      name="q"
+      id="searchInput"
+      value="{{ search.terms | escape }}"
+      placeholder="Search..."
+      aria-label="Search"
+    >
+  </form>
+</div>
+<div>
+  <div class="header-search-form" id="headerSearchform">
+    <form action="{{ routes.search_url }}" method="get" id="searchform">
+    <label for="search">
+      search
+    </label>
+    <input type="search"
+    name="query" id="searchInput" value="{{ search.terms | escape }}" placeholder="Search" arai-label="search">
+    </form>
+  </div>
+</div>
+<div>
+  <div class="header-search-form">
+    <form action="{{ routes.search_url }}" method="get" id="searchform">
+    <label for="search">search</label>
+    <input type="search" name="query" id="searchInput" value="{{ search.terms }}">
+    </form>
+  </div>
+  </div>
+  {%- if predictive_search.performed -%}
+    <div id="predictive-search-results" style="padding:15px;">
+      {%- if predictive_search.resources.collections.size > 0 -%}
+        <h3 id="predictive-search-collections" style="font-size:20px; text-align:left">collection</h3>
+        <ul
+          role="listbox"
+          aria-labelledby="predictive-search-collections"
+          style="color: rgba(var(--color-foreground), 0.75);header-height: 85px;"
+        >
+          {%- for collection in predictive_search.resources.collections -%}
+            <li role="option">
+              <a href="{{ collection.url }}">
+                {%- if collection.image -%}
+                  {{ collection | image_url: width: 50 | image_tag }}
+                {%- else -%}
+                  <div style="width: 50px; height: 50px; background: #eee;"></div>
+                {%- endif -%}
+                <span>{{ collection.title }}</span>
+              </a>
+            </li>
+          {%- endfor -%}
+        </ul>
+      {%- else -%}
+        <h2> no more product are available</h2>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+<div class="predictive-search">
+  {% if predictive_search.performed %}
+    <div id="predictive-search-results" style="padding:15px;">
+      {% if predictive_search.resources.collections.size > 0 %}
+        <h3 id="predictive-search-collections"> blogs
+          <ul role="listbox">
+            {% for collection in predictive_search.resources.collection %}
+              <li role="option">
+                <a href="{{ collection.url }}">
+                {% if collection.image %}
+                  {{ collection | image_url: width: 250, height: 280 }}
+                {% else %}
+                  <div style="width: 50px;
+                    height:50px; background: #eee">
+                  </div>
+                  <span>{{ collection.title }}</span>
+                {% endif %}
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+          {%- else -%}
+        <h2> no more product are available</h2>
+        </h3 id="predictive">
+      {% endif %}
+    </div>
+  {% endif %}
+</div>

@@ -1,0 +1,177 @@
+<div class="footer">
+  <div class="footer-top">
+    <div class="container-fluid">
+      <div class="row">
+        {% for block in section.blocks %}
+          {% if block.type == 'menu' %}
+            {% if block.settings.menu != blank %}
+              <div class="col-4 col-m-6">
+                <div class="footer-nav">
+                  {% if block.settings.heading != blank %}
+                    <h3>{{ block.settings.heading }}</h3>
+                  {% endif %}
+                  <ul>
+                    {% for link in linklists[block.settings.menu].links %}
+                      <li>
+                        <a href="{{ link.url }}">{{ link.title }}</a>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                </div>
+              </div>
+            {% endif %}
+
+          {% elsif block.type == 'newsletter' %}
+            <div class="col-4 col-m-12">
+              <div class="footer-nav newsLetter">
+                {% if block.settings.heading != blank %}
+                  <h3>{{ block.settings.heading }}</h3>
+                {% endif %}
+                <p>{{ block.settings.newsletter_text }}</p>
+                {% form 'customer' %}
+                  {% if form.posted_successfully? %}
+                    <p>Thanks for subscribing!</p>
+                  {% else %}
+                    <div class="inputWrapper">
+                      <input
+                        type="email"
+                        name="contact[email]"
+                        placeholder="{{ block.settings.newsletter_placeholder }}"
+                        required
+                      >
+                      <button type="submit" name="commit">
+                        {% if block.settings.button_icon != blank %}
+                          <img width="" height="" src="{{ block.settings.button_icon | image_url }}" alt="Submit">
+                        {% endif %}
+                      </button>
+                    </div>
+                  {% endif %}
+                {% endform %}
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="container-fluid">
+      <div class="row ai-c">
+        <div class="col-8 col-m-12">
+          <div class="footer-navigation">
+            {% if section.settings.bottom_menu != blank %}
+              <ul>
+                {% for link in linklists[section.settings.bottom_menu].links %}
+                  <li>
+                    <a href="{{ link.url }}">{{ link.title }}</a>
+                  </li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          </div>
+        </div>
+        <div class="col-4 col-m-12">
+          <div class="footer-bottom-right text-right">
+            <p>{{ section.settings.copyright_text }}</p>
+            <ul>
+              {% if settings.facebook_link != blank %}
+                <li>
+                  <a href="{{ settings.facebook_link }}">
+                    <img width="" height="" src="{{ settings.facebook_icon | image_url }}" alt="Facebook"
+                  ></a>
+                </li>
+              {% endif %}
+              {% if settings.instagram_link != blank %}
+                <li>
+                  <a href="{{ settings.instagram_link }}"
+                    ><img width="" height="" src="{{ settings.instagram_icon | image_url }}" alt="Instagram"
+                  ></a>
+                </li>
+              {% endif %}
+              {% if settings.pinterest_link != blank %}
+                <li>
+                  <a href="{{ settings.pinterest_link }}"
+                    ><img width="" height="" src="{{ settings.pinterest_icon | image_url }}" alt="Pinterest"
+                  ></a>
+                </li>
+              {% endif %}
+              {% comment %} {% if settings.other_link != blank %}
+                <li>
+                  <a href="{{ settings.other_link }}"><img width="" height="" src="{{ settings.other_icon | image_url }}" alt="Other"></a>
+                </li>
+              {% endif %} {% endcomment %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "bottom_menu",
+      "label": "Bottom Footer Menu"
+    },
+    {
+      "type": "text",
+      "id": "copyright_text",
+      "label": "Copyright Text"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "menu",
+      "limit": 2,
+      "name": "Menu",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menu"
+        }
+      ]
+    },
+    {
+      "type": "newsletter",
+      "limit": 1,
+      "name": "Newsletter",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading"
+        },
+        {
+          "type": "textarea",
+          "id": "newsletter_text",
+          "label": "Newsletter Description",
+          "default": "Subscribe to our newsletter to stay up-to-date on how we are redefining plant style and receive the latest product launches."
+        },
+        {
+          "type": "text",
+          "id": "newsletter_placeholder",
+          "label": "Input Placeholder",
+          "default": "Enter your email address..."
+        },
+        {
+          "type": "image_picker",
+          "id": "button_icon",
+          "label": "Submit Button Icon"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 3
+}
+{% endschema %}

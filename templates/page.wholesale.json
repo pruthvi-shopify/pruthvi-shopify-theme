@@ -1,0 +1,143 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {}
+    },
+    "hero_banner_yRJMAj": {
+      "type": "hero-banner",
+      "blocks": {
+        "slide_HGfcFN": {
+          "type": "slide",
+          "settings": {
+            "slide_image": "shopify://shop_images/Hero_img.jpg",
+            "alt_text": "Hero Image"
+          }
+        }
+      },
+      "block_order": [
+        "slide_HGfcFN"
+      ],
+      "name": "Hero banner",
+      "settings": {}
+    },
+    "wholesale_fDdkUc": {
+      "type": "wholesale",
+      "name": "wholesale",
+      "settings": {
+        "main_image": "shopify://shop_images/wholesale-trade-img.png",
+        "main_title": "Wholesale & trade",
+        "right_title": "Interested in Joining LBE Design's Wholesale or Design/Trade Program?",
+        "right_content": "<p>We sweat the details so you can feel confident you are offering your clients and customers the highest quality, most thoughtfully designed, and sustainably produced planters on the market. Apply below to learn more about how we can help you make your business a little greener with our Revival Ceramics line of premium planters.</p>"
+      }
+    },
+    "block_image_LDKJkC": {
+      "type": "block-image",
+      "blocks": {
+        "content_block_NPdziE": {
+          "type": "content_block",
+          "settings": {
+            "block_image": "shopify://shop_images/content-img-1_fbdda99c-c02a-4cc0-b10a-e7b22b0b08fb.png",
+            "heading": "Retail and Online",
+            "description": "Interested in carrying LBE Design products in your retail establishment or online store? We offer competitive wholesale discounts, low minimums, quick fulfillment, dedicated support, and dropshipping services tailored to fit your needs.",
+            "button_link": "",
+            "button_text": "Shop Now",
+            "reverse_layout": false
+          }
+        },
+        "content_block_yfwAAk": {
+          "type": "content_block",
+          "settings": {
+            "block_image": "shopify://shop_images/content-img-2_80dbca86-58cd-444c-a189-4e7b687de60d.png",
+            "heading": "Commercial",
+            "description": "LBE Design is ready to help with your next project. Our planters are engineered to fit grow pots and produced from natural materials, making them the ideal planter for your commercial applications.",
+            "button_link": "",
+            "button_text": "Shop Now",
+            "reverse_layout": true
+          }
+        },
+        "content_block_mHWCYq": {
+          "type": "content_block",
+          "settings": {
+            "block_image": "shopify://shop_images/content-img-3_3d3a52d3-c36e-4984-bbe6-dded1da8c376.png",
+            "heading": "Design and Trade",
+            "description": "Ready to offer your clients something special? We offer a best-in-class trade program with no minimum order requirement, and dedicated support. If you are a trade professional looking to join our program, we'll be happy to set you up.",
+            "button_link": "",
+            "button_text": "Shop Now",
+            "reverse_layout": false
+          }
+        }
+      },
+      "block_order": [
+        "content_block_NPdziE",
+        "content_block_yfwAAk",
+        "content_block_mHWCYq"
+      ],
+      "name": "block-image",
+      "settings": {}
+    },
+    "join_us_wt3tdX": {
+      "type": "join-us",
+      "name": "Join Us Section",
+      "settings": {
+        "heading": "Join Our Pack!"
+      }
+    },
+    "17645672289f1c7afb": {
+      "type": "apps",
+      "blocks": {
+        "stamped_reviews_instagram_feed_eh4yjY": {
+          "type": "shopify://apps/stamped-reviews/blocks/instagram-feed/a103faaf-2125-4b0e-89fa-de5149736723",
+          "settings": {
+            "feed_type": "gallery",
+            "color_hover": "#00c79c",
+            "color_hover_opacity": 50,
+            "take": 25,
+            "hover_text": "instagram",
+            "shop_button_text": "instafeed",
+            "height": 200,
+            "auto_play": true,
+            "auto_play_speed": 28,
+            "review_ids": "",
+            "product_ids": "",
+            "category": "",
+            "product_brand": "",
+            "tags": "",
+            "min_rating": "none",
+            "fill_empty": false,
+            "random": false,
+            "with_photos": false
+          }
+        },
+        "powr_instagram_feed_app_block_MDctHk": {
+          "type": "shopify://apps/powr-instagram-feed/blocks/app-block/0ef0f2d8-4861-4613-a8e4-82a7151be72e",
+          "settings": {
+            "app_id": "{{ page.title }}"
+          }
+        }
+      },
+      "block_order": [
+        "stamped_reviews_instagram_feed_eh4yjY",
+        "powr_instagram_feed_app_block_MDctHk"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "hero_banner_yRJMAj",
+    "wholesale_fDdkUc",
+    "block_image_LDKJkC",
+    "join_us_wt3tdX",
+    "17645672289f1c7afb"
+  ]
+}

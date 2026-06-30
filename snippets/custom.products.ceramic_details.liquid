@@ -1,0 +1,9 @@
+{% if product.metafields["custom"]["ceramic_details"] != blank %}
+  <div class="custom-field custom-field__ceramic-details custom-field__type--single-line-text-field">
+    <h3 class="custom-field--title">Ceramic Details</h3>
+    <div class="custom-field--value">
+      {{ product.metafields["custom"]["ceramic_details"] }}
+
+    </div>
+  </div>
+{% endif %}

@@ -1,0 +1,369 @@
+<!-- Filter Sidebar (STATIC) -->
+<div class="col-3 col-m-12">
+  {% comment %}
+    <div class="filterBtn mobileOnly">
+      <img width="" height="" src="{{ 'filter.png' | asset_url }}" alt="Filter">
+    </div>
+  {% endcomment %}
+  <div class="filter-inner desktopOnly" id="filterSidebar">
+    {% comment %}
+      {% if collection.tags.size > 0 %}
+        {% assign has_active = false %}
+        {% for tag in collection.all_tags %}
+          {% if tags.active_values.size > 0 %}
+            {% assign has_active = true %}
+            {{ has_active }}
+          {% endif %}
+        {% endfor %}
+
+        {% comment %} {% if has_active %} {% endcomment %}
+        <div class="filter-content">
+          <div class="filter-header">
+            <p><strong>Filter by:</strong></p>
+            <div class="clear-all">
+              <a href="{{ collection.url }}" id="clearAllBtn"> Clear all </a>
+            </div>
+          </div>
+
+          <div class="accessories">
+            <ul>
+              {% for tag in collection.all_tags %}
+                {% for active in tag.active_values %}
+                  <li>
+                    <a href="{{ active.url_to_remove }}">
+                      {{ active.label }}
+                      <span><img width="" height="" src="{{ 'close-btn.png' | file_url }}" alt="Close-btn"></span>
+                    </a>
+                  </li>
+                {% endfor %}
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+        {% comment %} {% endif %}  {% endcomment %}
+      {% endif %}
+    {% endcomment %}
+
+    {% comment %}
+      <div class="filter-content">
+        <div class="filter-header">
+          <p><strong>Filter by available:</strong></p>
+        </div>
+        <div class="shop-filter">
+          <ul class="ajax-filter-list">
+            <form action="{{ collection.url }}" method="get">
+              {% for tag in collection.all_tags %}
+                {% if tag contains 'size-' %}
+                  {% assign size_name = tag %}
+                  <li class="{% if current_tags contains tag %}active {% endif %}">
+                    {% if current_tags contains tag %}
+                      <a href="{{ size_name | link_to_remove_tag: tag }}">{{ tag }} </a>
+                    {% else %}
+                      <a href="{{ size_name | link_to_remove_tag: tag }}"> {{ tag }} </a>
+                    {% endif %}
+                  </li>
+                {% endif %}
+              {% endfor %}
+            </form>
+          </ul>
+        </div>
+      </div>
+    {% endcomment %}
+
+    {% comment %} <div class="filter-content">
+      <div class="filter-header">
+        <p><strong>Product tags:</strong></p>
+      </div>
+      <div class="shop-filter">
+        <ul class="ajax-filter-list">
+          {% for tag in collection.all_tags %}
+            {% unless tag contains 'c-' or tag contains 's-' %}
+              {% assign is_active = false %}
+              {% if current_tags contains tag %}
+                {% assign is_active = true %}
+              {% endif %}
+              <li>
+                <label class="filter-label">
+                  <input
+                    type="checkbox"
+                    {% comment %} value="{{ tag | handle }}"  {% endcomment %}
+                    class="tag-filter-checkbox"
+                    {% if is_active %}
+                      checked
+                    {% endif %}
+                    data-url="
+                      {% if is_active %}
+                      {{ '' | link_to_remove_tag: tag | split: 'href="' | last | split: '"' | first }}
+                       {% else %}
+                        {{ '' | link_to_add_tag: tag | split: 'href="' | last | split: '"' | first }}
+                         {% endif %}
+                    "
+                  >
+                  {{ tag }}
+                </label>
+              </li>
+            {% endunless %}
+          {% endfor %}
+        </ul>
+      </div>
+    </div> {% endcomment %}
+
+    <div class="filter-inner" id="filterSidebar">
+      {% comment %} <!-- Color Filter -->
+      <div class="filter-content">
+        <div class="filter-header">
+          <p><strong>Filter by Color:</strong></p>
+        </div>
+        <div class="shop-filter">
+          <ul class="ajax-filter-list">
+            {% for tag in collection.all_tags %}
+              {% if tag contains 'c-' %}
+                {% assign is_active = false %}
+                {% if current_tags contains tag %}{% assign is_active = true %}{% endif %}
+                <li>
+                  <label>
+                    <input
+                      type="checkbox"
+                      class="tag-filter-checkbox"
+                      {% if is_active %}
+                        checked
+                      {% endif %}
+                      data-url="
+                        {% if is_active %}
+                        {{ tag | link_to_remove_tag: tag | split: 'href="' | last | split: '"' | first }}
+                         {% else %}
+                         {{ tag | link_to_add_tag: tag | split: 'href="' | last | split: '"' | first }}
+                         {% endif %}
+                      "
+                    >
+                    {{ tag | remove: 'c-' }}
+                  </label>
+                </li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        </div>
+      </div> {% endcomment %}
+
+      <!-- Size Filter -->
+      {% comment %} <div class="filter-content">
+        <div class="filter-header">
+          <p><strong>Filter by Size:</strong></p>
+        </div>
+        <div class="shop-filter">
+          <ul class="ajax-filter-list">
+            {% for tag in collection.all_tags %}
+              {% if tag contains 's-' %}
+                {% assign is_active = false %}
+                {% if current_tags contains tag %}{% assign is_active = true %}{% endif %}
+                {% comment %} {% assign clean_tag = tag | remove: 's-' %} {% endcomment %}
+                <li>
+                  <label>
+                    <input
+                      type="checkbox"
+                      class="tag-filter-checkbox"
+                      {% if is_active %}
+                        checked
+                      {% endif %}
+                      {% comment %} data-url="{% if is_active %}{{ tag | link_to_remove_tag: tag }}{% else %}{{ tag | link_to_add_tag: tag }}{% endif %}" {% endcomment %}
+                      data-url="
+                        {% if is_active %}{{ tag | link_to_remove_tag: tag | split: 'href="' | last | split: '"' | first  }}
+                        {% else %}
+                         {{ tag | link_to_add_tag: tag | split: 'href="' | last | split: '"' | first }}
+                          {% endif %}
+                      "
+                    >
+                    {{ tag | remove: 's-' }}
+                    {% comment %} {{ clean_tag }} {% endcomment %}
+                  </label>
+                </li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        </div>
+      </div> {% endcomment %}
+    </div>
+
+    {% comment %}
+      <div class="filter-content">
+        <div class="filter-header">
+          <p><strong> Filter by Price:</strong></p>
+        </div>
+        <div class="shop-filter">
+          <ul class="ajax-filter-list">
+            <form action="{{ collection.url }}" method="get" id="priceFilterForm">
+              {% for param in collection.filters %}
+                {% for active in param.active_values %}
+                  <input type="hidden" name="{{ param.param_name }}" value="{{ active.value }}">
+                {% endfor %}
+              {% endfor %}
+              <li class="price-filter-input">
+                <label for="min-price"> Min:</label>
+                <input
+                  type="number"
+                  id="min-price"
+                  name="min-price"
+                  placeholder="0"
+                  min="0"
+                  value="{{ request.params['min-price'] }}"
+                >
+              </li>
+              <li class="price-filter-input">
+                <label for="max-price"> Max:</label>
+                <input
+                  type="number"
+                  id="max-price"
+                  name="max-price"
+                  placeholder="1800"
+                  min="0"
+                  value="{{ request.params['max-price'] }}"
+                >
+              </li>
+              <li>
+                <button id="apply-price-filter">Done</button>
+              </li>
+            </form>
+          </ul>
+        </div>
+      </div>
+    {% endcomment %}
+
+    <!-- ACTIVE FILTERS -->
+
+    {% if collection.filters.size > 0 %}
+      {% assign has_active = false %}
+      {% for filter in collection.filters %}
+        {% if filter.active_values.size > 0 %}
+          {% assign has_active = true %}
+        {% endif %}
+      {% endfor %}
+
+      {% if has_active %}
+        <div class="filter-content">
+          <div class="filter-header">
+            <p><strong>Filter by:</strong></p>
+            <div class="clear-all">
+              <a href="{{ collection.url }}" id="clearAllBtn"> Clear all </a>
+            </div>
+          </div>
+
+          <div class="accessories">
+            <ul>
+              {% for filter in collection.filters %}
+                {% for active in filter.active_values %}
+                  <li>
+                    <a href="{{ active.url_to_remove }}">
+                      {{ active.label }}
+                      <span><img width="" height="" src="{{ 'close-btn.png' | file_url }}" alt="Close-btn"></span>
+                    </a>
+                  </li>
+                {% endfor %}
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      {% endif %}
+    {% endif %}
+
+    <!-- ALWAYS SHOW FILTER OPTIONS (Hide on clear all by JS) -->
+
+    <div id="allFilters">
+      {% for filter in collection.filters %}
+        <div class="filter-content">
+          <div class="filter-header">
+            <p>
+              <strong>{{ filter.label | escape }}:</strong>
+            </p>
+          </div>
+
+          {% if filter.type == 'list' %}
+            <div class="shop-filter">
+              <ul>
+                {% for value in filter.values %}
+                  <li class="{% if value.active %}active{% endif %}">
+                    <a href="{{ value.url_to_add }}"> {{ value.label }} ({{ value.count }}) </a>
+                    {% if value.count == 0 %}
+                      <span style="color:red"> no more product are available </span>
+                    {% endif %}
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+          {% elsif filter.type == 'price_range' %}
+            <form action="{{ collection.url }}" method="get" id="priceFilterForm">
+              {% for param in collection.filters %}
+                {% for active in param.active_values %}
+                  <input type="hidden" name="{{ param.param_name }}" value="{{ active.value }}">
+                {% endfor %}
+              {% endfor %}
+
+              <div>
+                <label>Min</label>
+                <input
+                  id="minPrice"
+                  type="number"
+                  min="0"
+                  value="{% if filter.min_value.value %}{{ filter.min_value.value | divided_by: 100 }}{% endif %}"
+                >
+                <input type="hidden" name="{{ filter.min_value.param_name }}" id="minPriceCents">
+              </div>
+
+              <div>
+                <label>Max</label>
+                <input
+                  id="maxPrice"
+                  type="number"
+                  min="0"
+                  value="{% if filter.max_value.value %}{{ filter.max_value.value | divided_by: 100 }}{% endif %}"
+                >
+                <input type="hidden" name="{{ filter.max_value.param_name }}" id="maxPriceCents">
+              </div>
+              <button type="submit">ok</button>
+            </form>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+
+  {% comment %} <script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+    document.addEventListener('change', function (e) {
+      if (e.target.classList.contains('tag-filter-checkbox')) {
+        const url = e.target.getAttribute('data-url');
+        console.log(url);
+        if (url) {
+          updatetag(url);
+        }
+      }
+    });
+    function updatetag(url) {
+      const newurl = `${url}${url.includes('?') ? '&' : '?'}section_id=main-collection`;
+      document.querySelector('#productGrid').style.opacity = '0.5';
+      fetch(newurl)
+        .then(res => res.text())
+        .then(responseText => {
+          const html = new DOMParser().parseFromString(responseText, 'text/html');
+          const newGrid = html.querySelector('#productGrid').innerHTML;
+          document.querySelector('#productGrid').innerHTML = newGrid;
+          const newSidebar = html.querySelector('#filterSidebar').innerHTML;
+          document.querySelector('#filterSidebar').innerHTML = newSidebar;
+          history.pushState({ url }, '', url);
+          if (typeof initProductScripts === 'function') {
+            initProductScripts(document.querySelector('#productGrid'));
+          }
+          document.querySelector('#productGrid').style.opacity = '1';
+          initProductScripts();
+          initializeQuickView();
+        })
+        .catch(err => {
+          console.error("Filtering Error:", err);
+          document.querySelector('#productGrid').style.opacity = '1';
+        });
+    }
+  });
+  </script> {% endcomment %}
+

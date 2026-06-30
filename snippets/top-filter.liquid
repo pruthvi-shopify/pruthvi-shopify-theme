@@ -1,0 +1,88 @@
+ <div class="collection-prod">
+  <div class="collection-prod-inner" id="productGrid"> 
+    <div class="collection-prod-top prod-top-header">
+      <div class="row jc-sb">
+        <div class="change-view-option">
+          <button class="display-grid-view">
+            <img width="" height=""
+              src="https://cdn.shopify.com/s/files/1/0640/4839/8454/files/change-view-1_e112ef23-9ad0-4497-be41-e06106c39e34.png?v=1751865090"
+              alt="Grid View"
+            >
+          </button>
+          <button class="display-list-view">
+            <img width="" height=""
+              src="https://cdn.shopify.com/s/files/1/0640/4839/8454/files/change-view-2.png?v=1751865098"
+              alt="List View"
+            >
+          </button>
+        </div>
+        <div class="sort-by-prod">
+          <select class="niceSelect product-qty">
+            {% for i in (1..20) %}
+              <option value="{{ i }}">0{{ i }}</option>
+            {% endfor %}
+          </select>
+
+          <select class="niceSelect sort-product" id="sortBySelect">
+            <option
+              value="best-selling"
+              {% if collection.sort_by == 'best-selling' %}
+                selected
+              {% endif %}
+            >
+              Best selling
+            </option>
+            <option
+              value="title-ascending"
+              {% if collection.sort_by == 'title-ascending' %}
+                selected
+              {% endif %}
+            >
+              Product title A-Z
+            </option>
+            <option
+              value="title-descending"
+              {% if collection.sort_by == 'title-descending' %}
+                selected
+              {% endif %}
+            >
+              Product title Z-A
+            </option>
+            <option
+              value="price-descending"
+              {% if collection.sort_by == 'price-descending' %}
+                selected
+              {% endif %}
+            >
+              Highest price
+            </option>
+            <option
+              value="price-ascending"
+              {% if collection.sort_by == 'price-ascending' %}
+                selected
+              {% endif %}
+            >
+              Lowest price
+            </option>
+            <option
+              value="created-descending"
+              {% if collection.sort_by == 'created-descending' %}
+                selected
+              {% endif %}
+            >
+              Newest
+            </option>
+            <option
+              value="created-ascending"
+              {% if collection.sort_by == 'created-ascending' %}
+                selected
+              {% endif %}
+            >
+              Oldest
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+ </div>
+</div>

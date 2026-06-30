@@ -1,0 +1,8 @@
+{% if product.metafields["custom"]["product2"] != blank %}
+  <div class="custom-field custom-field__product2 custom-field__type--date-time">
+    <h3 class="custom-field--title">product2</h3>
+    <div class="custom-field--value">
+      {{ product.metafields["custom"]["product2"] | date: "%m/%d/%Y %I:%M:%S %p" }}
+    </div>
+  </div>
+{% endif %}

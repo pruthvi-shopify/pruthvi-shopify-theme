@@ -1,0 +1,196 @@
+<div class="main-content">
+  {% comment %}
+    <section class="hero-section">
+        <div class="hero-section-inner ">
+            <img src="images/Hero_img.jpg" alt="Hero_img">
+        </div>
+    </section>
+  {% endcomment %}
+
+  <section class="about-collection-desc">
+    <div class="about-collection-descr-inner">
+      <div class="container-fluid">
+        <div class="about-collection-text text-center">
+            {% if section.settings.main-title %}
+          <h1>{{ section.settings['main-title'] }}</h1>
+            {% endif %}
+          <div class="collection-content">
+            {% if section.settings.main-content %}
+            <p>{{ section.settings['main-content'] }}</p>
+            {% endif %}
+
+            <p></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="collection-prod">
+    <div class="collection-prod-inner">
+      <div class="container-fluid">
+        <div class="collection-prod-top prod-top-header">
+          <div class="row jc-sb">
+            <div class="change-view-option">
+              <button class="display-grid-view">
+                <img width="" height=""
+                  src="https://cdn.shopify.com/s/files/1/0640/4839/8454/files/change-view-1_e112ef23-9ad0-4497-be41-e06106c39e34.png?v=1751865090"
+                  alt="Change View Icon"
+                >
+              </button>
+              <button class="display-list-view">
+                <img width="" height=""
+                  src="https://cdn.shopify.com/s/files/1/0640/4839/8454/files/change-view-2.png?v=1751865098"
+                  alt="Change View Icon"
+                >
+              </button>
+            </div>
+          </div>
+        </div>
+        {% comment %} {% paginate collection.products by 10 %} {% endcomment %}
+        {% if section.settings.featured_collection != blank %}
+          {% assign collection = section.settings.featured_collection %}
+          <div class="row">
+            {% for product in collection.products  %}
+              <div class="col-3 col-s-6">
+                <div class="product-card">
+                  <div class="prod-card-img text-center">
+                    <!-- Add to cart + quick view -->
+                    <div class="prod-card-badge">
+                      <div>
+                        <a href="{{ product.url }}" class="quick-view">
+                          <img width="" height=""
+                            src="https://cdn.shopify.com/s/files/1/0640/4839/8454/files/zoom.png?v=1751865146"
+                            alt="zoom"
+                          >
+                        </a>
+                      </div>
+                    </div>
+
+                    <div class="prod-img">
+                      {% if product.featured_image != blank %}
+                        <a href="{{ product.url }}">
+                          <img width="" height="" src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.title }}">
+                        </a>
+                      {% endif %}
+                    </div>
+
+                    {% if product.variants.size > 1 %}
+                      <div class="prod-color mb-1">
+                        <ul>
+                          {% assign colors = product.variants | map: 'option1' | uniq %}
+                          {% for color in colors %}
+                            {% assign color_down = color | downcase %}
+                            <li>
+                              <span
+                                href="#"
+                                class="card-color-swatch"
+                                style="background-color: {{ color_down }};"
+                                title="{{ color }}"
+                              ></span>
+                            </li>
+                          {% endfor %}
+                        </ul>
+                      </div>
+                    {% endif %}
+                  </div>
+
+                  <div class="prod-detail">
+                    <div class="prod-title">
+                      <h4>
+                        <a href="{{ product.url }}">{{ product.title }}</a>
+                      </h4>
+                    </div>
+                    <div class="compare-price" id="productprice">
+                      {% if product.selected_or_first_available_variant.compare_at_price
+                          > product.selected_or_first_available_variant.price
+                      %}
+                        <span id="compareatprice2"
+                          ><del>
+                            {{-
+                              product.selected_or_first_available_variant.compare_at_price
+                              | money_without_trailing_zeros
+                            -}}
+                          </del></span
+                        >
+                      {% endif %}
+                      <span id="price2">
+                        {{ product.selected_or_first_available_variant.price | money_without_trailing_zeros }}
+                      </span>
+                    </div>
+                  </div>
+                  {% comment %}
+                    <script type="application/json" class="variant-data">
+                      {{ product.variants | json }}
+                    </script>
+                  {% endcomment %}
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+        <!-- Pagination -->
+        {% comment %}
+          {% if paginate.pages > 1 %}
+            <div class="pagination text-center mt-4">
+              {% if paginate.previous %}
+                <a href="{{ paginate.previous.url }}" class="pagination-prev">← Previous</a>
+              {% endif %}
+              {% for part in paginate.parts %}
+                {% if part.is_link %}
+                  <a href="{{ part.url }}">{{ part.title }}</a>
+                {% else %}
+                  <span class="current">{{ part.title }}</span>
+                {% endif %}
+              {% endfor %}
+              {% if paginate.next %}
+                <a href="{{ paginate.next.url }}" class="pagination-next">Next →</a>
+              {% endif %}
+            </div>
+          {% endif %}
+        {% endcomment %}
+        {% comment %} {% endpaginate %} {% endcomment %}
+      </div>
+    </div>
+  </section>
+
+  {% comment %}
+    <section class="join-us-section">
+      <div class="join-us-inner">
+        <div class="container">
+          <h3 class="text-center">Join Our Pack!</h3>
+        </div>
+      </div>
+    </section>
+  {% endcomment %}
+</div>
+
+{% schema %}
+{
+  "name": "roundtwo-collection",
+  "settings": [
+    {
+      "type": "text",
+      "id": "main-title",
+      "label": "Main-title"
+    },
+    {
+      "type": "richtext",
+      "id": "main-content",
+      "label": "Main-content"
+    },
+    {
+      "type": "collection",
+      "id": "featured_collection",
+      "label": "Collection",
+      
+      
+    },
+  ],
+  "presets": [
+    {
+      "name": "roundtwo-collection"
+    }
+  ]
+}
+{% endschema %}

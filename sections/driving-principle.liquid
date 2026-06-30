@@ -1,0 +1,94 @@
+<section class="content-img-content driving-principle" data-section="driving-principle">
+  <div class="container-fluid">
+    <h2 class="section-title h1">
+      {% if section.settings['main-heading'] != blank %}
+        {{ section.settings['main-heading'] }}
+      {% endif %}
+    </h2>
+    {% for block in section.blocks %}
+      {% assign reverse = false %}
+      {% if block.settings.image_position == 'right' %}
+        {% assign reverse = true %}
+      {% endif %}
+      <div class="img-with-content">
+        <div class="row ai-c {% if reverse %}row-reverse{% endif %}">
+          <div class="col-6">
+            <div class="contentImg">
+              <img width="" height="" src="{{ block.settings.images | image_url }}" alt="Content Img">
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="content-text {% if block.settings.image_position == 'left' %}marginLeft{% endif %}">
+              {% if block.settings['sub-title'] %}
+                <h3>{{ block.settings['sub-title'] }}</h3>
+              {% endif %}
+              <div class="rte">
+                {% if block.settings['sub-content'] != blank %}
+                  <p>
+                    {{ block.settings['sub-content'] }}
+                  </p>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+{% schema %}
+{
+  "name": "driving-principle",
+  "settings": [
+    {
+      "type": "text",
+      "id": "main-heading",
+      "label": "Main-Heading"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "principle_block",
+      "name": "principle_block",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "images",
+          "label": "Images"
+        },
+        {
+          "type": "text",
+          "id": "sub-title",
+          "label": "Sub-Title"
+        },
+        {
+          "type": "richtext",
+          "id": "sub-content",
+          "label": "Sub-Content"
+        },
+        {
+          "type": "select",
+          "id": "image_position",
+          "label": "Image Position",
+          "default": "left",
+          "options": [
+            {
+              "value": "left",
+              "label": "Image Left"
+            },
+            {
+              "value": "right",
+              "label": "Image Right"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "driving-principle"
+    }
+  ]
+}
+{% endschema %}

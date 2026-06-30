@@ -1,0 +1,72 @@
+<div class="main-content">
+  <section class="our-story">
+    <div class="container-fluid">
+      <h1 class="section-title">
+        {% if section.settings.heading != blank %}
+          {{ section.settings.heading }}
+        {% endif %}
+      </h1>
+      <div class="img-with-content">
+        <div class="row ai-c row-reverse">
+          <div class="col-6">
+            <div class="contentImg">
+              <img
+                width=""
+                height=""
+                src="{{ section.settings.image1 | image_url }}"
+                alt="{{ section.settings.image1.alt }}"
+              >
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="content-text">
+              {% if section.settings.subtitle != blank %}
+                <h3>{{ section.settings.subtitle }}</h3>
+              {% endif %}
+              <div class="rte">
+                <p>
+                  {% if section.settings['sub-content'] != blank %}
+                    {{ section.settings['sub-content'] }}
+                  {% endif %}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "about-us",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "image_picker",
+      "id": "image1",
+      "label": "Select Image"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle"
+    },
+    {
+      "type": "richtext",
+      "id": "sub-content",
+      "label": "Sub-Content"
+    }
+  ],
+  "presets": [
+    {
+      "name": "about-us"
+    }
+  ]
+}
+{% endschema %}

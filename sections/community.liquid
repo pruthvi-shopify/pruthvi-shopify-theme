@@ -1,0 +1,155 @@
+
+
+<section class="community-page-wrapper" data-sectiion="community">
+  <!-- MAIN TITLE -->
+  <section class="community-page">
+    <div class="community-inner">
+      <div class="container">
+        <h1 class="text-center">{{ section.settings.main_title | default: 'Community' }}</h1>
+      </div>
+
+      <!-- PLANT-A-SEED FEATURE BLOCK -->
+      <div class="plant-a-seed">
+        <div class="container-fluid">
+          <div class="row ai-c">
+            <div class="col-5">
+              <div class="plant-a-seed-img">
+                {% if section.settings.feature_image != blank %}
+                  <img
+                    src="{{ section.settings.feature_image | image_url: width: 900 }}"
+                    alt="{{ section.settings.feature_alt | escape }}"
+                  >
+                {% else %}
+                  <div style="background:#eee;height:300px;display:flex;align-items:center;justify-content:center;">
+                    <p>No feature image</p>
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+            <div class="col-7">
+              <div class="about-community">
+                <div class="community-text">
+                  <h3>{{ section.settings.feature_title }}</h3>
+                  {% if section.settings.feature_author != blank %}
+                    <h5>by {{ section.settings.feature_author }}</h5>
+                  {% endif %}
+                  {% if section.settings.feature_desc != blank %}
+                    <div class="rte">
+                      <p>{{ section.settings.feature_desc }}</p>
+                    </div>
+                  {% endif %}
+                </div>
+                {% if section.settings.feature_btn_text != blank and section.settings.feature_btn_link != blank %}
+                  <div class="continue-reading-btn">
+                    <a href="{{ section.settings.feature_btn_link }}" class="btn-pink">
+                      {{- section.settings.feature_btn_text -}}
+                    </a>
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- COMMUNITY ARTICLES (from Blog) -->
+      <div class="community">
+        <div class="container-fluid">
+          <div class="row">
+            {% assign community_blog = blogs[section.settings.community_blog] %}
+            {% if community_blog != blank and community_blog.articles_count > 0 %}
+              {% for article in community_blog.articles limit:4%}
+                <div class="col-6">
+                  <div class="about-community">
+                    {% if article.image %}
+                      <div class="community-img">
+                        <img width="" height="" src="{{ article.image | image_url: width: 800 }}" alt="{{ article.title }}">
+                      </div>
+                    {% endif %}
+
+                    <div class="product-release">
+                      <ul>
+                        {% if article.tags.size > 0 %}
+                          <li>{{ article.tags.first }}</li>
+                          <li class="separator">•</li>
+                        {% endif %}
+                        <li>{{ article.published_at | date: '%B %d, %Y' }}</li>
+                      </ul>
+                    </div>
+
+                    <div class="community-text">
+                      <h3>{{ article.title }}</h3>
+                      <h5>by {{ article.author | default: 'Admin' }}</h5>
+                      <div class="rte">
+                        <p>{{ article.excerpt_or_content | strip_html | truncatewords: 40 }}</p>
+                      </div>
+                    </div>
+
+                    <div class="continue-reading-btn">
+                      <a href="{{ article.url }}" class="btn-pink">Continue reading</a>
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+            {% else %}
+              <p style="text-align:center;width:100%;padding:30px;">
+                No community posts found. Please select a valid blog or add articles.
+              </p>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>
+
+{% schema %}
+{
+  "name": "Community Page",
+  "settings": [
+    {
+      "type": "text",
+      "id": "main_title",
+      "label": "Main Title",
+      "default": "Community"
+    },
+    {
+      "type": "image_picker",
+      "id": "feature_image",
+      "label": "Feature Image"
+    },
+    {
+      "type": "text",
+      "id": "feature_title",
+      "label": "Feature Title",
+    },
+    {
+      "type": "text",
+      "id": "feature_author",
+      "label": "Feature Author"
+    },
+    {
+      "type": "richtext",
+      "id": "feature_desc",
+      "label": "Feature Description"
+    },
+    {
+      "type": "text",
+      "id": "feature_btn_text",
+      "label": "Button Text",
+      "default": "Continue Reading"
+    },
+    {
+      "type": "blog",
+      "id": "community_blog",
+      "label": "Select Community Blog",
+      
+    },
+  ],
+  "presets": [
+    {
+      "name": "Community Page",
+    }
+  ]
+}
+{% endschema %}

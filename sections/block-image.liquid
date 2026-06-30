@@ -1,0 +1,105 @@
+{% if section.blocks.size > 0 %}
+  <section class="lbe-design-content" data-section="block-image">
+    <div class="img-content">
+      {% for block in section.blocks %}
+        <div class="img-with-content">
+          <div class="row ai-c jc-c {% if block.settings.reverse_layout %}row-reverse{% endif %}">
+            <div class="col-6 col-m-12">
+              <div class="contentImg">
+                {% if block.settings.block_image != blank %}
+                  {{
+                    block.settings.block_image
+                    | image_url: width: 3840
+                    | image_tag: width: block.settings.block_image.width, sizes: sizes, widths: widths
+                  }}
+                {% endif %}
+              </div>
+            </div>
+            <div class="col-6 col-m-12">
+              <div class="content-text">
+                {% if block.settings.heading != blank %}
+                  <h3>{{ block.settings.heading }}</h3>
+                {% endif %}
+                {% if block.settings.description != blank %}
+                  <div class="rte">
+                    <p>{{ block.settings.description }}</p>
+                  </div>
+                {% endif %}
+                <div class="shop-now-btn">
+                  {% if block.settings.button_link != blank %}
+                    <a href="{{ block.settings.button_link }}" class="btn-pink">
+                      {{ block.settings.button_text }}
+                    </a>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+{% endif %}
+{% comment %} {% if shop.metafields["custom_fields"]["date_and_time"] != blank %}
+  <div class="custom-field custom-field__date-and-time custom-field__type--date-time">
+    <h3 class="custom-field--title">Date and Time</h3>
+    <div class="custom-field--value">
+      {{ shop.metafields["custom_fields"]["date_and_time"] | date: "%m/%d/%Y %I:%M:%S %p" }}
+    </div>
+  </div>
+{% endif %}
+{{product.metafields.arena}} {% endcomment %}
+{% comment %} {{product.metafields.number.12345}} {% endcomment %}
+
+{% schema %}
+{
+  "name": "block-image",
+  "max_blocks": 3,
+  "settings": [],
+  "blocks": [
+    {
+      "type": "content_block",
+      "name": "Content Block",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "block_image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "The LBE Design promise"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "description",
+          "label": "Description"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button Link"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text",
+          "default": "Shop Now"
+        },
+        {
+          "type": "checkbox",
+          "id": "reverse_layout",
+          "label": "Reverse Layout"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "block-image"
+    }
+  ]
+}
+{% endschema %}

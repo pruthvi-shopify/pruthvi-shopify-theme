@@ -1,0 +1,8 @@
+{% if collection.metafields["custom"]["collection4"] != blank %}
+  <div class="custom-field custom-field__collection4 custom-field__type--date-time">
+    <h3 class="custom-field--title">collection4</h3>
+    <div class="custom-field--value">
+      {{ collection.metafields["custom"]["collection4"] | date: "%m/%d/%Y %I:%M:%S %p" }}
+    </div>
+  </div>
+{% endif %}

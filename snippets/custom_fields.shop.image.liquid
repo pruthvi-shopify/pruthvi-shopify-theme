@@ -1,0 +1,156 @@
+{% if shop.metafields["custom_fields"]["image"] != blank %}
+{% style %}
+
+{% if block.settings.title_font_custom != blank %}{{ block.settings.title_font | font_face }}{% endif %}
+
+#block-{{ block.id }} {
+  --content-max-width: {{ block.settings.content_max_width }}px;
+  {% if block.settings.title_font_custom != blank %}
+  --title-font-weight: {{ block.settings.title_font.weight }};
+  --title-font-style: {{ block.settings.title_font.style }};
+  --title-font-family: {{ block.settings.title_font.family }};
+  {% endif %}
+  --margin-top: {{ block.settings.margin_top }}rem;
+  --margin-bottom: {{ block.settings.margin_bottom }}rem;
+  --title-font-size: {{ block.settings.title_font_size }}px;
+  --title-line-height: {{ block.settings.title_line_height }}em;
+  --title-margin-bottom: {{ block.settings.title_margin_bottom }}rem;
+  --title-max-width: {{ block.settings.title_max_width }}px;
+  --title-font-color: {{ block.settings.title_font_color }};
+  --title-font-color-light: {{ block.settings.title_font_color_light }};
+  --body-font-size: {{ block.settings.body_font_size }}px;
+  --body-line-height: {{ block.settings.body_line_height }}em;
+  --body-margin-bottom: {{ block.settings.body_margin_bottom }}rem;
+  --body-font-color: {{ block.settings.body_font_color }};
+  --body-font-color-light: {{ block.settings.body_font_color_light }};
+  --link-padding: {{ block.settings.link_padding }};
+  --link-border-radius: {{ block.settings.link_border_radius }};
+  --link-font-size: {{ block.settings.link_font_size }}px;
+  --link-bg-color: {{ block.settings.link_bg_color }};
+  --link-hover-bg-color: {{ block.settings.link_hover_bg_color }};
+  --link-border: {{ block.settings.link_border }};
+  --link-font-color: {{ block.settings.link_font_color }};
+  --link-hover-font-color: {{ block.settings.link_hover_font_color }};
+  --link-bg-color-light: {{ block.settings.link_bg_color_light }};
+  --link-hover-bg-color-light: {{ block.settings.link_hover_bg_color_light }};
+  --link-border-light: {{ block.settings.link_border_light }};
+  --link-font-color-light: {{ block.settings.link_font_color_light }};
+  --link-hover-font-color-light: {{ block.settings.link_hover_font_color_light }};
+  --bg-color-light: {{ block.settings.bg_color_light }};
+  --bg-color-dark: {{ block.settings.bg_color_dark }};
+  --bg-opacity: {{ block.settings.bg_opacity }};
+
+  {% if block.settings.margin_top != blank %}margin-top: var(--margin-top);{% endif %}
+  {% if block.settings.margin_bottom != blank %}margin-bottom: var(--margin-bottom);{% endif %}
+}
+
+#block-{{ block.id }} .inner-maxwidth {
+  {% if block.settings.content_max_width != blank %}max-width: var(--content-max-width);{% endif %}
+}
+
+#block-{{ block.id }} .cf-widget-field__title {
+  {% if block.settings.title_font_size != blank %}font-size: var(--title-font-size);{% endif %}
+  {% if block.settings.title_line_height != blank %}line-height: var(--title-line-height);{% endif %}
+  {% if block.settings.title_margin_bottom != blank %}margin-bottom: var(--title-margin-bottom);{% endif %}
+  {% if block.settings.title_max_width != blank %}max-width: var(--title-max-width);{% endif %}
+  {% if block.settings.title_font_color != blank %}color: var(--title-font-color);{% endif %}
+  {% if block.settings.title_font_custom != blank %}
+  font-weight: var(--title-font-weight) !important;
+  font-style: var(--title-font-style) !important;
+  font-family: var(--title-font-family) !important;
+  {% endif %}
+}
+
+#block-{{ block.id }} .cf-widget-field__body {
+  {% if block.settings.body_font_size != blank %}font-size: var(--body-font-size);{% endif %}
+  {% if block.settings.body_line_height != blank %}line-height: var(--body-line-height);{% endif %}
+  {% if block.settings.body_margin_bottom != blank %}margin-bottom: var(--body-margin-bottom);{% endif %}
+  {% if block.settings.body_font_color != blank %}color: var(--body-font-color);{% endif %}
+}
+
+#block-{{ block.id }} .cf-widget-field__link a {
+  {% if block.settings.link_font_size != blank %}font-size: var(--link-font-size);{% endif %}
+  {% if block.settings.link_font_color != blank %}color: var(--link-font-color);{% endif %}
+  {% if block.settings.link_bg_color != blank %}background-color: var(--link-bg-color);{% endif %}
+  {% if block.settings.link_padding != blank %}padding: var(--link-padding);{% endif %}
+  {% if block.settings.link_border != blank %}border: var(--link-border);{% endif %}
+  {% if block.settings.link_border_radius != blank %}border-radius: var(--link-border-radius);{% endif %}
+}
+
+#block-{{ block.id }} .cf-widget-field__link a:hover {
+  {% if block.settings.link_hover_bg_color != blank %}background-color: var(--link-hover-bg-color);{% endif %}
+  {% if block.settings.link_hover_font_color != blank %}color: var(--link-hover-font-color);{% endif %}
+}
+
+#block-{{ block.id }} .cf-widget-item.cf-light-text--1 .cf-widget-field__link a {
+  {% if block.settings.link_font_color_light != blank %}color: var(--link-font-color-light);{% endif %}
+  {% if block.settings.link_bg_color_light != blank %}background-color: var(--link-bg-color-light);{% endif %}
+  {% if block.settings.link_border_light != blank %}border: var(--link-border-light);{% endif %}
+}
+
+#block-{{ block.id }} .cf-widget-item.cf-light-text--1 .cf-widget-field__link a:hover {
+  {% if block.settings.link_hover_bg_color_light != blank %}background-color: var(--link-hover-bg-color-light);{% endif %}
+  {% if block.settings.link_hover_font_color_light != blank %}color: var(--link-hover-font-color-light);{% endif %}
+}
+
+#block-{{ block.id }} .cf-widget-item.cf-light-text--1 .cf-widget-field__title {
+  {% if block.settings.title_font_color_light != blank %}color: var(--title-font-color-light);{% endif %}
+}
+
+#block-{{ block.id }} .cf-widget-item.cf-light-text--1 .cf-widget-field__body {
+  {% if block.settings.body_font_color_light != blank %}color: var(--body-font-color-light);{% endif %}
+}
+
+#block-{{ block.id }} .cf-widget-bg-overlay {
+  {% if block.settings.bg_color_dark != blank %}background-color: var(--bg-color-dark);{% endif %}
+  {% if block.settings.bg_opacity != blank %}opacity: var(--bg-opacity);{% endif %}
+}
+
+#block-{{ block.id }} .cf-widget-item.cf-light-text--1 .cf-widget-bg-overlay {
+  {% if block.settings.bg_color_light != blank %}background-color: var(--bg-color-light);{% endif %}
+}
+{% endstyle %}
+<div id="block-{{ block.id }}" class="cf-widget-image cf-widget__image-slider-v2 cf-auto-init"
+     data-hide_arrows="{% if block.settings.widget_hide_arrows %}1{% else %}0{% endif %}"
+     data-hide_pager="{% if block.settings.widget_hide_pager %}1{% else %}0{% endif %}"
+     data-randomize="{% if block.settings.widget_randomize %}1{% else %}0{% endif %}"
+     data-interval="{{ block.settings.widget_interval | times: 1000 }}"
+     data-effect="{{ block.settings.widget_effect }}"
+     data-animate_speed="{{ block.settings.widget_animate_speed }}">
+  <div class="cf-widget-items-wrapper cf-slider">
+    <div class="cf-slides-wrapper">
+      {% for item in shop.metafields["custom_fields"]["image"] %}
+      <div class="cf-widget-item cf-slide cf-text-pos--{{ item.text_pos }} cf-light-text--{{ item.light_text }}">
+        <div class="slide-image" style="background-image:url('{% render "cf-image" with image: item.image, crop: "center", print: "url", size: "1920x1080" %}');"></div>
+        <div class="cf-widget-bg-overlay"></div>
+        <div class="inner">
+          <div class="inner-padding">
+            <div class="inner-maxwidth">
+              
+                {% if item.title != blank %}
+                <div class="cf-widget-field cf-widget-field__title cf-widget-field--text">
+                  {{ item.title }}
+                </div>
+                {% endif %}
+              
+                {% if item.body != blank %}
+                <div class="cf-widget-field cf-widget-field__body cf-widget-field--html">
+                  {{ item.body }}
+                </div>
+                {% endif %}
+              
+                {% if item.link != blank %}
+                <div class="cf-widget-field cf-widget-field__link cf-widget-field--link">
+                  {{ item.link }}
+                </div>
+                {% endif %}
+              
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endif %}

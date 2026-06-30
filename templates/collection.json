@@ -1,0 +1,39 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "collection_hero_gUmWkU": {
+      "type": "collection-hero",
+      "name": "Hero and Collection Description",
+      "settings": {
+        "hero_image": "shopify://shop_images/Hero_img.jpg"
+      }
+    },
+    "main": {
+      "type": "main-collection",
+      "settings": {
+        "pagination_type": "load_more",
+        "range2": 19
+      }
+    },
+    "join_us_fBWrLT": {
+      "type": "join-us",
+      "name": "Join Us Section",
+      "settings": {
+        "heading": "Join Our Pack!"
+      }
+    }
+  },
+  "order": [
+    "collection_hero_gUmWkU",
+    "main",
+    "join_us_fBWrLT"
+  ]
+}

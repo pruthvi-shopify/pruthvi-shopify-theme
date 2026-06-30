@@ -1,0 +1,95 @@
+[
+  {
+    "name": "Social Media",
+    "settings": [
+      {
+        "type": "url",
+        "id": "facebook_link",
+        "label": "Facebook URL"
+      },
+      {
+        "type": "image_picker",
+        "id": "facebook_icon",
+        "label": "Facebook Icon"
+      },
+      {
+        "type": "url",
+        "id": "instagram_link",
+        "label": "Instagram URL"
+      },
+      {
+        "type": "image_picker",
+        "id": "instagram_icon",
+        "label": "Instagram Icon"
+      },
+      {
+        "type": "url",
+        "id": "pinterest_link",
+        "label": "Pinterest URL"
+      },
+      {
+        "type": "image_picker",
+        "id": "pinterest_icon",
+        "label": "Pinterest Icon"
+      },
+      {
+        "type": "url",
+        "id": "other_link",
+        "label": "Other Platform URL"
+      },
+      {
+        "type": "image_picker",
+        "id": "other_icon",
+        "label": "Other Icon"
+      }
+    ]
+  },
+  {
+    "name": "Free Shipping Bar",
+    "settings": [
+      {
+        "type": "text",
+        "id": "free_shipping_threshold",
+        "label": "Free Shipping Threshold (in whole currency)",
+        "default": "50",
+        "info": "Enter the amount for free shipping. Example: 50"
+      },
+      {
+        "type": "text",
+        "id": "pre_goal_message",
+        "label": "Message before goal",
+        "default": "Spend [amount] more for free shipping.",
+        "info": "Use [amount] to show the remaining amount."
+      },
+      {
+        "type": "text",
+        "id": "post_goal_message",
+        "label": "Message after goal",
+        "default": "Yay! You got the free shipping."
+      }
+    ]
+  },
+  {
+    "name": "Free Gift Bar",
+    "settings": [
+      {
+        "type": "text",
+        "id": "free_gift_threshold",
+        "label": "Free Gift Threshold (in whole currency)",
+        "default": "75",
+        "info": "Enter the amount for free gift. Example: 75"
+      },
+      {
+        "type": "product",
+        "id": "free_gift_product",
+        "label": "Select Free Gift Product"
+      },
+      {
+        "type": "textarea",
+        "id": "post_goal_message2",
+        "label": "Post Goal Message",
+        "default": "Congrats! You unlocked your Free Gift."
+      }
+    ]
+  }
+]

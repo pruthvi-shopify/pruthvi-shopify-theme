@@ -1,0 +1,6 @@
+
+<ul>
+{% for item in collection.metafields["custom"]["collection"].value %}
+<li><span class="metafield-number_integer">{{ item }}</span></li>
+{% endfor %}
+</ul>
